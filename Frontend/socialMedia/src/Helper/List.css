@@ -1,0 +1,14 @@
+
+.ProList li:hover{
+    background-color: #e5e7eb;
+
+}
+
+.ProList li{
+    padding: 5px 0;
+}
+
+.Notfiy:hover{
+    background-color: #e5e7eb;
+    transition-duration : 0.5s;
+}
