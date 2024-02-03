@@ -1,0 +1,15 @@
+.container{
+    margin-top: 0;
+}
+
+.ProfileList ul li{
+    color: rgb(86, 82, 82);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ActiveProfileItem{
+    color: blue !important;
+    border-bottom: 1px blue solid ;
+    padding-bottom: 5px;
+}

@@ -6,7 +6,7 @@ export default function Post() {
 
             <div className='flex items-start justify-between  p-5'>
                 <div className='flex gap-5'>
-                    <img src="/image/profile.jpg" width={30}></img>
+                    <img src="/image/Abdo.jpg" className="rounded-full" width={30}></img>
                     <div>
                         <p> <span className='font-bold'>Abdelatty</span> posted an update</p>
                         <p className='text-[12px] text-gray-500'>3 hours ago </p>
@@ -19,7 +19,7 @@ export default function Post() {
                 <p className='mb-5'>este es un tema muy interesante</p>
                 <hr></hr>
                 <div className='flex gap-5 mt-2  justify-between'>
-                    <div className='flex'>
+                    <div className='flex gap-5'>
                         <div className='flex gap-2 items-center'>
                             <img src="/icon/inbox.png" width={20}></img>
                             <p>Like</p>

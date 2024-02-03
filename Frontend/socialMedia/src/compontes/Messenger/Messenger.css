@@ -1,0 +1,12 @@
+.MessengerCard:hover{
+    background-color: rgb(193, 193, 193);
+    transition: 0.5s;
+}
+
+
+@media screen and (max-width: 900px) {
+
+    .BottomMessenger{
+        right: 15px !important;
+    }
+}

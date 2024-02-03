@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Group() {
     return (
-        <div className=' bg-[white] border shadow-lg p-3 cursor-pointer rounded-lg sticky top-0 '>
+        <div className='htr bg-[white] border shadow-lg p-3 cursor-pointer rounded-lg sticky top-0 '>
             <p className='text-gray-500 text-[18px]'>Groups</p>
             <section className='mt-5 flex flex-col gap-5'>
 

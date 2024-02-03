@@ -1,0 +1,90 @@
+
+@media screen and (max-width: 1200px) {
+
+    .container{
+        margin-left: 80px !important;
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+
+    .container{
+        margin-left: 80px !important;
+    }
+
+    .active{
+        display: none !important;
+    }
+
+    .about-photo{
+        display: none;
+    }
+
+    .del{
+        display: none;
+    }
+
+    .ProfileText{
+        text-align: center;
+        flex-direction: column !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .container{
+        margin-left: 65px !important;
+    }
+
+    .active{
+        display: none !important;
+    }
+
+    .about-photo{
+        display: none;
+    }
+
+    .del{
+        display: none;
+    }
+
+    .ProfileText{
+        text-align: center;
+        flex-direction: column !important;
+    }
+
+    .ProfileText ul li{
+        font-size: 10px !important;
+        background-color: red;
+    }
+}
+
+
+@media screen and (max-width: 380px) {
+
+    .container{
+        margin-left: 65px !important;
+    }
+
+    .active{
+        display: none !important;
+    }
+
+    .about-photo{
+        display: none;
+    }
+
+    .del{
+        display: none;
+    }
+
+    .ProfileText{
+        text-align: center;
+        flex-direction: column !important;
+    }
+
+    .ProfileList ul li{
+        font-size: 12px !important;
+    }
+}

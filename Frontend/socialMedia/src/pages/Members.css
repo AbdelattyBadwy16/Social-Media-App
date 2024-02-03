@@ -1,0 +1,25 @@
+@media screen and (max-width: 1040px) {
+
+    .ActiveList{
+        display: none !important;
+    }
+
+    .Gruops{
+        width: 90% !important;
+    }
+}
+
+@media screen and (max-width: 580px) {
+
+    .ActiveList{
+        display: none !important;
+    }
+
+    .Gruops{
+        width: 100% !important;
+    }
+
+    .searchMember{
+        display: none !important;
+    }
+}

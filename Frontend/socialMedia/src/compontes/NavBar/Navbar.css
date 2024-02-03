@@ -1,0 +1,49 @@
+.navbar {
+    background-color: red;
+}
+
+.leftNavItem{
+    padding: 5px;
+}
+
+.leftNavItem:hover {
+    background-color: rgb(209, 203, 203);
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 1300px) {
+
+    .navbar {
+        padding-left: 100px !important;
+        width: 100% !important;
+    }
+
+    .leftNavBar {
+        width: auto !important;
+        padding: 10px !important;
+    }
+}
+
+@media screen and (max-width: 916px) {
+
+    .navlist {
+        display: none !important;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .leftNavBar {
+        width: auto !important;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 675px) {
+
+    .search {
+        display: none !important;
+    }
+}
