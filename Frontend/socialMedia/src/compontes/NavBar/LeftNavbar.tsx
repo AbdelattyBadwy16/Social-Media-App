@@ -9,10 +9,21 @@ import '/icon/myFriends.png'
 import '/icon/MyGroup.png'
 import '/icon/setting.png'
 import '/icon/Logout.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 export default function LeftNavbar() {
     const [Active, SetActive] = useState(false);
+    const nav = useNavigate();
+    const cookie = new Cookies();
+    function handelLogout(){
+        cookie.remove("userName");
+        cookie.remove("image");
+        cookie.remove("bearer");
+        nav("/login");
+        return;
+    }
+
     return (
         <div className={`leftNavBar ${!Active ? 'w-[5%]' : 'w-[10%]'} bg-[white] h-[100vh] shadow-lg transition-all z-[1000] flex flex-col items-center fixed top-0`}>
             <img onClick={() => SetActive(!Active)} src='/icon/allList.png' width={25} className='mt-10 cursor-pointer'></img>
@@ -46,10 +57,10 @@ export default function LeftNavbar() {
                     <p className={`${Active ? "" : "hidden"}`}>Setting</p>
                 </Link>
             </div>
-            <Link to="login" className='leftNavItem flex mt-[50px] gap-3'>
+            <div onClick={handelLogout} className='leftNavItem flex mt-[50px] gap-3'>
                 <img src="/icon/Logout.png" className='cursor-pointer' width={25}></img>
                 <p className={`${Active ? "" : "hidden"}`}>Logout</p>
-            </Link>
+            </div>
         </div>
     )
 }

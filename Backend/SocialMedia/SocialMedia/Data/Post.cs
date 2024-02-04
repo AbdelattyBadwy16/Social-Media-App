@@ -9,6 +9,14 @@ namespace SocialMedia.Models
 		public string Status { get; set; }
 		public byte[]? Image { get; set; }
 
+		public int? likes { get; set; }
+		public int? loves { get; set; }
+		public int? Sads { get; set; }
+		public int? Haha { get; set; }
+		public int? Angry { get; set; }
+
+		public int? Wow { get; set; }
+
 		[ForeignKey("User")]
 		public string? UserId { get; set; }
 
@@ -17,5 +25,7 @@ namespace SocialMedia.Models
 		public User? User { get; set; }
 
 		public Group? Group { get; set; }
+
+		public ICollection<Comment> Comments { get; set; }
 	}
 }

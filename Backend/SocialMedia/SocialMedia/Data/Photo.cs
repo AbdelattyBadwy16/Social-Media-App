@@ -7,6 +7,8 @@ namespace SocialMedia.Models
 		public int Id { get; set; }
 		public byte[]? Image { get; set; }
 
+		
+
 		[ForeignKey("User")]
 		public string? UserId { get; set; }
 
@@ -16,5 +18,7 @@ namespace SocialMedia.Models
 		public User? User { get; set; }
 
         public Group? Group { get; set; }
+
+
 	}
 }
