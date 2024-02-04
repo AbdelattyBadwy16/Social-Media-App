@@ -8,7 +8,7 @@ import './Home.css'
 export default function Home() {
 
     const [ActiveFilter, SetActiveFilter] = useState(1);
-
+  
     return (
 
 
