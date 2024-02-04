@@ -13,7 +13,7 @@ export default function Activity() {
             </section>
 
             {/*post part*/}
-            <div div className='posts w-[50%] flex flex-col gap-5' >
+            <div className='posts w-[50%] flex flex-col gap-5' >
 
                 <section className='flex bg-[white] items-center justify-between border shadow-lg p-3 cursor-pointer rounded-lg'>
                     <section className='flex items-center gap-5'>

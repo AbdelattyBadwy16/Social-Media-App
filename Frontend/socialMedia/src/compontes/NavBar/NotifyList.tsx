@@ -7,7 +7,7 @@ export default function NotifyList() {
         <div className='w-[300px] h-[500px] shadow-lg  bg-[white] border z-[1000] absolute right-4 top-20'>
             <section className='flex justify-around items-center bg-gray-200 p-2 border shadow-md'>
                 <p className='text-[15px] font-semibold '>NOTIFICATION </p>
-                <Link className='text-[12px] text-blue-600'>VIEW ALL</Link>
+                <Link to ="" className='text-[12px] text-blue-600'>VIEW ALL</Link>
             </section>
 
             <section className=' rounded-lg flex gap-5 flex-col'>

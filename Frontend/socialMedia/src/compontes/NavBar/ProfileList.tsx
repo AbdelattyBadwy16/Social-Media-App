@@ -25,7 +25,7 @@ export default function ProfileList() {
                         </Link>
                     </li>
                     <li className='w-[100%]'>
-                        <Link className='flex justify-around items-center'>
+                        <Link to="" className='flex justify-around items-center'>
                             <h2>Topics</h2>
                             <div className='bg-gray-200 text-blue-600 rounded-full text-[white] pl-1 pr-1'>
                                 <p>3</p>
@@ -33,7 +33,7 @@ export default function ProfileList() {
                         </Link>
                     </li>
                     <li className='w-[100%]'>
-                        <Link className='flex justify-around items-center'>
+                        <Link to="" className='flex justify-around items-center'>
                             <h2>Groups</h2>
                             <div className='bg-gray-200 text-blue-600 rounded-full text-[white] pl-1 pr-1'>
                                 <p>3</p>
@@ -41,7 +41,7 @@ export default function ProfileList() {
                         </Link>
                     </li>
                     <li className='w-[100%]'>
-                        <Link className='flex justify-around items-center'>
+                        <Link to="" className='flex justify-around items-center'>
                             <h2>Friends</h2>
                             <div className='bg-gray-200 text-blue-600 rounded-full text-[white] pl-1 pr-1'>
                                 <p>5</p>
@@ -49,7 +49,7 @@ export default function ProfileList() {
                         </Link>
                     </li>
                     <li className='w-[100%]'>
-                        <Link className='flex justify-around items-center'>
+                        <Link to="" className='flex justify-around items-center'>
                             <h2>Messages</h2>
                             <div className='bg-gray-200 text-blue-600 rounded-full text-[white] pl-1 pr-1'>
                                 <p>0</p>
@@ -57,12 +57,12 @@ export default function ProfileList() {
                         </Link>
                     </li>
                     <li className='w-[100%]'>
-                        <Link className='flex justify-around items-center'>
+                        <Link to=""  className='flex justify-around items-center'>
                             <h2>Setting</h2>
                         </Link>
                     </li>
                     <li className='w-[100%]'>
-                        <Link className='flex justify-around items-center'>
+                        <Link to="" className='flex justify-around items-center'>
                             <h2>Logout</h2>
                         </Link>
                     </li>
