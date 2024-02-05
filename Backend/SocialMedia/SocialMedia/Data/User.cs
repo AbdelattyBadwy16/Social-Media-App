@@ -21,6 +21,10 @@ namespace SocialMedia.Models
 		public byte[]? BackImage { get; set; }
 		public byte[]? IconImage { get; set; }
 
+		public int Followers {  get; set; }
+		public int Following {get; set; }
+
+
 		public ICollection<User> Friends { get; set; }
 
 		public ICollection<Photo> Photos { get; set; }

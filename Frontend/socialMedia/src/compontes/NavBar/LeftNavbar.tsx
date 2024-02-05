@@ -11,16 +11,24 @@ import '/icon/setting.png'
 import '/icon/Logout.png'
 import { Link, useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function LeftNavbar() {
     const [Active, SetActive] = useState(false);
     const nav = useNavigate();
     const cookie = new Cookies();
-    function handelLogout(){
+
+    // logout
+    function handelLogout() {
         cookie.remove("userName");
         cookie.remove("image");
         cookie.remove("bearer");
-        nav("/login");
+        toast("Logging out...");
+        setTimeout(() => {
+            nav("/login");
+        }, 3000);
+
         return;
     }
 
@@ -61,6 +69,7 @@ export default function LeftNavbar() {
                 <img src="/icon/Logout.png" className='cursor-pointer' width={25}></img>
                 <p className={`${Active ? "" : "hidden"}`}>Logout</p>
             </div>
+            <ToastContainer autoClose={2500} />
         </div>
     )
 }

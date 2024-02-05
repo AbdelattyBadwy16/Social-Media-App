@@ -1,8 +1,10 @@
+import { Cookie } from "@mui/icons-material";
 import axios from "axios"
 import { json } from "stream/consumers";
+import Cookies from "universal-cookie";
 
 
-interface account {
+export interface account {
 
     UserName: string,
     FirstName: string,
@@ -46,7 +48,7 @@ interface accountLogin {
 
 }
 
-export async function LoginUser(user : accountLogin) {
+export async function LoginUser(user: accountLogin) {
     const res = await fetch(`https://localhost:7279/api/Account/Login`, {
         method: "POST",
         headers: {
@@ -61,3 +63,4 @@ export async function LoginUser(user : accountLogin) {
     });
     return res;
 }
+

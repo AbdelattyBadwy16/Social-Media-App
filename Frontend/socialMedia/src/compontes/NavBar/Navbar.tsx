@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ProfileList from './ProfileList';
 import NotifyList from './NotifyList';
 import './Navbar.css'
 import { Link } from 'react-router-dom';
+
 
 export default function Navbar() {
 
@@ -10,6 +11,9 @@ export default function Navbar() {
     const [ActiveNotifyList, setActiveNotfiyList] = useState(false);
     const [ActiveProfile, setActiveProfile] = useState(false);
     const [ActivePage, setActivePage] = useState(1);
+   
+
+
     return (
 
         <nav className='navbar w-[100%] h-[80px] bg-[white] flex items-center justify-around shadow-md'>
@@ -30,7 +34,7 @@ export default function Navbar() {
                 <img onClick={() => setActiveProfile(!ActiveProfile)} src='/image/Abdo.jpg' width={30} className='rounded-full cursor-pointer'></img>
                 {
                     ActiveProfile ?
-                        <ProfileList Active={ActiveProfile}></ProfileList> : ""
+                        <ProfileList ></ProfileList> : ""
                 }
                 {
                     ActiveNotify ?

@@ -1,10 +1,27 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '/image/profile.jpg'
 import { Link } from 'react-router-dom'
 import './List.css'
+import Cookies from 'universal-cookie';
+import { UserPost } from '../../Context/UserPostContext';
+import { GetUserPosts } from '../../Helper/PostApi';
 
 
 export default function ProfileList() {
+    const cookie = new Cookies();
+    const userName = cookie.get("userName");
+    const [topics, setTopics] = useState(0);
+
+
+    // get user Posts
+    const context = useContext(UserPost);
+    useEffect(() => {
+        async function fetch() {
+            const data = await GetUserPosts();
+            setTopics(data.length);
+        }
+        fetch();
+    }, []);
 
 
     return (
@@ -13,22 +30,17 @@ export default function ProfileList() {
             <section className='p-5 bg-gray-200 rounded-lg flex gap-5'>
                 <img src='/image/Abdo.jpg' width={30} className='rounded-full'></img>
                 <div>
-                    <h5>Hello, Abdelatty</h5>
+                    <h5>Hello, {userName}</h5>
                     <p className='text-[10px] text-gray-500'>Community Head</p>
                 </div>
             </section>
             <section>
                 <ul className='ProList flex flex-col gap-3 mt-5 mb-5 items-center'>
                     <li className='w-[100%]'>
-                        <Link to="profile" className='flex justify-around items-center'>
-                            <h2>Profile</h2>
-                        </Link>
-                    </li>
-                    <li className='w-[100%]'>
-                        <Link to="" className='flex justify-around items-center'>
+                        <Link to="/profile" className='flex justify-around items-center'>
                             <h2>Topics</h2>
                             <div className='bg-gray-200 text-blue-600 rounded-full text-[white] pl-1 pr-1'>
-                                <p>3</p>
+                                <p>{topics}</p>
                             </div>
                         </Link>
                     </li>
@@ -57,7 +69,7 @@ export default function ProfileList() {
                         </Link>
                     </li>
                     <li className='w-[100%]'>
-                        <Link to=""  className='flex justify-around items-center'>
+                        <Link to="" className='flex justify-around items-center'>
                             <h2>Setting</h2>
                         </Link>
                     </li>

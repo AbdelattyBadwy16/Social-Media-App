@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
 export default function RequireAuth() {
-
+    //protected route
     const user = useContext(User);
     const cookie = new Cookies();
     const userName = cookie.get("userName");

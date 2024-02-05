@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SocialMedia.Data;
 
 namespace SocialMedia.Models
 {
@@ -15,7 +16,7 @@ namespace SocialMedia.Models
 		public DbSet<Post> posts { get; set; }
 
 		public DbSet<Group> groups { get; set; }
-
+		public DbSet<User_Post> user_Posts { get; set; }
 	
 	}
 }

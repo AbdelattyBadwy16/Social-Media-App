@@ -24,8 +24,9 @@ export default function Register() {
     const [errContent, setErrContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const nav = useNavigate();
-
+    // validation and send account
     async function handelSubmit(e : any) {
+
         e.preventDefault();
 
         if (!CheckName(FirstName) || !CheckName(LastName)) {
@@ -120,7 +121,7 @@ export default function Register() {
                     <h3 className='text-[white] text-[18px]'>Join our world and share your events with us &#128525;.</h3>
                 </section>
             </div>
-            <ToastContainer />
+            <ToastContainer  />
         </div>
 
     )

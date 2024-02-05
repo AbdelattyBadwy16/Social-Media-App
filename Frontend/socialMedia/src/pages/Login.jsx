@@ -6,6 +6,8 @@ import { LoginUser } from '../Helper/AccountApi';
 import Spinner from '../compontes/Spinner';
 import { User } from '../Context/UserContext';
 import Cookies from 'universal-cookie';
+
+
 export default function Login() {
 
     const [UserName, setUserName] = useState("");
@@ -15,7 +17,7 @@ export default function Login() {
     const nav = useNavigate();
     const UserContext = useContext(User);
     const cookie = new Cookies();
-
+    //validation and submit account
     async function handelSubmit(e) {
         e.preventDefault();
         if (!UserName.length || !Password.length) {
@@ -30,11 +32,16 @@ export default function Login() {
             cookie.set("bearer",data.token);
             cookie.set("userName",data.userName);
             cookie.set("image",data.iconImage);
+            cookie.set("id",data.id);
+            
             if (res.ok) {
                 setIsLoading(true);
                 setErrContent("");
-                nav("/home");
                 setIsLoading(false);
+              
+                setTimeout(() => {
+                    nav("/home"); 
+                }, 3000);
 
             } else setErrContent("Invaild username or password.");
 

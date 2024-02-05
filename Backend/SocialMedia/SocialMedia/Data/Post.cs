@@ -14,8 +14,9 @@ namespace SocialMedia.Models
 		public int? Sads { get; set; }
 		public int? Haha { get; set; }
 		public int? Angry { get; set; }
-
 		public int? Wow { get; set; }
+
+		public DateTime CreatedAt { get; set; }
 
 		[ForeignKey("User")]
 		public string? UserId { get; set; }

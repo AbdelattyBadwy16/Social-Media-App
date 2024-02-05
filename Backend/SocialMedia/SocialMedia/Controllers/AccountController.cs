@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using SocialMedia.Model;
@@ -37,6 +38,7 @@ namespace SocialMedia.Controllers
 					FirstName = user.FirstName,
 					LastName = user.LastName,
 					Gender = user.Gender,
+					CreatedDate = DateTime.Now,
 				};
 
 				IdentityResult result = await _userManger.CreateAsync(newuser, user.password);
@@ -81,7 +83,7 @@ namespace SocialMedia.Controllers
 						var sc  = new SigningCredentials(key,SecurityAlgorithms.HmacSha256);
 						var mktoken = new JwtSecurityToken(
 								claims: clamis,
-								expires: DateTime.Now.AddHours(1),
+								expires: DateTime.Now.AddMonths(1),
 								signingCredentials : sc
 							);
 						var token = new
@@ -89,7 +91,7 @@ namespace SocialMedia.Controllers
 							token = new JwtSecurityTokenHandler().WriteToken(mktoken),
 						};
 
-						return Ok(new {token.token,user.UserName,user.IconImage});
+						return Ok(new {token.token,user.UserName,user.IconImage,user.Id});
 					}
 					else
 					{
@@ -104,7 +106,24 @@ namespace SocialMedia.Controllers
 
 		}
 
+		[HttpGet]
+		[Authorize]
 
-	
+		public async Task<IActionResult> GetAccountInfo(string UserName)
+		{
+			var user = await _userManger.FindByNameAsync(UserName);
+			
+			if(user ==  null)
+			{
+				return BadRequest(ModelState);
+			}
+				
+			return Ok(user);
+
+		}
+
+
+
+
 	}
 }
