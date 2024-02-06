@@ -5,7 +5,7 @@ namespace SocialMedia.Models
 	public class Photo
 	{
 		public int Id { get; set; }
-		public byte[]? Image { get; set; }
+		public string? ImagePath { get; set; }
 
 		
 

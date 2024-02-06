@@ -16,13 +16,11 @@ export default function Activity() {
     const [data, setData] = useState({ userName: "", firstName: "", secondName: "", about: "", bitrhDate: "", email: "", country: "", phoneNumber: "", followers: 0, following: 0 });
     const [isLoading, setIsLoading] = useState(false);
     const [addNewPost, setAddNewPost] = useState(false);
-    const [posts, setPosts] = useState([]);
     const cookie = new Cookies();
+    const IconImage = cookie.get("image");
     // get user data
     useEffect(() => {
         setIsLoading(true);
-        const token = cookie.get("bearer");
-        const username = cookie.get("userName");
         async function fetch() {
             try {
                 const data = await GetUserData();
@@ -53,9 +51,11 @@ export default function Activity() {
 
     const PostWindow = useContext(postWindow);
     async function handelAddPost() {
+        console.log("hello")
         cookie.set("PostWindow", 'true');
         setAddNewPost(!addNewPost);
         PostWindow.setOpen("true");
+        cookie.set("PostStatus","add");
         return;
     }
     const PostCheck = cookie.get("PostWindow");
@@ -71,7 +71,7 @@ export default function Activity() {
 
                     <section onClick={handelAddPost} className='flex bg-[white] items-center justify-between border shadow-lg p-3 cursor-pointer rounded-lg'>
                         <section className='flex items-center gap-5'>
-                            <img src="/image/Abdo.jpg" className="rounded-full" width={30}></img>
+                            <img src={`https://localhost:7279//userIcon/${IconImage}`} className="rounded-full" width={30}></img>
                             <h3 className='text-gray-500'>What's on your mind?</h3>
                         </section>
                         <section className='bg-gray-300 rounded-full p-1 border shadow-lg'>

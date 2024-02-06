@@ -39,9 +39,7 @@ export default function Home() {
                 </section>
 
                 <section className='flex flex-col gap-5'>
-                    <Post></Post>
-                    <Post></Post>
-                    <Post></Post>
+                   
                 </section>
 
             </div>

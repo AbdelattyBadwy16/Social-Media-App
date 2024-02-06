@@ -32,7 +32,8 @@ export async function RegisterNewUser(user: account) {
             email: user.Email,
             gender: user.Gender,
             phoneNumber: user.PhoneNumber,
-            country: user.Country
+            country: user.Country , 
+            iconImagePath : "profile.jpg"
 
         }),
     });

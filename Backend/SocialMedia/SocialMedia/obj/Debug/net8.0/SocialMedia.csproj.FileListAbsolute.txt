@@ -142,3 +142,4 @@ D:\react.js\SocialMedia\Backend\SocialMedia\SocialMedia\obj\Debug\net8.0\refint\
 D:\react.js\SocialMedia\Backend\SocialMedia\SocialMedia\obj\Debug\net8.0\SocialMedia.pdb
 D:\react.js\SocialMedia\Backend\SocialMedia\SocialMedia\obj\Debug\net8.0\SocialMedia.genruntimeconfig.cache
 D:\react.js\SocialMedia\Backend\SocialMedia\SocialMedia\obj\Debug\net8.0\ref\SocialMedia.dll
+D:\react.js\SocialMedia\Backend\SocialMedia\SocialMedia\bin\Debug\net8.0\SocialMedia.staticwebassets.runtime.json

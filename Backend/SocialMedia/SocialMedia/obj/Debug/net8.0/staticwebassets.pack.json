@@ -1,0 +1,77 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\17157777_194493117705535_6905883453128635351_o.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\17157777_194493117705535_6905883453128635351_o.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\Abdo.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\Abdo.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\grid-1.png",
+      "PackagePath": "staticwebassets\\userIcon\\grid-1.png"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\icons8-angry-face-48.png",
+      "PackagePath": "staticwebassets\\userIcon\\icons8-angry-face-48.png"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\loginBack.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\loginBack.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\pexels-photo-7078847.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\pexels-photo-7078847.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\profile.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\profile.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\17157777_194493117705535_6905883453128635351_o.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\17157777_194493117705535_6905883453128635351_o.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\Abdo.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\Abdo.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\grid-1.png",
+      "PackagePath": "staticwebassets\\userPhotos\\grid-1.png"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\icons8-angry-face-48.png",
+      "PackagePath": "staticwebassets\\userPhotos\\icons8-angry-face-48.png"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\loginBack.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\loginBack.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\pexels-photo-7078847.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\pexels-photo-7078847.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\profile.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\profile.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SocialMedia.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SocialMedia.props",
+      "PackagePath": "build\\SocialMedia.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SocialMedia.props",
+      "PackagePath": "buildMultiTargeting\\SocialMedia.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SocialMedia.props",
+      "PackagePath": "buildTransitive\\SocialMedia.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

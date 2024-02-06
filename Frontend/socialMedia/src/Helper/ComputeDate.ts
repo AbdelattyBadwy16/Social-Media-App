@@ -6,9 +6,8 @@ export function ComputeDate(date : string) {
     const minuts = new Date().getMinutes();
     const hours = new Date().getHours();
     const day = new Date().getDay();
-    const month = new Date().getDay();
+    const month = new Date().getMonth();
     const year = new Date().getFullYear();
-    
     if(year != PostDate.getFullYear()) return "year";
     if(month != PostDate.getMonth()) return "month";
     if(day != PostDate.getDay()) return "day";

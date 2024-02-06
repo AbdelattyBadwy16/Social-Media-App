@@ -10,11 +10,11 @@ import { GetUserPosts } from '../../Helper/PostApi';
 export default function ProfileList() {
     const cookie = new Cookies();
     const userName = cookie.get("userName");
+    const image = cookie.get("image");
     const [topics, setTopics] = useState(0);
-
+    const [leave , setLeave] = useState(false);
 
     // get user Posts
-    const context = useContext(UserPost);
     useEffect(() => {
         async function fetch() {
             const data = await GetUserPosts();
@@ -22,13 +22,13 @@ export default function ProfileList() {
         }
         fetch();
     }, []);
-
+    
 
     return (
 
-        <div className='w-[200px] bg-[white]  shadow-lg border border-gray-200 absolute z-[999] right-20 top-20'>
+        <div className={`${leave ? "hidden" : ""}  w-[200px] bg-[white]  shadow-lg border border-gray-200 absolute z-[999] right-20 top-20`}>
             <section className='p-5 bg-gray-200 rounded-lg flex gap-5'>
-                <img src='/image/Abdo.jpg' width={30} className='rounded-full'></img>
+                <img src={`https://localhost:7279//userIcon/${image}`} width={30} className='rounded-full'></img>
                 <div>
                     <h5>Hello, {userName}</h5>
                     <p className='text-[10px] text-gray-500'>Community Head</p>

@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ComputeDate } from '../../Helper/ComputeDate'
 import { CheckPostReact, DeletePost, GetPost, GetUserPosts, RemovePostReact, UpdateReacts } from '../../Helper/PostApi'
 import { UserPost } from '../../Context/UserPostContext'
+import { postWindow } from '../../Context/PostWindow'
 
 interface Post {
     firstName: string
@@ -23,8 +24,8 @@ interface Post {
 export default function Post(CurPost: Post) {
 
     const cookie = new Cookies();
-    const username = cookie.get("userName");
-    const token = cookie.get("bearer");
+    const image = cookie.get("image");
+
     const [post, setPost] = useState<Post>({});
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
@@ -35,14 +36,12 @@ export default function Post(CurPost: Post) {
     useEffect(() => {
         setPost(CurPost.post);
 
-
-
         async function fetch() {
 
             const data = await GetUserData();
             setFirstName(data.firstName);
             setSecondName(data.lastName);
-            const res = await CheckPostReact(CurPost.post.id);
+            const res = await CheckPostReact(CurPost?.post.id);
             setReactType(res);
         }
         fetch();
@@ -72,7 +71,6 @@ export default function Post(CurPost: Post) {
             PostTime = `${time - PostDate.getMinutes()} Minutes ago`;
     }
 
-
     //Delete Post
     const context = useContext(UserPost);
     async function handelDelete() {
@@ -86,7 +84,6 @@ export default function Post(CurPost: Post) {
 
     //add react
     async function handelAddReact(type: string) {
-
         const res = await UpdateReacts(post.id, type);
         const data = await GetPost(post.id);
         setPost(data);
@@ -95,20 +92,31 @@ export default function Post(CurPost: Post) {
     }
 
     //remove react
-
     async function RemoveReact() {
         const res = await RemovePostReact(post.id);
         const data = await GetPost(post.id);
         setPost(data);
         setReactType("0");
     }
- 
+
+
+    //edit post
+    const PostWindow = useContext(postWindow);
+    async function handelEdit() {
+        cookie.set("PostWindow", 'true');
+        PostWindow.setOpen("true");
+        cookie.set("PostStatus","edit");
+        cookie.set("PostId",post.id);
+        setOpenPostList(false);
+        return;
+    }
+    const PostCheck = cookie.get("PostWindow");
     return (
         <div className='bg-[white] border shadow-lg rounded-lg'>
 
             <div className='flex items-center justify-between relative p-5'>
                 <div className='flex gap-5'>
-                    <img src="/image/Abdo.jpg" className="rounded-full" width={30}></img>
+                    <img src={`https://localhost:7279//userIcon/${image}`} className="rounded-full" width={30}></img>
                     <div>
                         <p> <span className='font-bold'>{`${firstName} ${secondName}`}</span> posted an update</p>
                         <div className='flex gap-3 items-center'>
@@ -130,6 +138,7 @@ export default function Post(CurPost: Post) {
                     openPostList ?
                         <ul className=' shadow-lg bg-gray-300 transition-all flex flex-col gap-3 rounded-md absolute right-5 top-[60px]'>
                             <li onClick={handelDelete} className='cursor-pointer hover:bg-gray-400 p-2 rounded-md'>Delete</li>
+                            <li onClick={handelEdit} className='cursor-pointer hover:bg-gray-400 p-2 rounded-md'>Edit</li>
                             <li className='cursor-pointer  hover:bg-gray-400 p-2 rounded-md'>Save at favourite</li>
                         </ul> : ""
                 }
@@ -137,7 +146,7 @@ export default function Post(CurPost: Post) {
 
             <div className=' p-5'>
                 <p className='mb-5'>{post?.content !== undefined ? post?.content : ""}</p>
-
+                <img src="/image/Abdo.jpg"  className='w-[100%] max-h-[500px]'></img>
                 <div className='flex item-center justify-between mb-1 mt-10'>
                     <div className='flex transition  duration-1000 '>
                         {post?.likes + post?.angry + post?.loves + post?.sads + post?.haha + post?.wow}
@@ -203,7 +212,7 @@ export default function Post(CurPost: Post) {
 
             <div className='bg-[#f2f2f2] p-5 w-[100%]'>
                 <div className='flex gap-5 w-[100%]'>
-                    <img src="/image/profile.jpg" className='rounded-full' width={30}></img>
+                    <img src={`https://localhost:7279//userIcon/${image}`} className='rounded-full' width={30}></img>
                     <div className="w-[40%] shadow-md p-2 rounded-lg flex bg-[white] ">
                         <input type='text' className='search  w-[100%]' placeholder='Type a comment...'></input>
                         <img className='cursor-pointer' src="/icon/inbox.png" width={20}></img>

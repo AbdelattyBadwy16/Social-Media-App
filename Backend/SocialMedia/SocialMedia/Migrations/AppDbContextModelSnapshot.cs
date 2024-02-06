@@ -270,8 +270,8 @@ namespace SocialMedia.Migrations
                     b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -309,8 +309,8 @@ namespace SocialMedia.Migrations
                     b.Property<int?>("Haha")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Image")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Sads")
                         .HasColumnType("int");
@@ -351,8 +351,8 @@ namespace SocialMedia.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("BackImage")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("BackImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
@@ -389,8 +389,8 @@ namespace SocialMedia.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("IconImage")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("IconImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JopTitle")
                         .HasColumnType("nvarchar(max)");

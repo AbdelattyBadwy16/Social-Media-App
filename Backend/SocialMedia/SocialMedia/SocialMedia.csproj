@@ -19,4 +19,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\backIcon\" />
+    <Folder Include="wwwroot\postPhotos\" />
+    <Folder Include="wwwroot\userPhotos\" />
+    <Folder Include="wwwroot\userIcon\" />
+  </ItemGroup>
+
 </Project>

@@ -18,9 +18,9 @@ namespace SocialMedia.Models
 
 		public string? JopTitle { get; set; }
 		public string? About {  get; set; }
-		public byte[]? BackImage { get; set; }
-		public byte[]? IconImage { get; set; }
 
+		public string? IconImagePath { get; set; }
+		public string? BackImagePath { get; set; }
 		public int Followers {  get; set; }
 		public int Following {get; set; }
 

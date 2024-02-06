@@ -7,7 +7,7 @@ namespace SocialMedia.Models
 		public int Id { get; set; }
 		public string Content { get; set; }
 		public string Status { get; set; }
-		public byte[]? Image { get; set; }
+		public string? ImagePath { get; set; }
 
 		public int? likes { get; set; }
 		public int? loves { get; set; }

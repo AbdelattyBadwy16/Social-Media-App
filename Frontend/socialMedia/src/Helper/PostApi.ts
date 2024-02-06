@@ -7,26 +7,26 @@ interface Post {
     content: string,
     status: string,
     userId: string,
-    groupId: 0
+    groupId: 0 ,
+    file : FormData
 }
 
 
-export async function CreateNewPost(post: Post) {
+export async function CreateNewPost(post: Post ) {
     //handel close post
     const cookie = new Cookies();
-
     const token = cookie.get("bearer");
     try {
         const res = await fetch(`https://localhost:7279/api/Post`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 content: post.content,
                 status: post.status,
                 userId: post.userId,
+                file : post.file,
                 groupId: null
             })
 
@@ -149,9 +149,31 @@ export async function UpdateReacts(id: number, type: string ) {
 }
 
 
+export async function UpdatePost( content: string , status : string ) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    const Id = cookie.get("PostId");
+    try {
+        const res = await fetch(`https://localhost:7279/api/Post/EditPost?content=${content}&status=${status}&id=${Id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+        });
+        return res;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
+
+
+
 
 export async function CheckPostReact(id: number) {
-
+    if(id == undefined)return;
     const cookie = new Cookies();
     const token = cookie.get("bearer");
     const userId = cookie.get("id");

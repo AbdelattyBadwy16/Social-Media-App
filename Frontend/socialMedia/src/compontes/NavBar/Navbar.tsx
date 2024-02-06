@@ -3,6 +3,7 @@ import ProfileList from './ProfileList';
 import NotifyList from './NotifyList';
 import './Navbar.css'
 import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 
 export default function Navbar() {
@@ -11,7 +12,8 @@ export default function Navbar() {
     const [ActiveNotifyList, setActiveNotfiyList] = useState(false);
     const [ActiveProfile, setActiveProfile] = useState(false);
     const [ActivePage, setActivePage] = useState(1);
-   
+    const cookie = new Cookies();
+    const IconImage = cookie.get("image");
 
 
     return (
@@ -31,7 +33,7 @@ export default function Navbar() {
                     <li><Link to="members" className={`${ActivePage === 3 ? "Active" : ""}`} onClick={() => setActivePage(3)}>Members</Link></li>
                     <li><Link to="photos" className={`${ActivePage === 4 ? "Active" : ""}`} onClick={() => setActivePage(4)}>Photos</Link></li>
                 </ul>
-                <img onClick={() => setActiveProfile(!ActiveProfile)} src='/image/Abdo.jpg' width={30} className='rounded-full cursor-pointer'></img>
+                <img onClick={() => setActiveProfile(!ActiveProfile)} src={`https://localhost:7279//userIcon/${IconImage}`} width={30} className='rounded-full cursor-pointer'></img>
                 {
                     ActiveProfile ?
                         <ProfileList ></ProfileList> : ""

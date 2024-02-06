@@ -7,6 +7,10 @@ using Microsoft.Extensions.Hosting;
 using SocialMedia.Data;
 using SocialMedia.Model;
 using SocialMedia.Models;
+using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.InteropServices.JavaScript;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using System.Security.Cryptography;
 
 namespace SocialMedia.Controllers
 {
@@ -16,19 +20,33 @@ namespace SocialMedia.Controllers
 	public class PostController : ControllerBase
 	{
 
-		public PostController(AppDbContext DB)
+		public PostController(AppDbContext DB,IHostingEnvironment host)
 		{
 			_DB = DB;
+			_host = host;
 		}
 
 		private readonly AppDbContext _DB;
+		private readonly IHostingEnvironment _host;
 
 		[HttpPost]
 		public async Task<IActionResult> AddNewPost(dtoPost post)
 		{
-
 			if (ModelState.IsValid)
 			{
+
+				// add photo to userBack
+				string myUpload = Path.Combine(_host.WebRootPath, "postPhotos");
+				string ImageName = post.file.FileName;
+				string fullPath = Path.Combine(myUpload, ImageName);
+				await post.file.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+
+				// add photo to userPhotos
+				myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
+				ImageName = post.file.FileName;
+				fullPath = Path.Combine(myUpload, ImageName);
+				await post.file.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+
 				Post NewUser = new()
 				{
 					Content = post.Content,
@@ -41,6 +59,7 @@ namespace SocialMedia.Controllers
 					loves = 0,
 					Sads = 0,
 					Haha = 0,
+					ImagePath = ImageName,
 					CreatedAt = DateTime.Now
 				};
 
@@ -175,11 +194,12 @@ namespace SocialMedia.Controllers
 		}
 
 
-		[HttpPut("content")]
-		public async Task<IActionResult> UpdateContent(string content ,int id)
+		[HttpPut("EditPost")]
+		public async Task<IActionResult> EditPost(string content , string status ,int id)
 		{
 			Post post = await _DB.posts.FindAsync(id);
 			post.Content = content;
+			post.Status = status;
 			_DB.SaveChanges();
 
 			return Ok();

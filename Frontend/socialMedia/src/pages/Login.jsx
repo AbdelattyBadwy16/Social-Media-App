@@ -31,7 +31,7 @@ export default function Login() {
             UserContext.setAuth(data);
             cookie.set("bearer",data.token);
             cookie.set("userName",data.userName);
-            cookie.set("image",data.iconImage);
+            cookie.set("image",data.iconImagePath);
             cookie.set("id",data.id);
             
             if (res.ok) {
