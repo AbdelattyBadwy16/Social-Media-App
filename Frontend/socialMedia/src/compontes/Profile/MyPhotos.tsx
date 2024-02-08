@@ -28,10 +28,10 @@ export default function MyPhotos() {
       <hr></hr>
       { 
         isLoading ? "" :
-          <div className='grid md:grid-cols-4 mt-10 gap-5 h-[1000px] sm:grid-cols-2 grid-cols-1'>
+          <div className='grid md:grid-cols-4 mt-10 gap-5 h-auto sm:grid-cols-2 grid-cols-1'>
             {
               photos.map((image) =>
-                <img key={image.id} src={`https://localhost:7279//userPhotos/${image.imagePath}`} className="rounded-lg h-[100%] w-[80%] hover:bg-gray-500 shadow-lg border-2 p-3" width={100}></img>)
+                <img key={image.id} src={`https://localhost:7279//userPhotos/${image.imagePath}`} className="rounded-lg h-[300px] w-[80%] hover:bg-gray-500 shadow-lg border-2 p-3" width={100}></img>)
 
             }
           </div>

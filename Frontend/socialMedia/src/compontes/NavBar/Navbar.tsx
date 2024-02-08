@@ -26,14 +26,16 @@ export default function Navbar() {
                     <img className='cursor-pointer' src="/icon/search.png" width={20}></img>
                 </div>
             </section>
-            <section className='flex gap-6'>
+            <section className='flex gap-6 items-center'>
                 <ul className='navlist flex gap-6'>
                     <li><Link to="home" className={`${ActivePage === 1 ? "Active" : ""}`} onClick={() => setActivePage(1)}>Activity</Link></li>
                     <li><Link to="groups" className={`${ActivePage === 2 ? "Active" : ""}`} onClick={() => setActivePage(2)}>Groups</Link></li>
                     <li><Link to="members" className={`${ActivePage === 3 ? "Active" : ""}`} onClick={() => setActivePage(3)}>Members</Link></li>
                     <li><Link to="photos" className={`${ActivePage === 4 ? "Active" : ""}`} onClick={() => setActivePage(4)}>Photos</Link></li>
                 </ul>
-                <img onClick={() => setActiveProfile(!ActiveProfile)} src={`https://localhost:7279//userIcon/${IconImage}`} width={30} className='rounded-full cursor-pointer'></img>
+                <div className='w-[35px] h-[35px]'>
+                    <img onClick={() => setActiveProfile(!ActiveProfile)} src={`https://localhost:7279//userIcon/${IconImage}`} className='rounded-full cursor-pointer w-[100%] h-[100%]'></img>
+                </div>
                 {
                     ActiveProfile ?
                         <ProfileList ></ProfileList> : ""

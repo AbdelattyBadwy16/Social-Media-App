@@ -3,10 +3,11 @@ import "./NewPost.css"
 import Cookies from 'universal-cookie';
 import { postWindow } from '../../Context/PostWindow';
 import { GetUserData } from '../../Helper/ProfileApi';
-import { CreateNewPost, GetPost, GetUserPosts, UpdatePost } from '../../Helper/PostApi';
+import { AddPostImage, CreateNewPost, GetPost, GetUserPosts, UpdatePost } from '../../Helper/PostApi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserPost } from '../../Context/UserPostContext';
+import { Cookie } from '@mui/icons-material';
 
 export default function NewPost() {
     const cookie = new Cookies();
@@ -34,6 +35,7 @@ export default function NewPost() {
     //handel close post
     const PostWindow = useContext(postWindow);
     function handelClosePost() {
+        cookie.remove("PostWindow");
         cookie.set("PostWindow", 'false');
         PostWindow.setOpen(false);
         return;
@@ -46,7 +48,7 @@ export default function NewPost() {
        
         var f = document.getElementById("form");
         const newForm = new FormData(f);
-
+        
         let userId = await GetUserData();
         userId = userId.id;
         if (operation === "edit") {
@@ -57,9 +59,14 @@ export default function NewPost() {
             context.setPost([...data]);
 
         } else {
-            const res = await CreateNewPost({ content, userId, status , file : newForm });
-            console.log(res);
-            if (res.ok) {
+            const res = await CreateNewPost({ content, userId, status});
+
+
+
+            cookie.remove("PostId");
+            cookie.set("PostId",PostId);
+            const res2 = await AddPostImage(newForm);
+            if (res2.ok) {
                 toast("Post Created Successfuly!");
                 const data = await GetUserPosts();
                 context.setPost(data);
@@ -67,6 +74,7 @@ export default function NewPost() {
         }
 
         setTimeout(() => {
+            cookie.get("PostWindow")
             cookie.set("PostWindow", 'false');
             PostWindow.setOpen(false);
         }, 2000);
@@ -116,7 +124,7 @@ export default function NewPost() {
                     <button onClick={handelSubmit} className='bg-gray-400 shadow-lg p-1 rounded-lg font-bold w-[20%]'>{operation === "edit" ? "Edit" : "Posted"}</button>
                     <div className='flex gap-5'>
                         <img src="/icon/MyPhoto.png" className='cursor-pointer' onClick={() => setAddPhoto(!addPhoto)} width={30}></img>
-                        <form id="form">
+                        <form onSubmit={handelSubmit} id="form">
                             <input name="image" id='file' type='file' className={`${addPhoto ? "" : "hidden"} w-[100px]`}></input>
                         </form>
                     </div>

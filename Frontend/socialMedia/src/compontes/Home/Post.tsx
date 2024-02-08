@@ -103,8 +103,11 @@ export default function Post(CurPost: Post) {
     //edit post
     const PostWindow = useContext(postWindow);
     async function handelEdit() {
+        cookie.remove("PostWindow")
         cookie.set("PostWindow", 'true');
         PostWindow.setOpen("true");
+        cookie.remove("PostStatus");
+        cookie.remove("PostId");
         cookie.set("PostStatus","edit");
         cookie.set("PostId",post.id);
         setOpenPostList(false);
@@ -146,7 +149,6 @@ export default function Post(CurPost: Post) {
 
             <div className=' p-5'>
                 <p className='mb-5'>{post?.content !== undefined ? post?.content : ""}</p>
-                <img src="/image/Abdo.jpg"  className='w-[100%] max-h-[500px]'></img>
                 <div className='flex item-center justify-between mb-1 mt-10'>
                     <div className='flex transition  duration-1000 '>
                         {post?.likes + post?.angry + post?.loves + post?.sads + post?.haha + post?.wow}

@@ -17,6 +17,8 @@ namespace SocialMedia.Models
 
 		public DbSet<Group> groups { get; set; }
 		public DbSet<User_Post> user_Posts { get; set; }
+
+		public DbSet<Friends> friends { get; set; }
 	
 	}
 }

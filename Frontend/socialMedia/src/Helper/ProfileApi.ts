@@ -47,7 +47,7 @@ export async function UpdateIconImage(image: FormData) {
     const cookie = new Cookies();
     const token = cookie.get("bearer");
     const id = cookie.get("id");
-
+    
     const res = await fetch(`https://localhost:7279/api/Account/IconImage?id=${id}`, {
         method: "PUT",
         headers: {

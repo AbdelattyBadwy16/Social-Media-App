@@ -52,9 +52,11 @@ export default function Activity() {
     const PostWindow = useContext(postWindow);
     async function handelAddPost() {
         console.log("hello")
+        cookie.remove("PostWindow")
         cookie.set("PostWindow", 'true');
         setAddNewPost(!addNewPost);
         PostWindow.setOpen("true");
+        cookie.remove("PostStatus")
         cookie.set("PostStatus","add");
         return;
     }

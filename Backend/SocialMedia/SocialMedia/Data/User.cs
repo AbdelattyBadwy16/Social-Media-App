@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SocialMedia.Data;
 
 namespace SocialMedia.Models
 {
@@ -24,8 +25,6 @@ namespace SocialMedia.Models
 		public int Followers {  get; set; }
 		public int Following {get; set; }
 
-
-		public ICollection<User> Friends { get; set; }
 
 		public ICollection<Photo> Photos { get; set; }
 

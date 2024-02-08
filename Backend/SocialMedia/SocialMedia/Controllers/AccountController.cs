@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using SocialMedia.Data;
 using SocialMedia.Model;
 using SocialMedia.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -229,6 +230,44 @@ namespace SocialMedia.Controllers
 			}
 
 			return Ok(ModelState);
+
+		}
+
+
+		[HttpGet("GetAllUser")]
+
+		public async Task<IActionResult> GetAllUser()
+		{
+			ICollection<User>users = _DB.users.OrderBy((item)=>item.Followers).ToList();
+
+			return Ok(users);
+
+		}
+
+
+
+		[HttpPost("addFriend")]
+
+		public async Task<IActionResult> AddFreind(string id,string followerId)
+		{
+			Friends friend = new Friends()
+			{
+				UserId=id,
+				FollowerId=followerId
+			};
+
+			return Ok(ModelState);
+
+		}
+
+
+		[HttpGet("GetUserFriends")]
+
+		public async Task<IActionResult> GetUserFriends(string id)
+		{
+			var users = _DB.friends.Where((item) => item.UserId == id);
+
+			return Ok(users);
 
 		}
 	}

@@ -65,3 +65,17 @@ export async function LoginUser(user: accountLogin) {
     return res;
 }
 
+
+export async function GetAllUsers() {
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    const res = await fetch(`https://localhost:7279/api/Account/GetAllUser`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        }
+    });
+    const data = await res.json();
+    return data;
+}

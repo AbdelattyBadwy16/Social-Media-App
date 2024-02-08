@@ -15,6 +15,7 @@ export default function NewPost() {
     const PostWindow = useContext(postWindow);
 
     function handelClosePost() {
+        cookie.remove("PostWindow");
         cookie.set("PostWindow", 'false');
         PostWindow.setOpen(false);
         return;
@@ -37,6 +38,7 @@ export default function NewPost() {
         }
 
         setTimeout(() => {
+            cookie.remove("PostWindow");
             cookie.set("PostWindow", 'false');
             PostWindow.setOpen(false);
         }, 2000);

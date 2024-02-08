@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Active from '../compontes/Home/Active';
 import MemberCard from '../compontes/Members/MemberCard';
 import './Members.css'
+import { GetAllUsers } from '../Helper/AccountApi';
 
 export default function Members() {
   const [ActiveFilter, setActivefilter] = useState(1);
+  const [users,setUsers] = useState([]);
+  
+  useEffect(()=>{
+      async function  fetch() {
+          const res = await GetAllUsers();
+          setUsers(res);
+      }
+      fetch();
+  },[]);
 
   return (
     <div className='container flex items-start justify-between'>
@@ -25,11 +35,10 @@ export default function Members() {
         </div>
 
         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2  md:grid-cols-3 mr-5 m-5">
-          <MemberCard></MemberCard>
-          <MemberCard></MemberCard>
-          <MemberCard></MemberCard>
-          <MemberCard></MemberCard>
-          <MemberCard></MemberCard>
+          {
+            users.map((item)=><MemberCard user={item}></MemberCard>)
+          }
+          
         </div>
       </section>
 

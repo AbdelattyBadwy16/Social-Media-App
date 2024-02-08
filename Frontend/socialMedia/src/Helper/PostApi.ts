@@ -8,7 +8,6 @@ interface Post {
     status: string,
     userId: string,
     groupId: 0 ,
-    file : FormData
 }
 
 
@@ -20,15 +19,57 @@ export async function CreateNewPost(post: Post ) {
         const res = await fetch(`https://localhost:7279/api/Post`, {
             method: "POST",
             headers: {
+                "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 content: post.content,
                 status: post.status,
                 userId: post.userId,
-                file : post.file,
                 groupId: null
             })
+
+        });
+        const data = await res.json();
+        return data;
+    } catch {
+        toast("Post Creating Failled!");
+    }
+    return;
+}
+
+
+export async function AddPostImage(image: FormData) {
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    const id = cookie.get("PostId");
+    
+    const res = await fetch(`https://localhost:7279/api/Post/PostImage?id=${id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        body: image
+
+
+    });
+
+    return res;
+}
+
+
+export async function sd(file :FormData ,id : number) {
+    //handel close post
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    try {
+        const res = await fetch(`https://localhost:7279/api/Post/PostImage?id=${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: file
 
         });
         return res;

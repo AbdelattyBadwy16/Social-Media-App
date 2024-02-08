@@ -49,6 +49,7 @@ export default function Profile() {
     var f = document.getElementById("form");
     const cookie = new Cookies();
     const newForm = new FormData(f);
+    console.log(newForm);
     const res = await UpdateIconImage(newForm);
     if (res.ok) {
       toast("Photo Change Correctly.");
@@ -57,6 +58,7 @@ export default function Profile() {
           try {
             const data = await GetUserData();
             setData(data);
+            cookie.remove("image");
             cookie.set("image", data.iconImagePath);
           } finally {
             setIsLoading(false);

@@ -35,19 +35,7 @@ namespace SocialMedia.Controllers
 			if (ModelState.IsValid)
 			{
 
-				// add photo to userBack
-				string myUpload = Path.Combine(_host.WebRootPath, "postPhotos");
-				string ImageName = post.file.FileName;
-				string fullPath = Path.Combine(myUpload, ImageName);
-				await post.file.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-
-				// add photo to userPhotos
-				myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
-				ImageName = post.file.FileName;
-				fullPath = Path.Combine(myUpload, ImageName);
-				await post.file.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-
-				Post NewUser = new()
+				Post NewPost = new()
 				{
 					Content = post.Content,
 					Status = post.Status,
@@ -59,11 +47,39 @@ namespace SocialMedia.Controllers
 					loves = 0,
 					Sads = 0,
 					Haha = 0,
-					ImagePath = ImageName,
 					CreatedAt = DateTime.Now
 				};
 
-				await _DB.posts.AddAsync(NewUser);
+				await _DB.posts.AddAsync(NewPost);
+				await _DB.SaveChangesAsync();
+				return Ok(NewPost.Id);
+			}
+
+			return BadRequest(ModelState);
+
+		}
+
+		[HttpPut("PostImage")]
+		public async Task<IActionResult> AddPostImage(IFormFile image,int id)
+		{
+			if (ModelState.IsValid)
+			{
+
+				// add photo to postPhotos
+				string myUpload = Path.Combine(_host.WebRootPath, "postPhotos");
+				string ImageName = image.FileName;
+				string fullPath = Path.Combine(myUpload, ImageName);
+				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+
+				// add photo to userPhotos
+				myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
+				ImageName = image.FileName;
+				fullPath = Path.Combine(myUpload, ImageName);
+				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+
+				var Post = await _DB.posts.FindAsync(id);
+
+				Post.ImagePath = ImageName;
 				_DB.SaveChanges();
 				return Ok(ModelState);
 			}
