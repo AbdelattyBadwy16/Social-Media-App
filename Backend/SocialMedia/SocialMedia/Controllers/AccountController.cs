@@ -47,7 +47,8 @@ namespace SocialMedia.Controllers
 					CreatedDate = DateTime.Now,
 					About = "I,m a new User in Glichat App.",
 					IconImagePath = "profile.jpg",
-					BackImagePath = "loginBack.jpg"
+					BackImagePath = "loginBack.jpg",
+					JopTitle = "NewPie"
 				};
 
 				IdentityResult result = await _userManger.CreateAsync(newuser, user.password);
@@ -238,37 +239,39 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> GetAllUser()
 		{
-			ICollection<User>users = _DB.users.OrderBy((item)=>item.Followers).ToList();
+			ICollection<User>users = _DB.users.OrderByDescending((item)=>item.Followers).ToList();
 
 			return Ok(users);
 
 		}
 
-
-
-		[HttpPost("addFriend")]
-
-		public async Task<IActionResult> AddFreind(string id,string followerId)
+		[HttpPut("updateAccount")]
+		public async Task<IActionResult> updateAccount(dtoEditUser user)
 		{
-			Friends friend = new Friends()
+			var EditedUser = await _userManger.FindByIdAsync(user.Id);
+			if (EditedUser != null)
 			{
-				UserId=id,
-				FollowerId=followerId
-			};
+				if (await _userManger.CheckPasswordAsync(EditedUser, user.OldPassword))
+				{
+					EditedUser.FirstName = user.FirstName;
+					EditedUser.LastName = user.LastName;
+					EditedUser.Country = user.Country;
+					EditedUser.JopTitle = user.JopTitle;
+					EditedUser.NickName = user.NickName;
+					EditedUser.BirthDate = user.BirthDate;
+					EditedUser.PhoneNumber = user.PhoneNumber;
+					await _userManger.ChangePasswordAsync(EditedUser, user.OldPassword, user.Password);
+					_DB.SaveChanges();
+				}
+				else return Unauthorized("Wronge Old Password.");
+			}
+			else return BadRequest();
 
-			return Ok(ModelState);
-
+			return Ok(user);
 		}
 
 
-		[HttpGet("GetUserFriends")]
 
-		public async Task<IActionResult> GetUserFriends(string id)
-		{
-			var users = _DB.friends.Where((item) => item.UserId == id);
 
-			return Ok(users);
-
-		}
 	}
 }

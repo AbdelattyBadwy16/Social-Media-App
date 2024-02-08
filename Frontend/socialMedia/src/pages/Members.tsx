@@ -36,7 +36,7 @@ export default function Members() {
 
         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2  md:grid-cols-3 mr-5 m-5">
           {
-            users.map((item)=><MemberCard user={item}></MemberCard>)
+            users.map((item)=><MemberCard key={item.id} user={item}></MemberCard>)
           }
           
         </div>

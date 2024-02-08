@@ -45,11 +45,11 @@ export default function NewPost() {
     const context = useContext(UserPost)
 
     async function handelSubmit() {
-       
+
         var f = document.getElementById("form");
         const newForm = new FormData(f);
-        
-        let userId = await GetUserData();
+        const id = cookie.get("id");
+        let userId = await GetUserData(id);
         userId = userId.id;
         if (operation === "edit") {
             const res = await UpdatePost(content, status);
@@ -59,18 +59,14 @@ export default function NewPost() {
             context.setPost([...data]);
 
         } else {
-            const res = await CreateNewPost({ content, userId, status});
-
-
-
+            const res = await CreateNewPost({ content, userId, status });
             cookie.remove("PostId");
-            cookie.set("PostId",PostId);
-            const res2 = await AddPostImage(newForm);
-            if (res2.ok) {
-                toast("Post Created Successfuly!");
-                const data = await GetUserPosts();
-                context.setPost(data);
-            }
+            cookie.set("PostId", res);
+
+            toast("Post Created Successfuly!");
+            const data = await GetUserPosts();
+            context.setPost(data);
+
         }
 
         setTimeout(() => {
@@ -89,20 +85,21 @@ export default function NewPost() {
     useEffect(() => {
 
         async function fetch() {
-            const data = await GetUserData();
+            const id = cookie.get("id");
+            const data = await GetUserData(id);
             setName(data.firstName + " " + data.lastName);
         }
         fetch();
     }, []);
 
 
-   
+
 
 
     return (
         <>
             <div className='newpost w-[50%] max-h-[10%] h-[30%] rounded-lg absolute z-[1001] bg-[white] opacity-100'>
-                <div className='flex gap-0 items-center justify-between p-5 pb-0' >
+                <div className='flex gap-0 items-center justify-between bg-[white] p-5 pb-0' >
                     <p className='close p-2 cursor-pointer rounded-full font-bold' onClick={handelClosePost}>X</p>
                 </div>
                 <div className='text-center font-bold text-[20px] mb-5 absolute top-5 left-[38%]'>{operation === "edit" ? "Edit Post" : "Create New Post"}</div>
@@ -117,7 +114,7 @@ export default function NewPost() {
                         </select>
                     </div>
                 </div>
-                <div className='h-[100%]'>
+                <div className='h-[100%] bg-[white]'>
                     <textarea value={content} onChange={(e) => SetContent(e.target.value)} className='p-5 w-[100%] h-[100%]' placeholder={`What are you thinking, ${name}?`}></textarea>
                 </div>
                 <div className='flex p-5 justify-between rounded-b-lg bg-[white]'>

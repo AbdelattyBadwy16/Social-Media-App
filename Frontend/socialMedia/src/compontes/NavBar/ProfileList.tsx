@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '/image/profile.jpg'
 import { Link } from 'react-router-dom'
 import './List.css'
 import Cookies from 'universal-cookie';
-import { UserPost } from '../../Context/UserPostContext';
 import { GetUserPosts } from '../../Helper/PostApi';
 
 
@@ -13,7 +12,6 @@ export default function ProfileList() {
     const image = cookie.get("image");
     const [topics, setTopics] = useState(0);
     const [leave , setLeave] = useState(false);
-
     // get user Posts
     useEffect(() => {
         async function fetch() {
@@ -52,14 +50,7 @@ export default function ProfileList() {
                             </div>
                         </Link>
                     </li>
-                    <li className='w-[100%]'>
-                        <Link to="" className='flex justify-around items-center'>
-                            <h2>Friends</h2>
-                            <div className='bg-gray-200 text-blue-600 rounded-full text-[white] pl-1 pr-1'>
-                                <p>5</p>
-                            </div>
-                        </Link>
-                    </li>
+                    
                     <li className='w-[100%]'>
                         <Link to="" className='flex justify-around items-center'>
                             <h2>Messages</h2>

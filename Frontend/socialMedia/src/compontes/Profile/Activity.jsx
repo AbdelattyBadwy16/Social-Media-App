@@ -23,7 +23,8 @@ export default function Activity() {
         setIsLoading(true);
         async function fetch() {
             try {
-                const data = await GetUserData();
+                const id = cookie.get("id");
+                const data = await GetUserData(id);
                 setData(data);
             } finally {
                 setIsLoading(false);
@@ -48,7 +49,7 @@ export default function Activity() {
     }, []);
 
 
-
+    //add post window
     const PostWindow = useContext(postWindow);
     async function handelAddPost() {
         console.log("hello")

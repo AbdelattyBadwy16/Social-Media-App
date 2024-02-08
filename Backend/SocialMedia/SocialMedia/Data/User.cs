@@ -13,7 +13,7 @@ namespace SocialMedia.Models
 		public string Gender { get; set; }
 
 		public DateTime? CreatedDate { get; set; }
-		public DateTime? BirthDate { get; set; }
+		public string? BirthDate { get; set; }
 
 		public string Country { get; set; }
 
@@ -33,6 +33,7 @@ namespace SocialMedia.Models
 		public ICollection<User_Group> Groups { get; set; }
 
 		public ICollection<Group> MyGroups { get; set; }
+
 
 
 	}

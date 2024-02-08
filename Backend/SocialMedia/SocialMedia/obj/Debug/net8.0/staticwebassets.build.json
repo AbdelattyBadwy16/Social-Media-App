@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/tMcy5tjM+D4gtXOQrf1yUL2Ej2WOpI/L7+WUzF5Few=",
+  "Hash": "DRF2qru33oRTEnF8r5yQ6LmZMzxlamCjkRMSKGiWhuc=",
   "Source": "SocialMedia",
   "BasePath": "_content/SocialMedia",
   "Mode": "Default",
@@ -186,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\userIcon\\Abdo.jpg"
+    },
+    {
+      "Identity": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\avl1.png",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userIcon/avl1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\userIcon\\avl1.png"
     },
     {
       "Identity": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\grid-1.png",

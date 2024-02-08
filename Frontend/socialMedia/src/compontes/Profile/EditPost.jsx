@@ -27,8 +27,8 @@ export default function NewPost() {
     const [status, SetStatus] = useState("public");
     async function handelSubmit() {
         const token = cookie.get("bearer");
-        const username = cookie.get("userName");
-        let userId = await GetUserData({ token, username });
+        const username = cookie.get("id");
+        let userId = await GetUserData(id);
         userId = userId.id;
         const res = await CreateNewPost({ content, userId, status });
         if (res.ok) {
@@ -53,8 +53,8 @@ export default function NewPost() {
     useEffect(() => {
 
         async function fetch() {
-
-            const data = await GetUserData();
+            const id = cookie.get("id");
+            const data = await GetUserData(id);
             setName(data.firstName + " " + data.lastName);
         }
         fetch();

@@ -14,6 +14,9 @@ import MyGroups from "./compontes/Profile/MyGroups"
 import MyPhotos from "./compontes/Profile/MyPhotos"
 import RequireAuth from "./Helper/RequireAuth"
 import SaveAuth from "./Helper/SaveAuth"
+import Following from "./compontes/Profile/Following"
+import Follower from "./compontes/Profile/Follower"
+import Setting from "./compontes/Profile/Setting"
 
 
 function App() {
@@ -40,6 +43,9 @@ function App() {
               <Route path="Activity" element={<Activity></Activity>}></Route>
               <Route path="Groups" element={<MyGroups></MyGroups>}></Route>
               <Route path="Photos" element={<MyPhotos></MyPhotos>}></Route>
+              <Route path="Following" element={<Following></Following>}></Route>
+              <Route path="Follower" element={<Follower></Follower>}></Route>
+              <Route path="Setting" element={<Setting></Setting>}></Route>
             </Route>
             <Route path='*' element={<PageNotFound />} />
           </Route>

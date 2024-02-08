@@ -1,3 +1,4 @@
+import Cookies from 'universal-cookie';
 import { GetUserData, UpdateAbout } from '../../Helper/ProfileApi';
 import React, { useContext, useEffect, useState } from 'react'
 
@@ -12,7 +13,9 @@ export default function About() {
 
   useEffect(() => {
     async function fetch() {
-      const data = await GetUserData();
+      const cookie = new Cookies();
+      const id = cookie.get("id");
+      const data = await GetUserData(id);
       setAbout(data.about);
     }
     fetch();

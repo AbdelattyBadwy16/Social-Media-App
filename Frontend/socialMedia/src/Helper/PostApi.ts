@@ -254,3 +254,55 @@ export async function RemovePostReact(id: number) {
     }
     return;
 }
+
+
+export async function AddComment(id: number , content : string) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    const userId = cookie.get("id");
+
+    try {
+        const res = await fetch(`https://localhost:7279/api/Post/AddComment`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body :  JSON.stringify({
+                userId: userId,
+                postId: id,
+                content: content
+            })
+        });
+        return res;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
+
+
+
+export async function GetPostComments(id: number) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    const userId = cookie.get("id");
+
+    try {
+        const res = await fetch(`https://localhost:7279/api/Post/GetPostComments?Id=${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            
+        });
+        const data = res.json();
+        return data;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}

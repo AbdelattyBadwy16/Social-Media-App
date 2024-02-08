@@ -271,6 +271,40 @@ namespace SocialMedia.Controllers
 			_DB.SaveChanges();
 			return Ok(0);
 		}
+
+
+		[HttpPost("AddComment")]
+		public async Task<IActionResult> AddComment(dtoComment comment)
+		{
+		    var user = _DB.users.FirstOrDefault(user=>user.Id == comment.UserId);
+			var userName = "";
+			if (user != null)
+			{
+				userName = user.FirstName + " " + user.LastName;
+			}
+			else return BadRequest(ModelState);
+
+			Comment NewComment = new Comment()
+			{
+				PostId = comment.PostId,
+				Content = comment.Content,
+				UserName = userName,
+				UserId = comment.UserId,
+				UserImagePath = user.IconImagePath
+			};
+			_DB.Comments.Add(NewComment);
+			_DB.SaveChanges();
+			return Ok(ModelState);
+		}
+
+
+		[HttpGet("GetPostComments")]
+		public async Task<IActionResult> GetPostComments(int Id)
+		{
+			var Comments = _DB.Comments.Where(comment => comment.PostId == Id);
+			
+			return Ok(Comments);
+		}
 	}
 
 }

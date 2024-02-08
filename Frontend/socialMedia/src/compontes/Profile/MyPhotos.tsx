@@ -24,7 +24,7 @@ export default function MyPhotos() {
 
   return (
     <div className='m-10 bg-[white] p-5 rounded-lg border-2'>
-      <h3 className='mb-3 font-bold text-gray-500 text-[20px]'>MyPhotos</h3>
+      <h3 className='mb-3 font-bold text-gray-500 text-[20px]'>My Photos</h3>
       <hr></hr>
       { 
         isLoading ? "" :

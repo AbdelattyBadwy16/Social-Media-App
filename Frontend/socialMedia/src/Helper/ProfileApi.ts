@@ -8,10 +8,9 @@ interface userData {
 
 
 
-export async function GetUserData() {
+export async function GetUserData(id : string) {
     const cookie = new Cookies();
     const token = cookie.get("bearer");
-    const id = cookie.get("id");
     const res = await fetch(`https://localhost:7279/api/Account?id=${id}`, {
         method: "GET",
         headers: {
