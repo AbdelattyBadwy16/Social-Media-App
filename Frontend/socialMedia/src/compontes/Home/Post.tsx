@@ -121,8 +121,8 @@ export default function Post(CurPost: Post) {
     }
 
     //handel Add Comment
-    async function handelAddComment() {
-
+    async function handelAddComment(e : Event) {
+        if(!comment.length || e.key != "Enter")return;
         const res = await AddComment(post.id, comment);
         setcommentList(true);
         setComment("");
@@ -135,13 +135,13 @@ export default function Post(CurPost: Post) {
 
         const res = await GetPostComments(post.id);
         setcommentList(!commentList);
+        // this mean commient list is closed so no need to fetch data 
+        if(commentList == true)return;
         setComment("");
         setComments(res);
-        console.log(comments,res)
         return;
     }
 
-    const PostCheck = cookie.get("PostWindow");
     return (
         <div className='bg-[white] border shadow-lg rounded-lg'>
 
@@ -241,7 +241,7 @@ export default function Post(CurPost: Post) {
                 <div className='flex gap-5  w-[100%]'>
                     <img src={`https://localhost:7279//userIcon/${image}`} className='rounded-full' width={30}></img>
                     <div className="w-[100%] justify-between shadow-md p-2 rounded-lg flex bg-[white] gap-5">
-                        <input id="commentInp" name="commentInp" value={comment} onChange={(e) => setComment(e.target.value)} type='text' className='w-[100$]' placeholder='Type a comment...'></input>
+                        <input id="commentInp" name="commentInp" onKeyPress={handelAddComment} value={comment} onChange={(e) => setComment(e.target.value)} type='text' className='w-[100$]' placeholder='Type a comment...'></input>
                         <img onClick={handelAddComment} className='cursor-pointer' src="/icon/inbox.png" width={20}></img>
                     </div>
                     <div onClick={handelCommentList} className='text-[20px] cursor-pointer p-3 rounded-full'>{!commentList ? "v" : "^"}</div>

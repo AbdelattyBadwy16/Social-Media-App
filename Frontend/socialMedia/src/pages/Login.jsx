@@ -29,22 +29,19 @@ export default function Login() {
             const res = await LoginUser({ UserName, Password });
             const data = await res.json();
             UserContext.setAuth(data);
-            cookie.remove("bearer");
-            cookie.remove("userName");
-            cookie.remove("image");
-            cookie.remove("id");
-            cookie.set("bearer",data.token);
-            cookie.set("userName",data.userName);
-            cookie.set("image",data.iconImagePath);
-            cookie.set("id",data.id);
-            
+
+            console.log(res);
             if (res.ok) {
-                setIsLoading(true);
-                setErrContent("");
-                setIsLoading(false);
-              
+                cookie.remove("bearer");
+                cookie.remove("userName");
+                cookie.remove("image");
+                cookie.remove("id");
+                cookie.set("bearer", data.token);
+                cookie.set("userName", data.userName);
+                cookie.set("image", data.iconImagePath);
+                cookie.set("id", data.id);
                 setTimeout(() => {
-                    nav("/home"); 
+                    nav("/home");
                 }, 3000);
 
             } else setErrContent("Invaild username or password.");
