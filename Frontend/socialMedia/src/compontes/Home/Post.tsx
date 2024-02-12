@@ -18,14 +18,15 @@ interface Post {
     angry: number
     wow: number
     status: string
-    id: number
+    id: number,
+    userId : string,
+    imagePath : string
 }
 
 export default function Post(CurPost: Post) {
 
     const cookie = new Cookies();
-    const image = cookie.get("image");
-
+    const userImage = cookie.get("image");
     const [post, setPost] = useState<Post>({});
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
@@ -35,15 +36,16 @@ export default function Post(CurPost: Post) {
     const [commentList, setcommentList] = useState(false);
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
+    const [image , setImage] = useState("");
     // user Details
     useEffect(() => {
         setPost(CurPost.post);
-
         async function fetch() {
-            const id = cookie.get("id");
+            const id = CurPost.post.userId;
             const data = await GetUserData(id);
             setFirstName(data.firstName);
             setSecondName(data.lastName);
+            setImage(data.iconImagePath);
             const res = await CheckPostReact(CurPost?.post.id);
             setReactType(res);
 
@@ -76,7 +78,6 @@ export default function Post(CurPost: Post) {
         else
             PostTime = `${time - PostDate.getMinutes()} Minutes ago`;
     }
-
     //Delete Post
     const context = useContext(UserPost);
     async function handelDelete() {
@@ -239,7 +240,7 @@ export default function Post(CurPost: Post) {
 
             <div className='bg-[#f2f2f2] flex flex-col  gap-5 p-5 w-[100%]'>
                 <div className='flex gap-5  w-[100%]'>
-                    <img src={`https://localhost:7279//userIcon/${image}`} className='rounded-full' width={30}></img>
+                    <img src={`https://localhost:7279//userIcon/${userImage}`} className='rounded-full' width={30}></img>
                     <div className="w-[100%] justify-between shadow-md p-2 rounded-lg flex bg-[white] gap-5">
                         <input id="commentInp" name="commentInp" onKeyPress={handelAddComment} value={comment} onChange={(e) => setComment(e.target.value)} type='text' className='w-[100$]' placeholder='Type a comment...'></input>
                         <img onClick={handelAddComment} className='cursor-pointer' src="/icon/inbox.png" width={20}></img>

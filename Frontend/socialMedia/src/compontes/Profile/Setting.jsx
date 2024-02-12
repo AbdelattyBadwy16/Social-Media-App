@@ -69,7 +69,6 @@ export default function Setting() {
             toast("Old Password Required.");
             return;
         }
-        console.log(FirstName, FirstNameCheck);
         if (!FirstNameCheck) FirstName=userData.firstName;
         if (!LastNameCheck) LastName=userData.lastName;
         if (!nickNameCheck) nickName=userData.nickName;

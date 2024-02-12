@@ -36,14 +36,12 @@ export default function MemberCard(user: account) {
     async function handelRemoveFollow() {
         setIsFreind(false);
         const res = RemoveFriend(user.id);
-        console.log(res);
         return;
     }
 
     // add Follow
     async function handelAddFollow() {
         const res = await AddFriends(user.id);
-        console.log(res);
         setIsFreind(true);
         return;
     }

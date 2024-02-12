@@ -179,7 +179,6 @@ export interface UpdateAccount {
 
 
 export async function UpdateAccount(account: UpdateAccount) {
-    console.log(account);
     const cookie = new Cookies();
     const token = cookie.get("bearer");
     const userId = cookie.get("id");

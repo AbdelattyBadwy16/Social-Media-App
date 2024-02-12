@@ -21,14 +21,14 @@ interface userData {
   userName: string,
   createdDate: string,
   iconImagePath: string,
-  jopTitle : string
+  jopTitle: string
 }
 
 export default function Profile() {
   const [ActiveItem, setActiveItem] = useState(1);
   const [editImage, setEditImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<userData>({jopTitle:"", iconImagePath: "", createdDate: "", userName: "", firstName: "", secondName: "", about: "", bitrhDate: "", email: "", country: "", phoneNumber: "", followers: 0, following: 0 });
+  const [data, setData] = useState<userData>({ jopTitle: "", iconImagePath: "", createdDate: "", userName: "", firstName: "", secondName: "", about: "", bitrhDate: "", email: "", country: "", phoneNumber: "", followers: 0, following: 0 });
   const cookie = new Cookies();
   // fetch user data
   useEffect(() => {
@@ -100,6 +100,10 @@ export default function Profile() {
                 <div >
                   <div className="flex gap-3 items-center">
                     <h1 className="font-bold text-[25px]">{data.firstName}</h1>
+                    { 
+                      data.nickName != null ?
+                      <h3>({data.nickName})</h3> : ""
+                    }
                     <h3 className="text-[11px] font-bold border-2 border-gray-200 p-1 rounded-md  text-gray-600">{data.jopTitle}</h3>
                   </div>
                   <div className="flex gap-3 mb-5">

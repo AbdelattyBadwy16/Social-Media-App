@@ -60,7 +60,7 @@ export default function LeftNavbar() {
                     <img src='/icon/MyGroup.png' width={20}></img>
                     <p className={`${Active ? "" : "hidden"}`}>MyGroups</p>
                 </Link>
-                <Link to="" className='leftNavItem flex gap-3'>
+                <Link to="profile/Setting" className='leftNavItem flex gap-3'>
                     <img src='/icon/setting.png' width={20}></img>
                     <p className={`${Active ? "" : "hidden"}`}>Setting</p>
                 </Link>

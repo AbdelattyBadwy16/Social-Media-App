@@ -52,7 +52,6 @@ export default function Activity() {
     //add post window
     const PostWindow = useContext(postWindow);
     async function handelAddPost() {
-        console.log("hello")
         cookie.remove("PostWindow")
         cookie.set("PostWindow", 'true');
         setAddNewPost(!addNewPost);

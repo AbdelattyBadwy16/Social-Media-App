@@ -13,7 +13,6 @@ export default function Follower() {
             try {
                 const data = await GetFollower();
                 setFollowers(data);
-                console.log(data);
             } catch {
 
             } finally {

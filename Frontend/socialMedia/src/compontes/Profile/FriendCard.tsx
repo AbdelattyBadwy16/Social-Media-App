@@ -26,7 +26,6 @@ export default function FriendCard(user: friend) {
                     data = await GetUserData(user.user.followerId);
                 else data = await GetUserData(user.user.userId);
                 setData(data);
-                console.log(user.type)
             } finally {
                 setIsLoding(false);
             }

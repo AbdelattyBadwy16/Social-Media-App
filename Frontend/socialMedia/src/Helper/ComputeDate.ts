@@ -3,7 +3,6 @@
 export function ComputeDate(date : string) {
     if(date == undefined)return 0;
     const PostDate = new Date(date);
-    const minuts = new Date().getMinutes();
     const hours = new Date().getHours();
     const day = new Date().getDay();
     const month = new Date().getMonth();

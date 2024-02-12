@@ -30,7 +30,6 @@ export default function Login() {
             const data = await res.json();
             UserContext.setAuth(data);
 
-            console.log(res);
             if (res.ok) {
                 cookie.remove("bearer");
                 cookie.remove("userName");

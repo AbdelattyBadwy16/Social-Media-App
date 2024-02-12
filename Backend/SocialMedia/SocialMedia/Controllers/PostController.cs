@@ -102,7 +102,7 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> GetAllPosts()
 		{
-			List<Post> posts = _DB.posts.ToList();
+			var posts = _DB.posts.OrderByDescending(item=>item.Id).ToList();
 
 			return Ok(posts);
 		}

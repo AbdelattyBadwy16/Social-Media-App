@@ -3,7 +3,7 @@ import "./NewPost.css"
 import Cookies from 'universal-cookie';
 import { postWindow } from '../../Context/PostWindow';
 import { GetUserData } from '../../Helper/ProfileApi';
-import { CreateNewPost, GetALLPosts, GetUserPosts } from '../../Helper/PostApi';
+import { CreateNewPost, GetUserPosts } from '../../Helper/PostApi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserPost } from '../../Context/UserPostContext';
