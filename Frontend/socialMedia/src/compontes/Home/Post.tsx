@@ -2,7 +2,7 @@ import Cookies from 'universal-cookie'
 import { GetUserData } from '../../Helper/ProfileApi'
 import React, { useContext, useEffect, useState } from 'react'
 import { ComputeDate } from '../../Helper/ComputeDate'
-import { AddComment, CheckPostReact, DeletePost, GetPost, GetPostComments, GetUserPosts, RemovePostReact, UpdateReacts } from '../../Helper/PostApi'
+import { AddComment, CheckPostReact, DeletePost, GetPost, GetPostComments, GetUserPosts, RemoveComment, RemovePostReact, UpdateReacts } from '../../Helper/PostApi'
 import { UserPost } from '../../Context/UserPostContext'
 import { postWindow } from '../../Context/PostWindow'
 
@@ -19,14 +19,15 @@ interface Post {
     wow: number
     status: string
     id: number,
-    userId : string,
-    imagePath : string
+    userId: string,
+    imagePath: string
 }
 
 export default function Post(CurPost: Post) {
 
     const cookie = new Cookies();
     const userImage = cookie.get("image");
+    const userId = cookie.get("id");
     const [post, setPost] = useState<Post>({});
     const [firstName, setFirstName] = useState("");
     const [secondName, setSecondName] = useState("");
@@ -36,7 +37,7 @@ export default function Post(CurPost: Post) {
     const [commentList, setcommentList] = useState(false);
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
-    const [image , setImage] = useState("");
+    const [image, setImage] = useState("");
     // user Details
     useEffect(() => {
         setPost(CurPost.post);
@@ -54,7 +55,6 @@ export default function Post(CurPost: Post) {
         }
         fetch();
     }, []);
-
     // convert time
     const ago = ComputeDate(post?.createdAt);
     const PostDate = new Date(post?.createdAt);
@@ -93,6 +93,7 @@ export default function Post(CurPost: Post) {
     async function handelAddReact(type: string) {
         const res = await UpdateReacts(post.id, type);
         const data = await GetPost(post.id);
+
         setPost(data);
         setReactType(type);
         return;
@@ -122,11 +123,19 @@ export default function Post(CurPost: Post) {
     }
 
     //handel Add Comment
-    async function handelAddComment(e : Event) {
-        if(!comment.length || e.key != "Enter")return;
+    async function handelAddComment(e: Event) {
+        if (!comment.length || e.key != "Enter") return;
         const res = await AddComment(post.id, comment);
         setcommentList(true);
         setComment("");
+        handelCommentList();
+        return;
+    }
+
+    //handelDeleteComment
+
+    async function handelDeleteComment() {
+        const res = await RemoveComment(post.id);
         handelCommentList();
         return;
     }
@@ -137,7 +146,7 @@ export default function Post(CurPost: Post) {
         const res = await GetPostComments(post.id);
         setcommentList(!commentList);
         // this mean commient list is closed so no need to fetch data 
-        if(commentList == true)return;
+        if (commentList == true) return;
         setComment("");
         setComments(res);
         return;
@@ -169,8 +178,8 @@ export default function Post(CurPost: Post) {
                 {
                     openPostList ?
                         <ul className=' shadow-lg bg-gray-300 transition-all flex flex-col gap-3 rounded-md absolute right-5 top-[60px]'>
-                            <li onClick={handelDelete} className='cursor-pointer hover:bg-gray-400 p-2 rounded-md'>Delete</li>
-                            <li onClick={handelEdit} className='cursor-pointer hover:bg-gray-400 p-2 rounded-md'>Edit</li>
+                            <li onClick={handelDelete} className={`cursor-pointer hover:bg-gray-400 p-2 rounded-md ${post.userId == userId ? "" : "hidden"}`}>Delete</li>
+                            <li onClick={handelEdit} className={`cursor-pointer hover:bg-gray-400 p-2 rounded-md ${post.userId == userId ? "" : "hidden"}`}>Edit</li>
                             <li className='cursor-pointer  hover:bg-gray-400 p-2 rounded-md'>Save at favourite</li>
                         </ul> : ""
                 }
@@ -229,12 +238,12 @@ export default function Post(CurPost: Post) {
                                     }} className='cursor-pointer hover:bg-gray-400 rounded-lg' src="/icon/angry.png" width={20}></img>
                                 </div> : ""
                         }
-                        <label htmlFor="commentInp" className='flex gap-2 items-center cursor-pointer rounded-lg hover:bg-gray-300 p-2'>
+                        <label htmlFor={post.id} className='flex gap-2 items-center cursor-pointer rounded-lg hover:bg-gray-300 p-2'>
                             <img src="/icon/comment.png" width={20}></img>
                             <p>Comment</p>
                         </label>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -242,8 +251,7 @@ export default function Post(CurPost: Post) {
                 <div className='flex gap-5  w-[100%]'>
                     <img src={`https://localhost:7279//userIcon/${userImage}`} className='rounded-full' width={30}></img>
                     <div className="w-[100%] justify-between shadow-md p-2 rounded-lg flex bg-[white] gap-5">
-                        <input id="commentInp" name="commentInp" onKeyPress={handelAddComment} value={comment} onChange={(e) => setComment(e.target.value)} type='text' className='w-[100$]' placeholder='Type a comment...'></input>
-                        <img onClick={handelAddComment} className='cursor-pointer' src="/icon/inbox.png" width={20}></img>
+                        <input id={post.id} name={post.id} onKeyPress={handelAddComment} value={comment} onChange={(e) => setComment(e.target.value)} type='text' className='w-[100%]' placeholder='Type a comment...'></input>
                     </div>
                     <div onClick={handelCommentList} className='text-[20px] cursor-pointer p-3 rounded-full'>{!commentList ? "v" : "^"}</div>
                 </div>
@@ -254,11 +262,16 @@ export default function Post(CurPost: Post) {
                             <div className='flex flex-col '>
                                 {
                                     comments.map((item) =>
-                                        <div key={item.id} className='m-5 flex gap-5 items-center shadow-lg p-2 rounded-lg' >
-                                            <img className='w-[50px] rounded-full' src={`https://localhost:7279//userIcon/${item.userImagePath}`}></img>
-                                            <div>
-                                                <h3 className='font-bold'>{item.userName}</h3>
-                                                <p>{item.content}</p>
+                                        <div key={item.id} className='mr-10 flex gap-5 items-center shadow-lg p-2 rounded-lg w-full' >
+                                            <div className='flex items-center justify-between p-3 w-full'>
+                                                <div className='flex gap-2 items-center'>
+                                                    <img className='w-[40px] rounded-full' src={`https://localhost:7279//userIcon/${item.userImagePath}`}></img>
+                                                    <div>
+                                                        <h3 className='font-bold'>{item.userName}</h3>
+                                                        <p>{item.content}</p>
+                                                    </div>
+                                                </div>
+                                                <div onClick={handelDeleteComment} className='hover:bg-gray-400 p-2 rounded-full cursor-pointer'>X</div>
                                             </div>
                                         </div>
                                     )

@@ -11,6 +11,8 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Runtime.InteropServices.JavaScript;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore;
+using SocialMedia.Migrations;
 
 namespace SocialMedia.Controllers
 {
@@ -19,15 +21,16 @@ namespace SocialMedia.Controllers
 	
 	public class PostController : ControllerBase
 	{
+		private readonly AppDbContext _context;
+		private readonly IHostingEnvironment _host;
 
 		public PostController(AppDbContext DB,IHostingEnvironment host)
 		{
-			_DB = DB;
+			_context = DB;
 			_host = host;
 		}
 
-		private readonly AppDbContext _DB;
-		private readonly IHostingEnvironment _host;
+		
 
 		[HttpPost]
 		public async Task<IActionResult> AddNewPost(dtoPost post)
@@ -50,8 +53,8 @@ namespace SocialMedia.Controllers
 					CreatedAt = DateTime.Now
 				};
 
-				await _DB.posts.AddAsync(NewPost);
-				await _DB.SaveChangesAsync();
+				await _context.posts.AddAsync(NewPost);
+				await _context.SaveChangesAsync();
 				return Ok(NewPost.Id);
 			}
 
@@ -77,10 +80,10 @@ namespace SocialMedia.Controllers
 				fullPath = Path.Combine(myUpload, ImageName);
 				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
 
-				var Post = await _DB.posts.FindAsync(id);
+				var Post = await _context.posts.FindAsync(id);
 
 				Post.ImagePath = ImageName;
-				_DB.SaveChanges();
+				_context.SaveChanges();
 				return Ok(ModelState);
 			}
 
@@ -91,9 +94,13 @@ namespace SocialMedia.Controllers
 		[HttpGet("getPost")]
 		public async Task<IActionResult> GetPost(int id)
 		{
-			Post post = await _DB.posts.FindAsync(id);
+			var post = await _context.posts.FindAsync(id);
 
-			return Ok(post);
+			if(post != null) {
+			   return Ok(post);
+			}
+			return NotFound();
+
 		}
 
 
@@ -102,7 +109,7 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> GetAllPosts()
 		{
-			var posts = _DB.posts.OrderByDescending(item=>item.Id).ToList();
+			var posts = await _context.posts.OrderByDescending(item=>item.Id).ToListAsync();
 
 			return Ok(posts);
 		}
@@ -112,7 +119,7 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> GetAllPostsByUser(string userId)
 		{
-			var posts = _DB.posts.Where((item)=>item.UserId==userId).OrderByDescending((item)=>item.Id);
+			var posts = _context.posts.Where((item)=>item.UserId==userId).OrderByDescending((item)=>item.Id);
 
 			return Ok(posts);
 		}
@@ -122,9 +129,9 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> DeletePost(int id)
 		{
-			Post post = await _DB.posts.FindAsync(id);
-			_DB.posts.Remove(post);
-			_DB.SaveChanges();
+			Post post = await _context.posts.FindAsync(id);
+			_context.posts.Remove(post);
+			_context.SaveChanges();
 
 			return Ok();
 		}
@@ -132,13 +139,13 @@ namespace SocialMedia.Controllers
 		[HttpPut]
 		public async Task<IActionResult> UpdateLikes(string type, int id , string userId)
 		{
-			Post post = await _DB.posts.FindAsync(id);
+			Post post = await _context.posts.FindAsync(id);
 
-			User_Post temp = _DB.user_Posts.FirstOrDefault(x => x.PostId == post.Id && x.UserId == userId);
+			User_Post temp = _context.user_Posts.FirstOrDefault(x => x.PostId == post.Id && x.UserId == userId);
 
 			if (temp != null)
 			{
-				_DB.user_Posts.Remove(temp);
+				_context.user_Posts.Remove(temp);
 
 				if (temp.type == "like")
 				{
@@ -202,9 +209,9 @@ namespace SocialMedia.Controllers
 
 			
 			
-			_DB.user_Posts.Add(user_Post);
+			_context.user_Posts.Add(user_Post);
 
-			_DB.SaveChanges();
+			_context.SaveChanges();
 
 			return Ok();
 		}
@@ -213,10 +220,10 @@ namespace SocialMedia.Controllers
 		[HttpPut("EditPost")]
 		public async Task<IActionResult> EditPost(string content , string status ,int id)
 		{
-			Post post = await _DB.posts.FindAsync(id);
+			Post post = await _context.posts.FindAsync(id);
 			post.Content = content;
 			post.Status = status;
-			_DB.SaveChanges();
+			_context.SaveChanges();
 
 			return Ok();
 		}
@@ -225,7 +232,7 @@ namespace SocialMedia.Controllers
 		[HttpGet("CheckReact")]
 		public async Task<IActionResult> CheckPostReact(string userId, int id)
 		{
-			User_Post temp = _DB.user_Posts.FirstOrDefault(x => x.PostId == id && x.UserId == userId);
+			User_Post temp = _context.user_Posts.FirstOrDefault(x => x.PostId == id && x.UserId == userId);
 			if(temp != null)
 			{
 				return Ok(temp.type);
@@ -238,11 +245,11 @@ namespace SocialMedia.Controllers
 		[HttpPut("RemoveReact")]
 		public async Task<IActionResult> RemovePostReact(string userId, int id)
 		{
-			Post post = await _DB.posts.FindAsync(id);
+			Post post = await _context.posts.FindAsync(id);
 
-			User_Post temp = _DB.user_Posts.FirstOrDefault(x => x.PostId == id && x.UserId == userId);
+			User_Post temp = _context.user_Posts.FirstOrDefault(x => x.PostId == id && x.UserId == userId);
 			
-			_DB.user_Posts.Remove(temp);
+			_context.user_Posts.Remove(temp);
 
 			if (temp.type == "like")
 			{
@@ -268,7 +275,7 @@ namespace SocialMedia.Controllers
 			{
 				post.Wow--;
 			}
-			_DB.SaveChanges();
+			_context.SaveChanges();
 			return Ok(0);
 		}
 
@@ -276,7 +283,7 @@ namespace SocialMedia.Controllers
 		[HttpPost("AddComment")]
 		public async Task<IActionResult> AddComment(dtoComment comment)
 		{
-		    var user = _DB.users.FirstOrDefault(user=>user.Id == comment.UserId);
+		    var user = _context.users.FirstOrDefault(user=>user.Id == comment.UserId);
 			var userName = "";
 			if (user != null)
 			{
@@ -292,16 +299,29 @@ namespace SocialMedia.Controllers
 				UserId = comment.UserId,
 				UserImagePath = user.IconImagePath
 			};
-			_DB.Comments.Add(NewComment);
-			_DB.SaveChanges();
+			_context.Comments.Add(NewComment);
+			_context.SaveChanges();
 			return Ok(ModelState);
+		}
+
+		[HttpDelete("DeleteComment")]
+		public async Task<IActionResult> DeleteComment(int id)
+		{
+			var user = await _context.Comments.FirstOrDefaultAsync(item => item.PostId == id); ;
+			if(user != null)
+			{
+				_context.Comments.Remove(user);
+				_context.SaveChanges();
+				return Ok(ModelState);
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpGet("GetPostComments")]
 		public async Task<IActionResult> GetPostComments(int Id)
 		{
-			var Comments = _DB.Comments.Where(comment => comment.PostId == Id);
+			var Comments = _context.Comments.Where(comment => comment.PostId == Id);
 			
 			return Ok(Comments);
 		}

@@ -58,33 +58,32 @@ export async function AddPostImage(image: FormData) {
 }
 
 
-export async function sd(file :FormData ,id : number) {
-    //handel close post
-    const cookie = new Cookies();
-    const token = cookie.get("bearer");
-    try {
-        const res = await fetch(`https://localhost:7279/api/Post/PostImage?id=${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: file
+// export async function sd(file :FormData ,id : number) {
+    
+//     const cookie = new Cookies();
+//     const token = cookie.get("bearer");
+//     try {
+//         const res = await fetch(`https://localhost:7279/api/Post/PostImage?id=${id}`, {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`
+//             },
+//             body: file
 
-        });
-        return res;
-    } catch {
-        toast("Post Creating Failled!");
-    }
-    return;
-}
+//         });
+//         return res;
+//     } catch {
+//         toast("Post Creating Failled!");
+//     }
+//     return;
+// }
 
 
 export async function GetPost(id: number) {
     //handel close post
     const cookie = new Cookies();
     const token = cookie.get("bearer");
-
     try {
         const res = await fetch(`https://localhost:7279/api/Post/getPost?id=${id}`, {
             method: "GET",
@@ -282,6 +281,28 @@ export async function AddComment(id: number , content : string) {
     return;
 }
 
+
+
+export async function RemoveComment(id: number) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+
+    try {
+        const res = await fetch(`https://localhost:7279/api/Post/DeleteComment?id=${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        toast("comment Remove Correctly !! ");
+        return res;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
 
 
 export async function GetPostComments(id: number) {
