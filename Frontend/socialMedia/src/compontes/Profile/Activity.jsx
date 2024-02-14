@@ -64,9 +64,6 @@ export default function Activity() {
     return (
         <>
             <div className=' m-auto  mt-10 flex gap-10 items-start justify-center relative w-[100%]' >
-                <section className="active sticky top-0">
-                    <Active></Active>
-                </section>
 
                 {/*post part*/}
                 <div className='posts w-[50%] flex flex-col gap-5' >

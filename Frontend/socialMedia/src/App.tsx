@@ -17,6 +17,8 @@ import SaveAuth from "./Helper/SaveAuth"
 import Following from "./compontes/Profile/Following"
 import Follower from "./compontes/Profile/Follower"
 import Setting from "./compontes/Profile/Setting"
+import AllMember from "./compontes/Home/AllMember"
+import MyFavourite from "./compontes/Home/MyFavourite"
 
 
 function App() {
@@ -34,7 +36,11 @@ function App() {
         <Route element={<RequireAuth></RequireAuth>}>
           <Route element={<AppLayout></AppLayout>}>
             <Route index element={<Navigate replace to="/login" />} />
-            <Route path='/home' element={<Home></Home>}></Route>
+            <Route path='/home' element={<Home></Home>}>
+              <Route index element={<AllMember></AllMember>}></Route>
+              <Route index path='MyFavourite' element={<MyFavourite></MyFavourite>}></Route>
+              <Route index path='activiy' element={<AllMember></AllMember>}></Route>
+            </Route>
             <Route path='/groups' element={<Groups></Groups>}></Route>
             <Route path='/members' element={<Members></Members>}></Route>
             <Route path='/photos' element={<Photos></Photos>}></Route>

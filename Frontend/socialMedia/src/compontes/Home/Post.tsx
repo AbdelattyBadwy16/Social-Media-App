@@ -2,7 +2,7 @@ import Cookies from 'universal-cookie'
 import { GetUserData } from '../../Helper/ProfileApi'
 import React, { useContext, useEffect, useState } from 'react'
 import { ComputeDate } from '../../Helper/ComputeDate'
-import { AddComment, CheckPostReact, DeletePost, GetPost, GetPostComments, GetUserPosts, RemoveComment, RemovePostReact, UpdateReacts } from '../../Helper/PostApi'
+import { AddComment, AddFavPost, CheckFavPost, CheckPostReact, DeleteFavPost, DeletePost, GetPost, GetPostComments, GetUserPosts, RemoveComment, RemovePostReact, UpdateReacts } from '../../Helper/PostApi'
 import { UserPost } from '../../Context/UserPostContext'
 import { postWindow } from '../../Context/PostWindow'
 
@@ -38,20 +38,30 @@ export default function Post(CurPost: Post) {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
     const [image, setImage] = useState("");
+    const [isFav, setIsFav] = useState(false);
     // user Details
     useEffect(() => {
         setPost(CurPost.post);
         async function fetch() {
+
+            //Get User Data
             const id = CurPost.post.userId;
             const data = await GetUserData(id);
             setFirstName(data.firstName);
             setSecondName(data.lastName);
             setImage(data.iconImagePath);
+
+            //Get Post React
             const res = await CheckPostReact(CurPost?.post.id);
             setReactType(res);
 
+            // Get Post Comment
             const comments = await GetPostComments(CurPost?.post.id);
             setComments(comments)
+
+            //Check IF in Fav or not
+            const fav = await CheckFavPost(CurPost?.post.id,userId);
+            if(fav == "Found") setIsFav(true);
         }
         fetch();
     }, []);
@@ -152,6 +162,24 @@ export default function Post(CurPost: Post) {
         return;
     }
 
+
+    //handel Add To Favourite
+    async function handelAddToFav() {
+        setIsFav(true);
+        setOpenPostList(false);
+        const userId = cookie.get("id");
+        const res = await AddFavPost(post.id, userId);
+    }
+
+
+    //handel Delete Favourite
+    async function handelDeleteToFav() {
+        setIsFav(false);
+        setOpenPostList(false);
+        const userId = cookie.get("id");
+        const res = await DeleteFavPost(post.id,userId);
+    }
+
     return (
         <div className='bg-[white] border shadow-lg rounded-lg'>
 
@@ -180,7 +208,10 @@ export default function Post(CurPost: Post) {
                         <ul className=' shadow-lg bg-gray-300 transition-all flex flex-col gap-3 rounded-md absolute right-5 top-[60px]'>
                             <li onClick={handelDelete} className={`cursor-pointer hover:bg-gray-400 p-2 rounded-md ${post.userId == userId ? "" : "hidden"}`}>Delete</li>
                             <li onClick={handelEdit} className={`cursor-pointer hover:bg-gray-400 p-2 rounded-md ${post.userId == userId ? "" : "hidden"}`}>Edit</li>
-                            <li className='cursor-pointer  hover:bg-gray-400 p-2 rounded-md'>Save at favourite</li>
+                            {
+                                isFav ? <li onClick={handelDeleteToFav} className='cursor-pointer bg-blue-400 hover:bg-blue-800 hover:text-white p-2 rounded-md'>Delete from favourite</li> :
+                            <li onClick={handelAddToFav} className='cursor-pointer  hover:bg-gray-400 p-2 rounded-md'>Save at favourite</li>
+                            }
                         </ul> : ""
                 }
             </div>

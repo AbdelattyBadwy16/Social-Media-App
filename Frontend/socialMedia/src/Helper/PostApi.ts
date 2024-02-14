@@ -160,6 +160,8 @@ export async function DeletePost(id: number) {
                 "Authorization": `Bearer ${token}`
             },
         });
+        toast("Post Deleted Succussfuly!! ");
+
         return res;
     } catch {
         toast("Nertwork Problem !! ");
@@ -313,6 +315,98 @@ export async function GetPostComments(id: number) {
 
     try {
         const res = await fetch(`https://localhost:7279/api/Post/GetPostComments?Id=${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            
+        });
+        const data = res.json();
+        return data;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
+
+
+export async function AddFavPost(postId: number , userId : string) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+
+    try {
+        const res = await fetch(`https://localhost:7279/api/FavouritPost/addPost?userId=${userId}&PostId=${postId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            
+        });
+        toast("Added to favourite Succussfuly!! ");
+        return res;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
+
+
+export async function DeleteFavPost(postId: number , userId : string) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+
+    try {
+        const res = await fetch(`https://localhost:7279/api/FavouritPost/DeletePost?userId=${userId}&PostId=${postId}`, {
+            method: "Delete",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            
+        });
+        toast("Deleted From favourite Succussfuly!! ");
+        return res;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
+
+
+
+export async function CheckFavPost(postId: number , userId : string) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    try {
+        const res = await fetch(`https://localhost:7279/api/FavouritPost/Check?userId=${userId}&PostId=${postId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            
+        });
+        const data = res.text();
+        return data;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
+
+
+
+export async function GetFavPost(userId : string) {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    try {
+        const res = await fetch(`https://localhost:7279/api/FavouritPost?userId=${userId}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

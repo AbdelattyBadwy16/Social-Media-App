@@ -20,6 +20,7 @@ namespace SocialMedia.Models
 
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<Friends> friends { get; set; }
+		public DbSet<FavouritPost> favouritPosts { get; set; }
 	
 	}
 }

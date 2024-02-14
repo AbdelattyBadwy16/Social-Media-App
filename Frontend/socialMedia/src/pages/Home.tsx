@@ -7,7 +7,7 @@ import { postWindow } from '../Context/PostWindow';
 import Cookies from 'universal-cookie';
 import NewPost from '../compontes/Profile/NewPost';
 import { GetALLPosts } from '../Helper/PostApi';
-import Post from '../compontes/Home/Post';
+import { Link, Outlet } from 'react-router-dom';
 
 export default function Home() {
 
@@ -46,9 +46,7 @@ export default function Home() {
             {/*blog part*/}
             <Blog></Blog>
 
-            {/*post part*/}
-            <div className='posts w-[50%] flex flex-col gap-5'>
-
+            <div className='flex flex-col gap-5'>
                 <section onClick={handelAddPost} className='flex bg-[white] items-center justify-between border shadow-lg p-3 cursor-pointer rounded-lg'>
                     <section className='flex items-center gap-5'>
                         <img src="/image/Abdo.jpg" className="rounded-full" width={30}></img>
@@ -60,26 +58,18 @@ export default function Home() {
                 </section>
 
                 <section className='flex bg-[white] items-center justify-between border shadow-lg p-3 cursor-pointer rounded-lg'>
-                    <ul className='flex gap-5'>
-                        <li className={`${ActiveFilter === 1 ? "Active" : ""}`} onClick={() => SetActiveFilter(1)}>All Members</li>
+                    <ul className='flex gap-5 items-center'>
+                        <Link to="/home/activiy"><li className={`${ActiveFilter === 1 ? "Active" : ""}`} onClick={() => SetActiveFilter(1)}>All Members</li></Link>
                         <li className={`${ActiveFilter === 2 ? "Active" : ""}`} onClick={() => SetActiveFilter(2)}>My Groups</li>
-                        <li className={`${ActiveFilter === 3 ? "Active" : ""}`} onClick={() => SetActiveFilter(3)}>My Favorites</li>
+                        <Link to="/home/MyFavourite"><li className={`${ActiveFilter === 3 ? "Active" : ""}`} onClick={() => SetActiveFilter(3)}>My Favorites</li></Link>
                         <li className={`mentions ${ActiveFilter === 4 ? "Active" : ""}`} onClick={() => SetActiveFilter(4)}>Mentions</li>
                     </ul>
                 </section>
 
-                {
-                    posts.length ?
-                        <section className='flex flex-col gap-5 mb-5'>
-                            {
-                                posts.map((item) => <Post key={item.id} post={item}></Post>)
-                            }
-                        </section> :
-                        <p className='text-center text-[30px] font-bold p-5 shadow-lg rounded-lg'>No Posts Have.</p>
+                <Outlet></Outlet>
 
-                }
             </div>
-
+            {/*post part*/}
 
             {/*Avtive and group part*/}
             <div className='active-group w-[25%] flex flex-col gap-5 sticky top-0'>
