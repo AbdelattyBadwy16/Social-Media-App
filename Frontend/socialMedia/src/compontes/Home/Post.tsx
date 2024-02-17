@@ -2,9 +2,10 @@ import Cookies from 'universal-cookie'
 import { GetUserData } from '../../Helper/ProfileApi'
 import React, { useContext, useEffect, useState } from 'react'
 import { ComputeDate } from '../../Helper/ComputeDate'
-import { AddComment, AddFavPost, CheckFavPost, CheckPostReact, DeleteFavPost, DeletePost, GetPost, GetPostComments, GetUserPosts, RemoveComment, RemovePostReact, UpdateReacts } from '../../Helper/PostApi'
+import { AddComment, AddFavPost, CheckFavPost, CheckPostReact, DeleteFavPost, DeletePost, GetFavPost, GetPost, GetPostComments, GetUserPosts, RemoveComment, RemovePostReact, UpdateReacts } from '../../Helper/PostApi'
 import { UserPost } from '../../Context/UserPostContext'
 import { postWindow } from '../../Context/PostWindow'
+import { FavPost } from '../../Context/MyFavPost'
 
 interface Post {
     firstName: string
@@ -60,8 +61,8 @@ export default function Post(CurPost: Post) {
             setComments(comments)
 
             //Check IF in Fav or not
-            const fav = await CheckFavPost(CurPost?.post.id,userId);
-            if(fav == "Found") setIsFav(true);
+            const fav = await CheckFavPost(CurPost?.post.id, userId);
+            if (fav == "Found") setIsFav(true);
         }
         fetch();
     }, []);
@@ -164,11 +165,14 @@ export default function Post(CurPost: Post) {
 
 
     //handel Add To Favourite
+    const context2 = useContext(FavPost);
     async function handelAddToFav() {
         setIsFav(true);
         setOpenPostList(false);
         const userId = cookie.get("id");
         const res = await AddFavPost(post.id, userId);
+        const data = await GetFavPost(userId);
+        context2.setPost(data);
     }
 
 
@@ -177,7 +181,9 @@ export default function Post(CurPost: Post) {
         setIsFav(false);
         setOpenPostList(false);
         const userId = cookie.get("id");
-        const res = await DeleteFavPost(post.id,userId);
+        const res = await DeleteFavPost(post.id, userId);
+        const data = await GetFavPost(userId);
+        context2.setPost(data);
     }
 
     return (
@@ -210,7 +216,7 @@ export default function Post(CurPost: Post) {
                             <li onClick={handelEdit} className={`cursor-pointer hover:bg-gray-400 p-2 rounded-md ${post.userId == userId ? "" : "hidden"}`}>Edit</li>
                             {
                                 isFav ? <li onClick={handelDeleteToFav} className='cursor-pointer bg-blue-400 hover:bg-blue-800 hover:text-white p-2 rounded-md'>Delete from favourite</li> :
-                            <li onClick={handelAddToFav} className='cursor-pointer  hover:bg-gray-400 p-2 rounded-md'>Save at favourite</li>
+                                    <li onClick={handelAddToFav} className='cursor-pointer  hover:bg-gray-400 p-2 rounded-md'>Save at favourite</li>
                             }
                         </ul> : ""
                 }

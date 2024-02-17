@@ -4,9 +4,10 @@ export const User = createContext({});
 
 export default function UserProvider({ children }) {
 
-  const [Auth, setAuth] = useState();
+  const [user, setUser] = useState();
+  let [status , setStatus] = useState(0);
 
   return (
-    <User.Provider value={{Auth,setAuth}}>{children}</User.Provider>
+    <User.Provider value={{user,setUser,status,setStatus}}>{children}</User.Provider>
   )
 }

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '/image/profile.jpg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './List.css'
 import Cookies from 'universal-cookie';
 import { GetUserPosts } from '../../Helper/PostApi';
+import { ToastContainer, toast } from 'react-toastify';
+import { User } from '@/Context/UserContext';
 
 
 export default function ProfileList() {
@@ -12,6 +14,7 @@ export default function ProfileList() {
     const image = cookie.get("image");
     const [topics, setTopics] = useState(0);
     const [leave , setLeave] = useState(false);
+    const nav = useNavigate();
     // get user Posts
     useEffect(() => {
         async function fetch() {
@@ -21,6 +24,23 @@ export default function ProfileList() {
         fetch();
     }, []);
     
+
+      // logout
+      function handelLogout() {
+        cookie.remove("userName");
+        cookie.remove("image");
+        cookie.remove("bearer");
+        cookie.remove("id");
+        cookie.remove("PostId");
+        cookie.remove("PostWindow");
+        cookie.remove("PostStatus");
+        toast("Logging out...");
+        setTimeout(() => {
+            nav("/login");
+        }, 3000);
+
+        return;
+    }
 
     return (
 
@@ -64,13 +84,14 @@ export default function ProfileList() {
                             <h2>Setting</h2>
                         </Link>
                     </li>
-                    <li className='w-[100%]'>
+                    <li onClick={handelLogout} className='w-[100%]'>
                         <Link to="" className='flex justify-around items-center'>
                             <h2>Logout</h2>
                         </Link>
                     </li>
                 </ul>
             </section>
+            <ToastContainer autoClose={2500} />
         </div>
 
     )

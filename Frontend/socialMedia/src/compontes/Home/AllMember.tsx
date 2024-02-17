@@ -1,29 +1,30 @@
 import { GetALLPosts } from '../../Helper/PostApi';
-import React, {  useEffect, useState } from 'react'
+import React, {  useContext, useEffect } from 'react'
 import Post from '../../compontes/Home/Post';
+import { UserPost } from '../../Context/UserPostContext';
 
 export default function AllMember() {
 
-    const [posts, setPosts] = useState([]);
+    const context = useContext(UserPost);
 
     //Get All Posts
     useEffect(() => {
         async function fetch() {
             const res = await GetALLPosts();
-            setPosts(res);
+            context.setPost([...res]);
         }
         fetch();
-    }, []);
+    }, [context.post]);
 
    
     return (
         <div className='posts w-ful flex flex-col gap-5'>
 
             {
-                posts.length ?
+                context.post.length ?
                     <section className='flex flex-col gap-5 mb-5'>
                         {
-                            posts.map((item) => <Post key={item.id} post={item}></Post>)
+                            context.post.map((item) => <Post key={item.id} post={item}></Post>)
                         }
                     </section> :
                     <p className='text-center text-[30px] font-bold p-5 shadow-lg rounded-lg'>No Posts Have.</p>

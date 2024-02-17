@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Post from '../Home/Post'
-import Active from '../Home/Active'
 import About from './About'
 import PhotosList from './PhotosList'
 import "./Activity.css"
@@ -57,13 +56,13 @@ export default function Activity() {
         setAddNewPost(!addNewPost);
         PostWindow.setOpen("true");
         cookie.remove("PostStatus")
-        cookie.set("PostStatus","add");
+        cookie.set("PostStatus", "add");
         return;
     }
     const PostCheck = cookie.get("PostWindow");
     return (
         <>
-            <div className=' m-auto  mt-10 flex gap-10 items-start justify-center relative w-[100%]' >
+            <div className=' m-auto  mt-10 flex gap-10 items-start justify-center w-[100%]' >
 
                 {/*post part*/}
                 <div className='posts w-[50%] flex flex-col gap-5' >
@@ -100,6 +99,14 @@ export default function Activity() {
                     PostCheck ?
                         <>
                             <NewPost></NewPost>
+                        </> : ""
+                }
+
+                {
+                    PostCheck ?
+                        <>
+                            <div className='w-[100%] h-[5000px] z-[1000] top-0 bg-gray-500 opacity-80 rounded-lg absolute flex items-center justify-center left-0'>
+                            </div>
                         </> : ""
                 }
 

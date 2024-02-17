@@ -1,7 +1,8 @@
-import {  GetFavPost } from '../../Helper/PostApi';
-import React, { useEffect, useState } from 'react'
-import Post from '../../compontes/Home/Post';
+import { GetFavPost } from '../../Helper/PostApi';
+import React, { useContext, useEffect, useState } from 'react'
+import Post from './Post';
 import Cookies from 'universal-cookie';
+import { FavPost } from '../../Context/MyFavPost'
 
 export default function MyFavourite() {
 
@@ -9,15 +10,19 @@ export default function MyFavourite() {
     const cookie = new Cookies();
     const userId = cookie.get("id");
     const [data, setData] = useState([]);
+    const context = useContext(FavPost);
+
     //Get All Posts
     useEffect(() => {
         async function fetch() {
             const res = await GetFavPost(userId);
             setData(res);
             setPosts(res);
+            context.setPost(res);
+            setPosts(context.post);
         }
         fetch();
-    }, []);
+    }, [context.post]);
 
 
     return (

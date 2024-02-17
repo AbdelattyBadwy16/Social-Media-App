@@ -24,6 +24,10 @@ export default function LeftNavbar() {
         cookie.remove("userName");
         cookie.remove("image");
         cookie.remove("bearer");
+        cookie.remove("id");
+        cookie.remove("PostId");
+        cookie.remove("PostWindow");
+        cookie.remove("PostStatus");
         toast("Logging out...");
         setTimeout(() => {
             nav("/login");

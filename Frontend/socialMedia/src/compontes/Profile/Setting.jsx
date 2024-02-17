@@ -4,7 +4,7 @@ import Cookies from 'universal-cookie';
 import Spinner from '../Spinner';
 import { ToastContainer, toast } from 'react-toastify';
 import { UpdateAccount } from '../../Helper/AccountApi';
-import { postWindow } from '../../Context/PostWindow';
+import { User } from '../../Context/UserContext';
 
 export default function Setting() {
     const [FirstNameCheck, setFirstNameCheck] = useState(false);
@@ -54,12 +54,19 @@ export default function Setting() {
 
 
     // handelSubmit
-
     async function Fetch() {
         const res = await UpdateAccount({ FirstName, LastName, Password, nickName, BirhDate, JopTitle, PhoneNumber, Country, oldPassword })
         if (typeof (res) == "string") {
             toast(res);
-        } else toast("Account Updated Successfuly.");
+        } else {
+            toast("Account Updated Successfuly.");
+            const context = useContext(User);
+            const cookie = new Cookies();
+            const userId = cookie.get("id");
+            const data = await GetUserData(userId);
+            context.setUser(data);
+            context.setStatus(!context.status);
+        }
         return;
     }
 
@@ -69,16 +76,16 @@ export default function Setting() {
             toast("Old Password Required.");
             return;
         }
-        if (!FirstNameCheck) FirstName=userData.firstName;
-        if (!LastNameCheck) LastName=userData.lastName;
-        if (!nickNameCheck) nickName=userData.nickName;
+        if (!FirstNameCheck) FirstName = userData.firstName;
+        if (!LastNameCheck) LastName = userData.lastName;
+        if (!nickNameCheck) nickName = userData.nickName;
         if (!BirhDateCheck) BirhDate = userData.birthDate;
-        if (!JopTitleCheck) JopTitle=userData.jopTitle;
-        if (!PhoneNumberCheck) PhoneNumber=userData.phoneNumber;
-        if (!CountryCheck) Country=userData.country;
+        if (!JopTitleCheck) JopTitle = userData.jopTitle;
+        if (!PhoneNumberCheck) PhoneNumber = userData.phoneNumber;
+        if (!CountryCheck) Country = userData.country;
         if (!PasswordCheck) Password = oldPassword;
-        
-       Fetch();
+
+        Fetch();
         return 0;
     }
 
@@ -97,57 +104,57 @@ export default function Setting() {
                                 <label>FirstName :</label>
                                 <input value={FirstName} placeholder='FirstName' className={`shadow-lg p-2 rounded-lg ${!FirstNameCheck ? "" : "hidden"} `} disabled type='text'></input>
                                 <input onChange={(e) => setFirstName(e.target.value)} value={FirstName} placeholder='FirstName' className={`shadow-lg p-2 rounded-lg ${!FirstNameCheck ? "hidden" : ""} `} type='text'></input>
-                                <input onClick={() => setFirstNameCheck(!FirstNameCheck)} className={` ${FirstNameCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setFirstNameCheck(!FirstNameCheck)} className={` ${FirstNameCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setFirstNameCheck(!FirstNameCheck)} className={` ${FirstNameCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setFirstNameCheck(!FirstNameCheck)} className={` ${FirstNameCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex  md:flex-row flex-col items-center gap-3'>
                                 <label>LastName :</label>
                                 <input value={LastName} placeholder='LastName' className={`shadow-lg p-2 rounded-lg ${!LastNameCheck ? "" : "hidden"} `} disabled type='text'></input>
                                 <input onChange={(e) => setLastName(e.target.value)} value={LastName} placeholder='LastName' className={`shadow-lg p-2 rounded-lg ${!LastNameCheck ? "hidden" : ""} `} type='text'></input>
-                                <input onClick={() => setLastNameCheck(!LastNameCheck)} className={` ${LastNameCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setLastNameCheck(!LastNameCheck)} className={` ${LastNameCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setLastNameCheck(!LastNameCheck)} className={` ${LastNameCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setLastNameCheck(!LastNameCheck)} className={` ${LastNameCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex  md:flex-row flex-col items-center gap-3'>
                                 <label>Password :</label>
                                 <input value={Password} placeholder='Password' className={`shadow-lg p-2 rounded-lg ${!PasswordCheck ? "" : "hidden"} `} disabled type='password'></input>
                                 <input onChange={(e) => setPassword(e.target.value)} value={Password} placeholder='Password' className={`shadow-lg p-2 rounded-lg ${!PasswordCheck ? "hidden" : ""} `} type='password'></input>
-                                <input onClick={() => setPasswordCheck(!PasswordCheck)} className={` ${PasswordCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setPasswordCheck(!PasswordCheck)} className={` ${PasswordCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setPasswordCheck(!PasswordCheck)} className={` ${PasswordCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setPasswordCheck(!PasswordCheck)} className={` ${PasswordCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex  md:flex-row flex-col items-center gap-3'>
                                 <label>NickName :</label>
                                 <input value={nickName} placeholder='nickName' className={`shadow-lg p-2 rounded-lg ${!nickNameCheck ? "" : "hidden"} `} disabled type='text'></input>
                                 <input onChange={(e) => setnickName(e.target.value)} value={nickName} placeholder='nickName' className={`shadow-lg p-2 rounded-lg ${!nickNameCheck ? "hidden" : ""} `} type='text'></input>
-                                <input onClick={() => setNickNameCheck(!nickNameCheck)} className={` ${nickNameCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setNickNameCheck(!nickNameCheck)} className={` ${nickNameCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setNickNameCheck(!nickNameCheck)} className={` ${nickNameCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setNickNameCheck(!nickNameCheck)} className={` ${nickNameCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex  md:flex-row flex-col items-center gap-3'>
                                 <label>BirhDate :</label>
                                 <input value={BirhDate} placeholder='BirhDate' className={`shadow-lg p-2 rounded-lg ${!BirhDateCheck ? "" : "hidden"} `} disabled type='text'></input>
                                 <input onChange={(e) => setBirhDate(e.target.value)} value={BirhDate} placeholder='BirhDate' className={`shadow-lg p-2 rounded-lg ${!BirhDateCheck ? "hidden" : ""} `} type='text'></input>
-                                <input onClick={() => setBirhDateCheck(!BirhDateCheck)} className={` ${BirhDateCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setBirhDateCheck(!BirhDateCheck)} className={` ${BirhDateCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setBirhDateCheck(!BirhDateCheck)} className={` ${BirhDateCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setBirhDateCheck(!BirhDateCheck)} className={` ${BirhDateCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex  md:flex-row flex-col  md:flex-row flex-col items-center gap-3'>
                                 <label>JopTitle :</label>
                                 <input value={JopTitle} placeholder='JopTitle' className={`shadow-lg p-2 rounded-lg ${!JopTitleCheck ? "" : "hidden"} `} disabled type='text'></input>
                                 <input onChange={(e) => setJopTitle(e.target.value)} value={JopTitle} placeholder='JopTitle' className={`shadow-lg p-2 rounded-lg ${!JopTitleCheck ? "hidden" : ""} `} type='text'></input>
-                                <input onClick={() => setJopTitleCheck(!JopTitleCheck)} className={` ${JopTitleCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setJopTitleCheck(!JopTitleCheck)} className={` ${JopTitleCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setJopTitleCheck(!JopTitleCheck)} className={` ${JopTitleCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setJopTitleCheck(!JopTitleCheck)} className={` ${JopTitleCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex  md:flex-row flex-col items-center gap-3'>
                                 <label>PhoneNumber :</label>
                                 <input value={PhoneNumber} placeholder='PhoneNumber' className={`shadow-lg p-2 rounded-lg ${!PhoneNumberCheck ? "" : "hidden"} `} disabled type='text'></input>
                                 <input onChange={(e) => setPhoneNumber(e.target.value)} value={PhoneNumber} placeholder='PhoneNumber' className={`shadow-lg p-2 rounded-lg ${!PhoneNumberCheck ? "hidden" : ""} `} type='text'></input>
-                                <input onClick={() => setPhoneNumberCheck(!PhoneNumberCheck)} className={` ${PhoneNumberCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setPhoneNumberCheck(!PhoneNumberCheck)} className={` ${PhoneNumberCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setPhoneNumberCheck(!PhoneNumberCheck)} className={` ${PhoneNumberCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setPhoneNumberCheck(!PhoneNumberCheck)} className={` ${PhoneNumberCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex  md:flex-row flex-col items-center gap-3'>
                                 <label>Country :</label>
                                 <input value={Country} placeholder='CountryCheck' className={`shadow-lg p-2 rounded-lg ${!CountryCheck ? "" : "hidden"} `} disabled type='text'></input>
                                 <input onChange={(e) => setCountry(e.target.value)} value={Country} placeholder='CountryCheck' className={`shadow-lg p-2 rounded-lg ${!CountryCheck ? "hidden" : ""} `} type='text'></input>
-                                <input onClick={() => setCountryCheck(!CountryCheck)} className={` ${CountryCheck ? "" : "hidden"}`} type="checkbox" ></input>
-                                <input onClick={() => setCountryCheck(!CountryCheck)} className={` ${CountryCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
+                                <input readOnly onClick={() => setCountryCheck(!CountryCheck)} className={` ${CountryCheck ? "" : "hidden"}`} type="checkbox" ></input>
+                                <input readOnly onClick={() => setCountryCheck(!CountryCheck)} className={` ${CountryCheck ? "hidden" : ""}`} checked type="checkbox" ></input>
                             </div>
                             <div className='flex items-center gap-3'>
                                 <label>Update BackGround :</label>

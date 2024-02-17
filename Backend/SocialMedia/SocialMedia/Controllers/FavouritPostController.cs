@@ -53,7 +53,7 @@ namespace SocialMedia.Controllers
 		public async Task<IActionResult> GetUserFavPost(string userId)
 		{
 
-			var post = _DB.favouritPosts.Where(post => post.UserId == userId).Include("post");
+			var post = _DB.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post=>post.Id).Include("post");
 			return Ok(post);
 		}
 
