@@ -34,7 +34,7 @@ export default function Activity() {
 
 
     // get user Posts
-    const context = useContext(UserPost);
+    const context: any = useContext(UserPost);
 
     useEffect(() => {
         setIsLoading(true);
@@ -49,7 +49,7 @@ export default function Activity() {
 
 
     //add post window
-    const PostWindow = useContext(postWindow);
+    const PostWindow: any = useContext(postWindow);
     async function handelAddPost() {
         cookie.remove("PostWindow")
         cookie.set("PostWindow", 'true');
@@ -82,7 +82,7 @@ export default function Activity() {
 
                             <section className='flex flex-col gap-5'>
                                 {
-                                    context.post.map((item) => <Post key={item.id} post={item}></Post>)
+                                    context.post.map((item : any) => <Post key={item.id} post={item}></Post>)
                                 }
                             </section> :
                             <p className='text-center text-[30px] font-bold p-5 shadow-lg rounded-lg'>No Posts Have.</p> : ""

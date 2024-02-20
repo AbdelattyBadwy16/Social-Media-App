@@ -13,7 +13,7 @@ export default function Profile() {
   const [ActiveItem, setActiveItem] = useState(1);
   const [editImage, setEditImage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const UserContext = useContext(User);
+  const UserContext : any = useContext(User);
   const cookie = new Cookies();
   // fetch user data
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function Profile() {
 
   // handel edit Iconimage
   async function handelIconImage() {
-    var f = document.getElementById("form");
+    var f : any = document.getElementById("form");
     const cookie = new Cookies();
     const newForm = new FormData(f);
     const res = await UpdateIconImage(newForm);
@@ -44,9 +44,9 @@ export default function Profile() {
           try {
             const id = cookie.get("id");
             const data = await GetUserData(id);
-            setData(data);
             cookie.remove("image");
             cookie.set("image", data.iconImagePath);
+            console.log(data.iconImagePath)
           } finally {
             setIsLoading(false);
           }

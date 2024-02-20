@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\postPhotos\\pexels-photo-7078847.jpg"
     },
     {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\1.png",
+      "PackagePath": "staticwebassets\\userIcon\\1.png"
+    },
+    {
       "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\17157777_194493117705535_6905883453128635351_o.jpg",
       "PackagePath": "staticwebassets\\userIcon\\17157777_194493117705535_6905883453128635351_o.jpg"
     },
@@ -45,6 +49,14 @@
       "PackagePath": "staticwebassets\\userIcon\\avl1.png"
     },
     {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\card1.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\card1.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\card3.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\card3.jpg"
+    },
+    {
       "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\grid-1.png",
       "PackagePath": "staticwebassets\\userIcon\\grid-1.png"
     },
@@ -63,6 +75,14 @@
     {
       "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\profile.jpg",
       "PackagePath": "staticwebassets\\userIcon\\profile.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\spash.jpg",
+      "PackagePath": "staticwebassets\\userIcon\\spash.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\1.png",
+      "PackagePath": "staticwebassets\\userPhotos\\1.png"
     },
     {
       "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\17157777_194493117705535_6905883453128635351_o.jpg",
@@ -89,6 +109,14 @@
       "PackagePath": "staticwebassets\\userPhotos\\avl1.png"
     },
     {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\card1.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\card1.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\card3.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\card3.jpg"
+    },
+    {
       "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\deqeue.png",
       "PackagePath": "staticwebassets\\userPhotos\\deqeue.png"
     },
@@ -111,6 +139,10 @@
     {
       "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\profile.jpg",
       "PackagePath": "staticwebassets\\userPhotos\\profile.jpg"
+    },
+    {
+      "Id": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\spash.jpg",
+      "PackagePath": "staticwebassets\\userPhotos\\spash.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SocialMedia.Microsoft.AspNetCore.StaticWebAssets.props",

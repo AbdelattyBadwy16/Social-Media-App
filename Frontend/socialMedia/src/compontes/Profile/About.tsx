@@ -37,7 +37,7 @@ export default function About() {
         <p onClick={() => setOpenList(!openList)} className='text-[30px] font-bold cursor-pointer'>...</p>
         {
           openList ?
-            <div onClick={() => { setOpenList(false); setOpenEdit(true); setAbout(data.about) }} className='absolute bg-gray-300 shadow-lg p-2 rounded-lg hover:bg-gray-500 cursor-pointer right-8 top-[60px]'>
+            <div onClick={() => { setOpenList(false); setOpenEdit(true) }} className='absolute bg-gray-300 shadow-lg p-2 rounded-lg hover:bg-gray-500 cursor-pointer right-8 top-[60px]'>
               Edit
             </div> : ""
         }

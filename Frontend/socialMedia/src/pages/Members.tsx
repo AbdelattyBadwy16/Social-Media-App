@@ -3,11 +3,13 @@ import Active from '../compontes/Home/Active';
 import MemberCard from '../compontes/Members/MemberCard';
 import './Members.css'
 import { GetAllUsers } from '../Helper/AccountApi';
+import Cookies from 'universal-cookie';
 
 export default function Members() {
   const [ActiveFilter, setActivefilter] = useState(1);
   const [users,setUsers] = useState([]);
-  
+  const cookie = new Cookies();
+  const userId = cookie.get("id");
   useEffect(()=>{
       async function  fetch() {
           const res = await GetAllUsers();
@@ -36,9 +38,8 @@ export default function Members() {
 
         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2  md:grid-cols-3 mr-5 m-5">
           {
-            users.map((item)=><MemberCard key={item.id} user={item}></MemberCard>)
-          }
-          
+            users.map((item : any)=>item.id==userId?"":<MemberCard key={item.id} user={item}></MemberCard>)
+          }       
         </div>
       </section>
 

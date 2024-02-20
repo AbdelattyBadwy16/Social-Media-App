@@ -27,7 +27,7 @@ export default function Setting() {
     let [oldPassword, setOldPassword] = useState("");
 
     const [isLoading, setIsLoading] = useState(false);
-    const [userData, setUserData] = useState({});
+    const [userData , setUserData] = useState<any>({});
     //get user data
     useEffect(() => {
         setIsLoading(true);
@@ -60,7 +60,7 @@ export default function Setting() {
             toast(res);
         } else {
             toast("Account Updated Successfuly.");
-            const context = useContext(User);
+            const context : any = useContext(User);
             const cookie = new Cookies();
             const userId = cookie.get("id");
             const data = await GetUserData(userId);
@@ -70,7 +70,7 @@ export default function Setting() {
         return;
     }
 
-    async function handelSubmit(e) {
+    async function handelSubmit(e : any) {
         e.preventDefault();
         if (oldPassword == "") {
             toast("Old Password Required.");

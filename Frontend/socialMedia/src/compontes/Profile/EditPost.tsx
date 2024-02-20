@@ -12,7 +12,7 @@ export default function NewPost() {
 
     //handel close post
     const cookie = new Cookies();
-    const PostWindow = useContext(postWindow);
+    const PostWindow : any = useContext(postWindow);
 
     function handelClosePost() {
         cookie.remove("PostWindow");
@@ -22,12 +22,11 @@ export default function NewPost() {
     }
 
     //handel edit post
-    const context = useContext(UserPost)
+    const context : any = useContext(UserPost)
     const [content, SetContent] = useState("");
     const [status, SetStatus] = useState("public");
     async function handelSubmit() {
-        const token = cookie.get("bearer");
-        const username = cookie.get("id");
+        const id = cookie.get("id");
         let userId = await GetUserData(id);
         userId = userId.id;
         const res = await CreateNewPost({ content, userId, status });

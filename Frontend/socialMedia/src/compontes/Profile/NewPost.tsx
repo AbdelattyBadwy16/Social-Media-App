@@ -7,7 +7,6 @@ import { AddPostImage, CreateNewPost, GetPost, GetUserPosts, UpdatePost } from '
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { UserPost } from '../../Context/UserPostContext';
-import { Cookie } from '@mui/icons-material';
 
 export default function NewPost() {
     const cookie = new Cookies();
@@ -33,7 +32,7 @@ export default function NewPost() {
     }
 
     //handel close post
-    const PostWindow = useContext(postWindow);
+    const PostWindow : any = useContext(postWindow);
     function handelClosePost() {
         cookie.remove("PostWindow");
         cookie.set("PostWindow", 'false');
@@ -42,11 +41,11 @@ export default function NewPost() {
     }
 
     //handel add post or update
-    const context = useContext(UserPost)
+    const context : any = useContext(UserPost)
 
     async function handelSubmit() {
 
-        var f = document.getElementById("form");
+        var f : any = document.getElementById("form");
         const newForm = new FormData(f);
         const id = cookie.get("id");
         let userId = await GetUserData(id);
@@ -59,7 +58,7 @@ export default function NewPost() {
             context.setPost([...data]);
 
         } else {
-            const res = await CreateNewPost({ content, userId, status });
+            const res : any = await CreateNewPost({ content, userId, status });
             cookie.remove("PostId");
             cookie.set("PostId", res);
 

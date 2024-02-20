@@ -5,7 +5,7 @@ import { UserPost } from '../../Context/UserPostContext';
 
 export default function AllMember() {
 
-    const context = useContext(UserPost);
+    const context:any = useContext(UserPost);
 
     //Get All Posts
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function AllMember() {
                 context.post.length ?
                     <section className='flex flex-col gap-5 mb-5'>
                         {
-                            context.post.map((item) => <Post key={item.id} post={item}></Post>)
+                            context.post.map((item : any) => <Post key={item.id} post={item}></Post>)
                         }
                     </section> :
                     <p className='text-center text-[30px] font-bold p-5 shadow-lg rounded-lg'>No Posts Have.</p>

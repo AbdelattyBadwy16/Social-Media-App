@@ -24,7 +24,7 @@ interface Post {
     imagePath: string
 }
 
-export default function Post(CurPost: Post) {
+export default function Post(CurPost: any) {
 
     const cookie = new Cookies();
     const userImage = cookie.get("image");
@@ -53,7 +53,7 @@ export default function Post(CurPost: Post) {
             setImage(data.iconImagePath);
 
             //Get Post React
-            const res = await CheckPostReact(CurPost?.post.id);
+            const res: any = await CheckPostReact(CurPost?.post.id);
             setReactType(res);
 
             // Get Post Comment
@@ -90,7 +90,7 @@ export default function Post(CurPost: Post) {
             PostTime = `${time - PostDate.getMinutes()} Minutes ago`;
     }
     //Delete Post
-    const context = useContext(UserPost);
+    const context: any = useContext(UserPost);
     async function handelDelete() {
         const res = await DeletePost(post.id);
         setOpenPostList(false);
@@ -120,7 +120,7 @@ export default function Post(CurPost: Post) {
 
 
     //edit post
-    const PostWindow = useContext(postWindow);
+    const PostWindow : any = useContext(postWindow);
     async function handelEdit() {
         cookie.remove("PostWindow")
         cookie.set("PostWindow", 'true');
@@ -134,7 +134,7 @@ export default function Post(CurPost: Post) {
     }
 
     //handel Add Comment
-    async function handelAddComment(e: Event) {
+    async function handelAddComment(e: any) {
         if (!comment.length || e.key != "Enter") return;
         const res = await AddComment(post.id, comment);
         setcommentList(true);
@@ -165,7 +165,7 @@ export default function Post(CurPost: Post) {
 
 
     //handel Add To Favourite
-    const context2 = useContext(FavPost);
+    const context2 : any = useContext(FavPost);
     async function handelAddToFav() {
         setIsFav(true);
         setOpenPostList(false);

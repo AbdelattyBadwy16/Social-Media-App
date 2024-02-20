@@ -22,6 +22,6 @@
         "@/*": ["./*"]
       }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "main.jsx", "pages/Register.tsx", "Context/UserContext.jsx", "compontes/Spinner.jsx", "pages/Login.jsx", "Helper/RequireAuth.jsx", "Helper/SaveAuth.jsx", "compontes/Profile/Activity.jsx", "compontes/Profile/NewPost.jsx", "compontes/Members/MemberCard.tsx", "compontes/Profile/Setting.jsx", "compontes/Home/MyFavourite.jsx", "pages/Profile.jsx"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "main.tsx", "pages/Register.tsx", "Context/UserContext.tsx", "compontes/Spinner.jsx", "pages/Login.tsx", "Helper/RequireAuth.tsx", "Helper/SaveAuth.tsx", "compontes/Profile/Activity.tsx", "compontes/Profile/NewPost.tsx", "compontes/Members/MemberCard.tsx", "compontes/Profile/Setting.tsx", "compontes/Home/MyFavourite.tsx", "pages/Profile.tsx", "compontes/Home/Post.tsx"],
     "exclude": ["node_modules"]
   }

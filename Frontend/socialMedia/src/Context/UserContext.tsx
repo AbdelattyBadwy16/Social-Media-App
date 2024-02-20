@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react'
 
 export const User = createContext({});
 
-export default function UserProvider({ children }) {
+export default function UserProvider({ children } : any) {
 
   const [user, setUser] = useState();
   let [status , setStatus] = useState(0);

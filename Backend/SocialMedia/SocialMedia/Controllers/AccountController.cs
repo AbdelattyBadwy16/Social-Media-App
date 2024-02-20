@@ -239,7 +239,7 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> GetAllUser()
 		{
-			ICollection<User>users = _DB.users.OrderByDescending((item)=>item.Followers).ToList();
+			ICollection<User>users =  _DB.users.OrderByDescending((item)=>item.Followers).ToList();
 
 			return Ok(users);
 

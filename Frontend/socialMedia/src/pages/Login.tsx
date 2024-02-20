@@ -18,7 +18,7 @@ export default function Login() {
     const UserContext = useContext(User);
     const cookie = new Cookies();
     //validation and submit account
-    async function handelSubmit(e) {
+    async function handelSubmit(e : any) {
         e.preventDefault();
         if (!UserName.length || !Password.length) {
             setErrContent("Email or Password Mustn't be empty.");
@@ -28,7 +28,6 @@ export default function Login() {
             setIsLoading(true);
             const res = await LoginUser({ UserName, Password });
             const data = await res.json();
-            UserContext.setAuth(data);
 
             if (res.ok) {
                 cookie.remove("bearer");

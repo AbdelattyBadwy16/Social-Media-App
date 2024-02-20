@@ -10,7 +10,7 @@ export default function MyFavourite() {
     const cookie = new Cookies();
     const userId = cookie.get("id");
     const [data, setData] = useState([]);
-    const context = useContext(FavPost);
+    const context : any = useContext(FavPost);
 
     //Get All Posts
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function MyFavourite() {
                 posts.length ?
                     <section className='flex flex-col gap-5 mb-5'>
                         {
-                            data.map((item) => <Post key={item.id} post={item.post}></Post>)
+                            data.map((item : any) => <Post key={item.id} post={item.post}></Post>)
                         }
                     </section> :
                     <p className='text-center text-[30px] font-bold p-5 shadow-lg rounded-lg'>No Posts Have.</p>

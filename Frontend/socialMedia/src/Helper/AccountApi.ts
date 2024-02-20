@@ -164,7 +164,6 @@ export async function CheckFriend(id: string) {
 
 
 export interface UpdateAccount {
-    id: string,
     FirstName: string,
     LastName: string,
     nickName: string,

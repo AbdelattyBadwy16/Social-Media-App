@@ -7,7 +7,7 @@ interface Post {
     content: string,
     status: string,
     userId: string,
-    groupId: 0 ,
+    
 }
 
 
@@ -232,7 +232,7 @@ export async function CheckPostReact(id: number) {
     } catch {
         toast("Nertwork Problem !! ");
     }
-    return;
+    return "";
 }
 
 

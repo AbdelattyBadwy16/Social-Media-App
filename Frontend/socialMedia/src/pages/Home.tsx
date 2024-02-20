@@ -26,7 +26,7 @@ export default function Home() {
     }, []);
 
     //add post window
-    const PostWindow = useContext(postWindow);
+    const PostWindow : any = useContext(postWindow);
     async function handelAddPost() {
 
         cookie.remove("PostWindow")
@@ -38,7 +38,7 @@ export default function Home() {
         return;
     }
     const PostCheck = cookie.get("PostWindow");
-
+    const IconImage = cookie.get("image");
     return (
 
 
@@ -49,7 +49,7 @@ export default function Home() {
             <div className='flex flex-col gap-5'>
                 <section onClick={handelAddPost} className='flex bg-[white] items-center justify-between border shadow-lg p-3 cursor-pointer rounded-lg'>
                     <section className='flex items-center gap-5'>
-                        <img src="/image/Abdo.jpg" className="rounded-full" width={30}></img>
+                        <img src={`https://localhost:7279//userIcon/${IconImage}`} className="rounded-full" width={30}></img>
                         <h3 className='text-gray-500'>What's on your mind?</h3>
                     </section>
                     <section className='bg-gray-300 rounded-full p-1 border shadow-lg'>
