@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Model;
 using SocialMedia.Models;
+using SocialMedia.Repository;
 
 namespace SocialMedia.Controllers
 {
@@ -11,26 +12,24 @@ namespace SocialMedia.Controllers
 	{
 		public PhotoController(AppDbContext DB)
 		{
-			_DB = DB;
+			photoRepository = new PhotoRepository();
 		}
-		private readonly AppDbContext _DB;
+		private readonly PhotoRepository photoRepository;
 
 		[HttpGet]
 
-		public async Task<IActionResult> GetPostByIdTop3(string id)
+		public IActionResult GetPostByIdTop3(string id)
 		{
-			var photos = _DB.photos.Where(x => x.UserId == id).Take(3);
-
+			var photos = photoRepository.GetTop3(id);
 			return Ok(photos);
 		}
 
 
 		[HttpGet("AllPhotos")]
 
-		public async Task<IActionResult> GetPostById(string id)
+		public IActionResult GetPostById(string id)
 		{
-			var photos = _DB.photos.Where(x => x.UserId == id);
-
+			var photos = photoRepository.Get(id);
 			return Ok(photos);
 		}
 

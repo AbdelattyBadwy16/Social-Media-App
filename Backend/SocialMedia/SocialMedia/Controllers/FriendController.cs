@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Data;
 using SocialMedia.Models;
+using SocialMedia.Repository;
 
 namespace SocialMedia.Controllers
 {
@@ -12,31 +13,20 @@ namespace SocialMedia.Controllers
 	{
 		public FriendController(AppDbContext DB)
 		{
-			_DB = DB;
+			friendRepository = new FriendRepository();
 		}
-		private readonly AppDbContext _DB;
-
+		private FriendRepository friendRepository;
 		[HttpPost("addFriend")]
 
-		public async Task<IActionResult> AddFreind(string id, string followerId)
+		public IActionResult AddFreind(string id, string followerId)
 		{
 			Friends friend = new Friends()
 			{
 				UserId = id,
 				FollowerId = followerId
 			};
-			await _DB.friends.AddAsync(friend);
-			var user = _DB.users.FirstOrDefault(user => user.Id == id);
-			if (user != null)
-			{
-				user.Following++;
-			}
-			user = _DB.users.FirstOrDefault(user => user.Id == followerId);
-			if (user != null)
-			{
-				user.Followers++;
-			}
-			await _DB.SaveChangesAsync();
+			friendRepository.Add(friend);
+			friendRepository.UpdateFollower(id, followerId,1);
 			return Ok(ModelState);
 		}
 
@@ -45,20 +35,9 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> DeleteFriend(string userId, string id)
 		{
-			Friends friend  = _DB.friends.FirstOrDefault((item) => item.UserId == userId && item.FollowerId == id);
-			_DB.friends.Remove(friend);
-
-			var user = _DB.users.FirstOrDefault(user => user.Id == userId);
-			if (user != null)
-			{
-				user.Following--;
-			}
-			user = _DB.users.FirstOrDefault(user => user.Id == id);
-			if (user != null)
-			{
-				user.Followers--;
-			}
-			_DB.SaveChanges();
+			Friends? friend = await friendRepository.Find(userId,id);
+			friendRepository.Delete(friend, userId, id);
+			friendRepository.UpdateFollower(userId, id, -1);
 			return Ok(ModelState);
 
 		}
@@ -66,10 +45,9 @@ namespace SocialMedia.Controllers
 
 		[HttpGet("GetUserFollowing")]
 
-		public async Task<IActionResult> GetUserFollowing(string id)
+		public IActionResult GetUserFollowing(string id)
 		{
-			var users = _DB.friends.Where((item) => item.UserId == id);		
-
+			var users = friendRepository.GetFollowing(id);
 			return Ok(users);
 
 		}
@@ -77,26 +55,19 @@ namespace SocialMedia.Controllers
 
 		[HttpGet("GetUserFollower")]
 
-		public async Task<IActionResult> GetUserFollower(string id)
+		public IActionResult GetUserFollower(string id)
 		{
-			var users = _DB.friends.Where((item) => item.FollowerId== id);
-
+			var users = friendRepository.GetFollower(id);
 			return Ok(users);
 
 		}
 
 		[HttpGet("CheckFriend")]
 
-		public async Task<IActionResult> CheckFriend(string userId, string id)
+		public IActionResult CheckFriend(string userId, string id)
 		{
-			var users = _DB.friends.Where((item) => item.UserId == userId);
-			var res = false;
-			foreach(var user in users)
-			{
-				if (user.FollowerId == id) res = true;
-			}
-
-			return Ok(res);
+			bool IsFreind= friendRepository.Check(userId, id);
+			return Ok(IsFreind);
 
 		}
 	}

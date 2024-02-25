@@ -6,8 +6,8 @@ namespace SocialMedia.Models
 {
 	public class AppDbContext : IdentityDbContext<User>
 	{
-		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }	
-
+		public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+		public AppDbContext() : base() { }
 		public DbSet<User> users { get; set; }
 		public DbSet<Photo> photos { get; set; }
 
@@ -21,6 +21,12 @@ namespace SocialMedia.Models
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<Friends> friends { get; set; }
 		public DbSet<FavouritPost> favouritPosts { get; set; }
-	
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseSqlServer("Server = . ; Database = SocailMediaDB; Integrated Security = SSPI ; TrustServerCertificate = true");
+			base.OnConfiguring(optionsBuilder);
+		}
+
 	}
 }

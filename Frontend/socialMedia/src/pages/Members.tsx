@@ -4,25 +4,28 @@ import MemberCard from '../compontes/Members/MemberCard';
 import './Members.css'
 import { GetAllUsers } from '../Helper/AccountApi';
 import Cookies from 'universal-cookie';
+import Spinner from '../compontes/Spinner';
 
 export default function Members() {
   const [ActiveFilter, setActivefilter] = useState(1);
-  const [users,setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(0);
   const cookie = new Cookies();
   const userId = cookie.get("id");
-  useEffect(()=>{
-      async function  fetch() {
-          const res = await GetAllUsers();
-          setUsers(res);
-      }
-      fetch();
-  },[]);
+  useEffect(() => {
+    async function fetch() {
+      setIsLoading(1);
+      const res = await GetAllUsers();
+      setUsers(res);
+      setIsLoading(0);
+    }
+    fetch();
+  }, []);
 
   return (
     <div className='container flex items-start justify-between'>
 
       <section className="Gruops w-[70%]">
-
         <div className="border-b-1 flex justify-between items-center border shadow-lg bg-[white] p-4 rounded-md">
           <ul className="flex gap-5 text-gray-500 font-bold text-[12px]">
             <li className={`${ActiveFilter === 1 ? "Active" : ""} relative cursor-pointer`} onClick={() => setActivefilter(1)}>
@@ -35,18 +38,19 @@ export default function Members() {
             <input type='text' className='  w-[90%]  ' placeholder='Search Members'></input>
           </div>
         </div>
-
-        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2  md:grid-cols-3 mr-5 m-5">
-          {
-            users.map((item : any)=>item.id==userId?"":<MemberCard key={item.id} user={item}></MemberCard>)
-          }       
-        </div>
+        {isLoading ? <div className='mt-20'><Spinner></Spinner></div> :
+          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2  md:grid-cols-3 mr-5 m-5">
+            {
+              users.map((item: any) => item.id == userId ? "" : <MemberCard key={item.id} user={item}></MemberCard>)
+            }
+          </div>
+        }
       </section>
 
       <section className="ActiveList w-[25%] sticky top-0">
         <Active></Active>
       </section>
 
-    </div>
+    </div >
   )
 }

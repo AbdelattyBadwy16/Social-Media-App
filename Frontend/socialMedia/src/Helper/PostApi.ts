@@ -176,7 +176,7 @@ export async function UpdateReacts(id: number, type: string ) {
     const token = cookie.get("bearer");
     const userId = cookie.get("id");
     try {
-        const res = await fetch(`https://localhost:7279/api/Post?type=${type}&id=${id}&userId=${userId}`, {
+        const res = await fetch(`https://localhost:7279/api/Post/AddPostReact?type=${type}&id=${id}&userId=${userId}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

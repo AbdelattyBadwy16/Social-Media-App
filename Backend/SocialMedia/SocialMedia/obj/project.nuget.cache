@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MTCNHtkBOIo/lGihCmwvVsZAUeQn5u3G1niy1i6sM50dooEB7Lbh+5lXiYCWa7yVLjdbodDIumFwKp9ItfptVA==",
+  "dgSpecHash": "59w33onMnKuS12wzjeUBbopg4mTc31t7DHw8dsv9b+BbtdJwd+2eAZv/Wokxd7E9Mycr9eH4J6eVm/ZrZwPziA==",
   "success": true,
-  "projectFilePath": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj",
+  "projectFilePath": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdelatty\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Abdelatty\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj": {}
+    "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj": {}
   },
   "projects": {
-    "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj": {
+    "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj",
+        "projectUniqueName": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj",
         "projectName": "SocialMedia",
-        "projectPath": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj",
+        "projectPath": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\SocialMedia.csproj",
         "packagesPath": "C:\\Users\\Abdelatty\\.nuget\\packages\\",
-        "outputPath": "D:\\react.js\\SocialMedia\\Backend\\SocialMedia\\SocialMedia\\obj\\",
+        "outputPath": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

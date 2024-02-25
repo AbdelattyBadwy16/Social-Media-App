@@ -13,6 +13,7 @@ using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Migrations;
+using SocialMedia.Repository;
 
 namespace SocialMedia.Controllers
 {
@@ -21,19 +22,23 @@ namespace SocialMedia.Controllers
 	
 	public class PostController : ControllerBase
 	{
-		private readonly AppDbContext _context;
 		private readonly IHostingEnvironment _host;
 
 		public PostController(AppDbContext DB,IHostingEnvironment host)
 		{
-			_context = DB;
 			_host = host;
+			postRepository = new PostRepository();
+			userPostRepository = new UserPostRepository();
+			userRepository = new UserRepository();
+			commentRepository = new CommentRepository();
 		}
 
-		
-
+		public PostRepository postRepository ;
+		public UserPostRepository userPostRepository;
+		public UserRepository userRepository;
+		public CommentRepository commentRepository;
 		[HttpPost]
-		public async Task<IActionResult> AddNewPost(dtoPost post)
+		public async Task<IActionResult> AddNewPostAsync(dtoPost post)
 		{
 			if (ModelState.IsValid)
 			{
@@ -53,8 +58,8 @@ namespace SocialMedia.Controllers
 					CreatedAt = DateTime.Now
 				};
 
-				await _context.posts.AddAsync(NewPost);
-				await _context.SaveChangesAsync();
+				await postRepository.AddAsync(NewPost);
+
 				return Ok(NewPost.Id);
 			}
 
@@ -67,23 +72,17 @@ namespace SocialMedia.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-
-				// add photo to postPhotos
-				string myUpload = Path.Combine(_host.WebRootPath, "postPhotos");
-				string ImageName = image.FileName;
-				string fullPath = Path.Combine(myUpload, ImageName);
-				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-
-				// add photo to userPhotos
-				myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
-				ImageName = image.FileName;
-				fullPath = Path.Combine(myUpload, ImageName);
-				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-
-				var Post = await _context.posts.FindAsync(id);
-
-				Post.ImagePath = ImageName;
-				_context.SaveChanges();
+				string ImageName;
+				//add post photo
+				ImageName = postRepository.AddPostPhoto(_host, image, "postPhotos");
+				//add user photo
+				ImageName = postRepository.AddPostPhoto(_host, image, "userPhotos");
+				
+				Post? post = await postRepository.Find(id);
+				if(post  != null)
+				{
+					postRepository.AddPostImage(post, ImageName);
+				}
 				return Ok(ModelState);
 			}
 
@@ -94,8 +93,7 @@ namespace SocialMedia.Controllers
 		[HttpGet("getPost")]
 		public async Task<IActionResult> GetPost(int id)
 		{
-			var post = await _context.posts.FindAsync(id);
-
+			var post = await postRepository.Find(id);
 			if(post != null) {
 			   return Ok(post);
 			}
@@ -107,20 +105,18 @@ namespace SocialMedia.Controllers
 
 		[HttpGet]
 
-		public async Task<IActionResult> GetAllPosts()
+		public IActionResult GetAllPosts()
 		{
-			var posts = await _context.posts.OrderByDescending(item=>item.Id).ToListAsync();
-
+			var posts = postRepository.GetAll();
 			return Ok(posts);
 		}
 
 
 		[HttpGet("userPost")]
 
-		public async Task<IActionResult> GetAllPostsByUser(string userId)
+		public IActionResult GetAllPostsByUser(string userId)
 		{
-			var posts = _context.posts.Where((item)=>item.UserId==userId).OrderByDescending((item)=>item.Id);
-
+			List<Post> posts = postRepository.GetAllByUser(userId);
 			return Ok(posts);
 		}
 
@@ -129,90 +125,43 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> DeletePost(int id)
 		{
-			Post post = await _context.posts.FindAsync(id);
-			_context.posts.Remove(post);
-			_context.SaveChanges();
-
+			Post? post = await postRepository.Find(id);
+			if (post != null)
+			{
+				postRepository.Delete(post);
+			}
 			return Ok();
 		}
 
-		[HttpPut]
+		[HttpPut("AddPostReact")]
 		public async Task<IActionResult> UpdateLikes(string type, int id , string userId)
 		{
-			Post post = await _context.posts.FindAsync(id);
-
-			User_Post temp = _context.user_Posts.FirstOrDefault(x => x.PostId == post.Id && x.UserId == userId);
+			Post? post = await postRepository.Find(id);
+			User_Post? temp = await userPostRepository.Get(id, userId);
 
 			if (temp != null)
 			{
-				_context.user_Posts.Remove(temp);
-
-				if (temp.type == "like")
+				userPostRepository.Delete(temp);
+				if (post != null)
 				{
-					post.likes--;
-				}
-				else if (temp.type == "love")
-				{
-					post.loves--;
-				}
-				else if (temp.type == "angry")
-				{
-					post.Angry--;
-				}
-				else if (temp.type == "haha")
-				{
-					post.Haha--;
-				}
-				else if (temp.type == "sad")
-				{
-					post.Sads--;
-				}
-				else if (temp.type == "wow")
-				{
-					post.Wow--;
+					postRepository.UpdateReact(post, temp.type, -1);
 				}
 			}
-			
-
-				if (type == "like")
-				{
-					post.likes++;
-				}
-				else if (type == "love")
-				{
-					post.loves++;
-				}
-				else if (type == "angry")
-				{
-					post.Angry++;
-				}
-				else if (type == "haha")
-				{
-					post.Haha++;
-				}
-				else if (type == "sad")
-				{
-					post.Sads++;
-				}
-				else if (type == "wow")
-				{
-					post.Wow++;
-				}
-			
+			int postId = 0;
+			if (post != null)
+			{
+				postRepository.UpdateReact(post, type, 1);
+				postId = post.Id;
+			}
 
 			User_Post user_Post = new User_Post()
 			{
 				UserId = userId,
-				PostId = post.Id,
+				PostId = postId,
 				type = type,
 			};
-
 			
-			
-			_context.user_Posts.Add(user_Post);
-
-			_context.SaveChanges();
-
+			userPostRepository.Add(user_Post);
 			return Ok();
 		}
 
@@ -220,10 +169,11 @@ namespace SocialMedia.Controllers
 		[HttpPut("EditPost")]
 		public async Task<IActionResult> EditPost(string content , string status ,int id)
 		{
-			Post post = await _context.posts.FindAsync(id);
-			post.Content = content;
-			post.Status = status;
-			_context.SaveChanges();
+			Post? post = await postRepository.Find(id);
+			if (post != null)
+			{
+				postRepository.Update(content, status, post);
+			}
 
 			return Ok();
 		}
@@ -232,7 +182,7 @@ namespace SocialMedia.Controllers
 		[HttpGet("CheckReact")]
 		public async Task<IActionResult> CheckPostReact(string userId, int id)
 		{
-			User_Post temp = _context.user_Posts.FirstOrDefault(x => x.PostId == id && x.UserId == userId);
+			User_Post? temp = await userPostRepository.Get(id,userId);
 			if(temp != null)
 			{
 				return Ok(temp.type);
@@ -245,37 +195,18 @@ namespace SocialMedia.Controllers
 		[HttpPut("RemoveReact")]
 		public async Task<IActionResult> RemovePostReact(string userId, int id)
 		{
-			Post post = await _context.posts.FindAsync(id);
+			Post? post =await postRepository.Find(id); //await _context.posts.FindAsync(id);
+			User_Post? temp = await userPostRepository.Get(id,userId);
 
-			User_Post temp = _context.user_Posts.FirstOrDefault(x => x.PostId == id && x.UserId == userId);
-			
-			_context.user_Posts.Remove(temp);
 
-			if (temp.type == "like")
+			if (temp != null)
 			{
-				post.likes--;
+				userPostRepository.Delete(temp);
 			}
-			else if (temp.type == "love")
+			if (post != null && temp != null)
 			{
-				post.loves--;
+				postRepository.UpdateReact(post, temp.type, -1);
 			}
-			else if (temp.type == "angry")
-			{
-				post.Angry--;
-			}
-			else if (temp.type == "haha")
-			{
-				post.Haha--;
-			}
-			else if (temp.type == "sad")
-			{
-				post.Sads--;
-			}
-			else if (temp.type == "wow")
-			{
-				post.Wow--;
-			}
-			_context.SaveChanges();
 			return Ok(0);
 		}
 
@@ -283,8 +214,8 @@ namespace SocialMedia.Controllers
 		[HttpPost("AddComment")]
 		public async Task<IActionResult> AddComment(dtoComment comment)
 		{
-		    var user = _context.users.FirstOrDefault(user=>user.Id == comment.UserId);
-			var userName = "";
+		    User? user = await userRepository.Get(comment.UserId);
+			string userName = "";
 			if (user != null)
 			{
 				userName = user.FirstName + " " + user.LastName;
@@ -299,19 +230,18 @@ namespace SocialMedia.Controllers
 				UserId = comment.UserId,
 				UserImagePath = user.IconImagePath
 			};
-			_context.Comments.Add(NewComment);
-			_context.SaveChanges();
+
+			commentRepository.Add(NewComment);
 			return Ok(ModelState);
 		}
 
 		[HttpDelete("DeleteComment")]
-		public async Task<IActionResult> DeleteComment(int id)
+		public IActionResult DeleteComment(int id)
 		{
-			var user = await _context.Comments.FirstOrDefaultAsync(item => item.PostId == id); ;
-			if(user != null)
+			Comment? comment = commentRepository.Find(id);
+			if(comment != null)
 			{
-				_context.Comments.Remove(user);
-				_context.SaveChanges();
+				commentRepository.Delete(comment);
 				return Ok(ModelState);
 			}
 			return BadRequest(ModelState);
@@ -319,9 +249,9 @@ namespace SocialMedia.Controllers
 
 
 		[HttpGet("GetPostComments")]
-		public async Task<IActionResult> GetPostComments(int Id)
+		public IActionResult GetPostComments(int Id)
 		{
-			var Comments = _context.Comments.Where(comment => comment.PostId == Id);
+			List<Comment> Comments = commentRepository.FindByPost(Id);
 			
 			return Ok(Comments);
 		}

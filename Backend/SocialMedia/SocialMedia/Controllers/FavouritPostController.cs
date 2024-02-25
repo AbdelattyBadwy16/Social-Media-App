@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Data;
 using SocialMedia.Models;
+using SocialMedia.Repository;
 
 namespace SocialMedia.Controllers
 {
@@ -13,36 +14,35 @@ namespace SocialMedia.Controllers
 		public FavouritPostController(AppDbContext DB)
 		{
 			_DB = DB;
+			favouritPostRepository = new FavouritPostRepository();
 		}
 		private readonly AppDbContext _DB;
-
+		private readonly FavouritPostRepository favouritPostRepository;
 
 
 		[HttpPost("addPost")]
 
-		public async Task<IActionResult> AddPost(string userId, int PostId)
+		public IActionResult AddPost(string userId, int PostId)
 		{
 			FavouritPost favouritPost = new FavouritPost()
 			{
 				UserId = userId,
 				PostId = PostId
 			};
-			await _DB.favouritPosts.AddAsync(favouritPost);
-			await _DB.SaveChangesAsync();
+			favouritPostRepository.Add(favouritPost);
 			return Ok(ModelState);
 		}
 
 
 		[HttpDelete("DeletePost")]
 
-		public async Task<IActionResult> DeletePost(string userId, int PostId)
+		public IActionResult DeletePost(string userId, int PostId)
 		{
 
-			var post = _DB.favouritPosts.FirstOrDefault(post=>post.UserId == userId && post.PostId==PostId);
+			var post = favouritPostRepository.Find(userId, PostId);
 			if (post != null)
 			{
-				_DB.favouritPosts.Remove(post);
-				await _DB.SaveChangesAsync();
+				favouritPostRepository.Delete(post);
 				return Ok(ModelState);
 			}else return BadRequest(ModelState);
 		}
@@ -50,25 +50,24 @@ namespace SocialMedia.Controllers
 
 		[HttpGet]
 
-		public async Task<IActionResult> GetUserFavPost(string userId)
+		public IActionResult GetUserFavPost(string userId)
 		{
-
-			var post = _DB.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post=>post.Id).Include("post");
+			var post = favouritPostRepository.GetAll(userId);
 			return Ok(post);
 		}
 
 
 		[HttpGet("Check")]
 
-		public async Task<IActionResult> CheckFavPost(string userId,int PostId)
+		public IActionResult CheckFavPost(string userId,int PostId)
 		{
 
-			var post = await _DB.favouritPosts.FirstOrDefaultAsync(post => post.UserId == userId && post.PostId == PostId);
+			var post = favouritPostRepository.Find(userId, PostId);
 			if(post != null)
 			{
 				return Ok("Found");
-			}else return Ok("Not Found");
-			
+			}
+			return Ok("Not Found");
 		}
 	}
 }
