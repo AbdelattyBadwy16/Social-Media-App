@@ -1,1 +1,1 @@
-This is Social Media App like Facebook and is under development !!!!
+This is Social Media App like Facebook with react in frontend and .net in backend and is under development !!!!
