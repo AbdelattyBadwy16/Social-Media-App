@@ -10,11 +10,11 @@ namespace SocialMedia.Controllers
 	[ApiController]
 	public class PhotoController : ControllerBase
 	{
-		public PhotoController(AppDbContext DB)
+		public PhotoController(AppDbContext DB , IPhotoRepository _photoRepo)
 		{
-			photoRepository = new PhotoRepository();
+			photoRepository = _photoRepo;
 		}
-		private readonly PhotoRepository photoRepository;
+		private readonly IPhotoRepository photoRepository;
 
 		[HttpGet]
 

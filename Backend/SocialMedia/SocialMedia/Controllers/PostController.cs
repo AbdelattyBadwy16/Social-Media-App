@@ -24,19 +24,19 @@ namespace SocialMedia.Controllers
 	{
 		private readonly IHostingEnvironment _host;
 
-		public PostController(AppDbContext DB,IHostingEnvironment host)
+		public PostController(AppDbContext DB,IHostingEnvironment host , IPostRepository _postRepo , IUserPostRepository _userPostRepo , IUserRepository _userRepo , ICommentRepository _commentRepo)
 		{
 			_host = host;
-			postRepository = new PostRepository();
-			userPostRepository = new UserPostRepository();
-			userRepository = new UserRepository();
-			commentRepository = new CommentRepository();
+			postRepository = _postRepo;
+			userPostRepository = _userPostRepo;
+			userRepository = _userRepo;
+			commentRepository = _commentRepo;
 		}
 
-		public PostRepository postRepository ;
-		public UserPostRepository userPostRepository;
-		public UserRepository userRepository;
-		public CommentRepository commentRepository;
+		public IPostRepository postRepository ;
+		public IUserPostRepository userPostRepository;
+		public IUserRepository userRepository;
+		public ICommentRepository commentRepository;
 		[HttpPost]
 		public async Task<IActionResult> AddNewPostAsync(dtoPost post)
 		{

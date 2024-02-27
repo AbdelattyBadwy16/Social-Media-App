@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Models;
+using SocialMedia.Repository;
 using TestRESTAPI.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,13 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddCustomJwtAuth(builder.Configuration);
 
+builder.Services.AddScoped<IPostRepository , PostRepository>();	
+builder.Services.AddScoped<IFriendRepository , FriendRepository>();	
+builder.Services.AddScoped<IFavouritPostRepository , FavouritPostRepository>();	
+builder.Services.AddScoped<IUserRepository , UserRepository>();	
+builder.Services.AddScoped<IUserPostRepository , UserPostRepository>();	
+builder.Services.AddScoped<IPhotoRepository , PhotoRepository>();	
+builder.Services.AddScoped<ICommentRepository , CommentRepository>();	
 
 var app = builder.Build();
 

@@ -11,13 +11,13 @@ namespace SocialMedia.Controllers
 	[ApiController]
 	public class FavouritPostController : ControllerBase
 	{
-		public FavouritPostController(AppDbContext DB)
+		public FavouritPostController(AppDbContext DB , IFavouritPostRepository _favPostRepo)
 		{
 			_DB = DB;
-			favouritPostRepository = new FavouritPostRepository();
+			favouritPostRepository = _favPostRepo;
 		}
 		private readonly AppDbContext _DB;
-		private readonly FavouritPostRepository favouritPostRepository;
+		private readonly IFavouritPostRepository favouritPostRepository;
 
 
 		[HttpPost("addPost")]

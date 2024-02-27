@@ -25,14 +25,12 @@ namespace SocialMedia.Controllers
 			_configuration = configuration;
 			_host = host;
 			_DB = DB;
-			accountRepository = new AccountRepository();
 		}
 
 		private readonly UserManager<User> _userManger;
 		private readonly IConfiguration _configuration;
 		private readonly AppDbContext _DB;
 		private readonly IHostingEnvironment _host;
-		private readonly AccountRepository accountRepository;
 		[HttpPost]
 		public async Task<IActionResult> RegisterNewUser(dtoNewUser user)
 		{

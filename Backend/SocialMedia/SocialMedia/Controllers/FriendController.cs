@@ -11,11 +11,11 @@ namespace SocialMedia.Controllers
 	[ApiController]
 	public class FriendController : ControllerBase
 	{
-		public FriendController(AppDbContext DB)
+		public FriendController(AppDbContext DB , IFriendRepository _friendRepo)
 		{
-			friendRepository = new FriendRepository();
+			friendRepository = _friendRepo;
 		}
-		private FriendRepository friendRepository;
+		private IFriendRepository friendRepository;
 		[HttpPost("addFriend")]
 
 		public IActionResult AddFreind(string id, string followerId)
