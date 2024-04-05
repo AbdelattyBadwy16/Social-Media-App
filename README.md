@@ -27,6 +27,13 @@ The website resembles Facebook with features such as user registration, profile 
   - user manger for mange users and roles
   - sql database
 
+
+
+In the future, I plan to add more features to the project.
+
+
+
+
 # here some photo from project
 
 
