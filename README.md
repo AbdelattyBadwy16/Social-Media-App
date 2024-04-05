@@ -13,14 +13,14 @@ The website resembles Facebook with features such as user registration, profile 
 - show all your favourite posts.
 
 # Technology Used :
-frontend : 
+# frontend : 
   - reactjs
   - context api
   - typescript
   - tailwind for styling
   - toast library for notification
   - cookies
-backend :
+# backend :
   - .net web api
   - entity framework core
   - jwt for token
