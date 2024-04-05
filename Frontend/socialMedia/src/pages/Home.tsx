@@ -60,7 +60,7 @@ export default function Home() {
                 <section className='flex bg-[white] items-center justify-between border shadow-lg p-3 cursor-pointer rounded-lg'>
                     <ul className='flex gap-5 items-center'>
                         <Link to="/home/activiy"><li className={`${ActiveFilter === 1 ? "Active" : ""}`} onClick={() => SetActiveFilter(1)}>All Members</li></Link>
-                        <li className={`${ActiveFilter === 2 ? "Active" : ""}`} onClick={() => SetActiveFilter(2)}>My Groups</li>
+                        <Link to="/home/Following"><li className={`${ActiveFilter === 2 ? "Active" : ""}`} onClick={() => SetActiveFilter(2)}>My Following</li></Link>
                         <Link to="/home/MyFavourite"><li className={`${ActiveFilter === 3 ? "Active" : ""}`} onClick={() => SetActiveFilter(3)}>My Favorites</li></Link>
                         <li className={`mentions ${ActiveFilter === 4 ? "Active" : ""}`} onClick={() => SetActiveFilter(4)}>Mentions</li>
                     </ul>

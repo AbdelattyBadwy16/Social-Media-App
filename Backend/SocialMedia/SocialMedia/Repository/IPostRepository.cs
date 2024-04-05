@@ -14,5 +14,6 @@ namespace SocialMedia.Repository
 		void Delete(Post post);
 		void UpdateReact(Post post, string type, int payload);
 		void Update(string content, string status, Post post);
+		List<Post> GetFollowingPost(string id);
 	}
 }

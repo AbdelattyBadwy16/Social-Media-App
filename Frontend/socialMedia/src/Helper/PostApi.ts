@@ -146,6 +146,26 @@ export async function GetUserPosts() {
     return;
 }
 
+export async function GetFollowingPosts() {
+
+    const cookie = new Cookies();
+    const token = cookie.get("bearer");
+    const id = cookie.get("id");
+    try {
+        const res = await fetch(`https://localhost:7279/api/Post/GetFollowingPost?UserId=${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+        });
+        const data = await res.json();
+        return data;
+    } catch {
+        toast("Nertwork Problem !! ");
+    }
+    return;
+}
 
 
 export async function DeletePost(id: number) {

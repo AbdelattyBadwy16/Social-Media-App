@@ -15,17 +15,17 @@ export default function Login() {
     const [errContent, setErrContent] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const nav = useNavigate();
-    const UserContext = useContext(User);
     const cookie = new Cookies();
     //validation and submit account
-    async function handelSubmit(e : any) {
+    async function handelSubmit(e: any) {
         e.preventDefault();
+        setIsLoading(true);
         if (!UserName.length || !Password.length) {
             setErrContent("Email or Password Mustn't be empty.");
             return;
         }
         try {
-            setIsLoading(true);
+            setErrContent("");
             const res = await LoginUser({ UserName, Password });
             const data = await res.json();
 
@@ -40,12 +40,13 @@ export default function Login() {
                 cookie.set("id", data.id);
                 setTimeout(() => {
                     nav("/home");
-                }, 3000);
+                    setIsLoading(false);
+                }, 1000);
 
             } else setErrContent("Invaild username or password.");
 
         } finally {
-            setIsLoading(false);
+            setErrContent("");
         }
 
         return;

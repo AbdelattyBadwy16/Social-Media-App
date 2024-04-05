@@ -11,7 +11,7 @@ import { User } from '@/Context/UserContext';
 export default function ProfileList() {
     const cookie = new Cookies();
     const userName = cookie.get("userName");
-    const image = cookie.get("image");
+    const [image,setImage] = useState("");
     const [topics, setTopics] = useState(0);
     const [leave , setLeave] = useState(false);
     const nav = useNavigate();
@@ -22,6 +22,8 @@ export default function ProfileList() {
             setTopics(data.length);
         }
         fetch();
+        
+        setImage(cookie.get("image"));
     }, []);
     
 

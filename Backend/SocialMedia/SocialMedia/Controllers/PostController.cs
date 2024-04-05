@@ -24,19 +24,21 @@ namespace SocialMedia.Controllers
 	{
 		private readonly IHostingEnvironment _host;
 
-		public PostController(AppDbContext DB,IHostingEnvironment host , IPostRepository _postRepo , IUserPostRepository _userPostRepo , IUserRepository _userRepo , ICommentRepository _commentRepo)
+		public PostController(AppDbContext DB,IHostingEnvironment host ,IFriendRepository _friendRepo, IPostRepository _postRepo , IUserPostRepository _userPostRepo , IUserRepository _userRepo , ICommentRepository _commentRepo)
 		{
 			_host = host;
 			postRepository = _postRepo;
 			userPostRepository = _userPostRepo;
 			userRepository = _userRepo;
 			commentRepository = _commentRepo;
+			friendRepository = _friendRepo;
 		}
 
 		public IPostRepository postRepository ;
 		public IUserPostRepository userPostRepository;
 		public IUserRepository userRepository;
 		public ICommentRepository commentRepository;
+		public IFriendRepository friendRepository;
 		[HttpPost]
 		public async Task<IActionResult> AddNewPostAsync(dtoPost post)
 		{
@@ -254,6 +256,23 @@ namespace SocialMedia.Controllers
 			List<Comment> Comments = commentRepository.FindByPost(Id);
 			
 			return Ok(Comments);
+		}
+
+		[HttpGet("GetFollowingPost")]
+
+		public IActionResult GetFollowingPost(string UserId)
+		{
+			List<Friends> friends = friendRepository.GetFollowing(UserId);
+			List<Post> posts = new List<Post>();
+			foreach(Friends friend in friends)
+			{
+				List<Post> posts2 = postRepository.GetFollowingPost(friend.FollowerId);
+				foreach(Post post in posts2)
+				{
+					posts.Add(post);
+				}
+			}
+			return Ok(posts);
 		}
 	}
 

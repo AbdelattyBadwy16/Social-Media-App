@@ -94,6 +94,12 @@ namespace SocialMedia.Repository
 			post.Status = status;
 			_context.SaveChanges();
 		}
+		 
+		public List<Post> GetFollowingPost(string id)
+		{
+			List<Post> posts = _context.posts.Where(post=>post.UserId == id).ToList();
+			return posts;
+		}
 	}
 	
 	

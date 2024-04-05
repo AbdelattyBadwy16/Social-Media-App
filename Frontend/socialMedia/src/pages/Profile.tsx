@@ -110,8 +110,6 @@ export default function Profile() {
                 <ul className="flex gap-5 items-center justify-center">
                   <Link to="activity"><li onClick={() => setActiveItem(1)} className={`${ActiveItem === 1 ? "ActiveProfileItem" : ""} `}>Activity</li></Link>
                   <Link to="Photos"><li onClick={() => setActiveItem(3)} className={`${ActiveItem === 3 ? "ActiveProfileItem" : ""} `}>Photos</li></Link>
-                  <li onClick={() => setActiveItem(4)} className={`${ActiveItem === 4 ? "ActiveProfileItem" : ""} `}>Messeges</li>
-                  <Link to="Groups"><li onClick={() => setActiveItem(5)} className={`${ActiveItem === 5 ? "ActiveProfileItem" : ""} del`}>Groups</li></Link>
                   <Link to="Setting"><li onClick={() => setActiveItem(7)} className={`${ActiveItem === 7 ? "ActiveProfileItem" : ""} `}>Setting</li></Link>
                 </ul>
               </div>
