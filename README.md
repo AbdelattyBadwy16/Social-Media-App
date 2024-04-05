@@ -25,6 +25,7 @@ The website resembles Facebook with features such as user registration, profile 
   - entity framework core
   - jwt for token
   - user manger for mange users and roles
+  - sql database
 
 # here some photo from project
 
