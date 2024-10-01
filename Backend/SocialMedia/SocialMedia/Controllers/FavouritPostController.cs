@@ -11,49 +11,62 @@ namespace SocialMedia.Controllers
 	[ApiController]
 	public class FavouritPostController : ControllerBase
 	{
+		private readonly AppDbContext _DB;
+		private readonly IFavouritPostRepository favouritPostRepository;
 		public FavouritPostController(AppDbContext DB , IFavouritPostRepository _favPostRepo)
 		{
 			_DB = DB;
 			favouritPostRepository = _favPostRepo;
 		}
-		private readonly AppDbContext _DB;
-		private readonly IFavouritPostRepository favouritPostRepository;
+	
 
 
 		[HttpPost("addPost")]
 
-		public IActionResult AddPost(string userId, int PostId)
+		public async Task<IActionResult> AddPost(string userId, int PostId)
 		{
-			FavouritPost favouritPost = new FavouritPost()
+			if (ModelState.IsValid)
 			{
-				UserId = userId,
-				PostId = PostId
-			};
-			favouritPostRepository.Add(favouritPost);
-			return Ok(ModelState);
+				FavouritPost favouritPost = new FavouritPost()
+				{
+					UserId = userId,
+					PostId = PostId
+				};
+				await favouritPostRepository.Add(favouritPost);
+				return Ok(ModelState);
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpDelete("DeletePost")]
 
-		public IActionResult DeletePost(string userId, int PostId)
+		public async Task<IActionResult> DeletePost(string userId, int PostId)
 		{
-
-			var post = favouritPostRepository.Find(userId, PostId);
-			if (post != null)
+			if (ModelState.IsValid)
 			{
-				favouritPostRepository.Delete(post);
-				return Ok(ModelState);
-			}else return BadRequest(ModelState);
+				var post = await favouritPostRepository.Find(userId, PostId);
+				if (post != null)
+				{
+					await favouritPostRepository.Delete(post);
+					return Ok(ModelState);
+				}
+				else return BadRequest(ModelState);
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpGet]
 
-		public IActionResult GetUserFavPost(string userId)
+		public async Task<IActionResult> GetUserFavPost(string userId)
 		{
-			var post = favouritPostRepository.GetAll(userId);
-			return Ok(post);
+			if (ModelState.IsValid)
+			{
+				var post = await favouritPostRepository.GetAll(userId);
+				return Ok(post);
+			}
+			return BadRequest(ModelState);
 		}
 
 
@@ -62,12 +75,16 @@ namespace SocialMedia.Controllers
 		public IActionResult CheckFavPost(string userId,int PostId)
 		{
 
-			var post = favouritPostRepository.Find(userId, PostId);
-			if(post != null)
+			if (ModelState.IsValid)
 			{
-				return Ok("Found");
+				var post = favouritPostRepository.Find(userId, PostId);
+				if(post is not null)
+				{
+					return Ok("Found");
+				}
+				return Ok("Not Found");
 			}
-			return Ok("Not Found");
+			return BadRequest(ModelState);
 		}
 	}
 }

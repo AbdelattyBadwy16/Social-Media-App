@@ -69,7 +69,7 @@ namespace SocialMedia.Repository
 			List<Post> posts = new List<Post>(); 
 			try
 			{
-				await _context.posts.Where((item) => item.UserId == userId).OrderByDescending((item) => item.Id).ToListAsync();
+				posts = await _context.posts.Where((item) => item.UserId == userId).OrderByDescending((item) => item.Id).ToListAsync();
 			}catch(Exception ex)
 			{
 				throw new Exception(ex.Message);

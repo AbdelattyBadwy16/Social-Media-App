@@ -15,7 +15,7 @@ namespace SocialMedia.Repository
 			return await _context.user_Posts.FirstOrDefaultAsync(x => x.PostId == postId && x.UserId == userId);
 		}
 
-		public async void Delete(User_Post temp)
+		public async Task Delete(User_Post temp)
 		{
 			try
 			{
@@ -27,7 +27,7 @@ namespace SocialMedia.Repository
 			}
 		}
 
-		public async void Add(User_Post userPost)
+		public async Task Add(User_Post userPost)
 		{
 			try
 			{

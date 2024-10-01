@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SocialMedia.Data;
+using SocialMedia.Mapper;
 using SocialMedia.Model;
 using SocialMedia.Models;
 using SocialMedia.Repository;
@@ -18,40 +19,30 @@ namespace SocialMedia.Controllers
 	[ApiController]
 	public class AccountController : Controller
 	{
+		
+		private readonly UserManager<User> _userManger;
+		private readonly IConfiguration _configuration;
+		private readonly AppDbContext _DB;
+		private readonly IHostingEnvironment _host;
 
-		public AccountController(UserManager<User> userManager, IConfiguration configuration , AppDbContext DB , IHostingEnvironment host)
+		private readonly IUserRepository _userRepository;
+		public AccountController(UserManager<User> userManager, IConfiguration configuration , AppDbContext DB , IHostingEnvironment host , IUserRepository userRepository)
 		{
 			_userManger = userManager;
 			_configuration = configuration;
 			_host = host;
 			_DB = DB;
+			_userRepository = userRepository;
 		}
 
-		private readonly UserManager<User> _userManger;
-		private readonly IConfiguration _configuration;
-		private readonly AppDbContext _DB;
-		private readonly IHostingEnvironment _host;
+
 		[HttpPost]
 		public async Task<IActionResult> RegisterNewUser(dtoNewUser user)
 		{
 
 			if (ModelState.IsValid)
 			{
-				User newuser = new()
-				{
-					UserName = user.userName,
-					Email = user.email,
-					Country = user.Country,
-					FirstName = user.FirstName,
-					LastName = user.LastName,
-					Gender = user.Gender,
-					CreatedDate = DateTime.Now,
-					About = "I,m a new User in Glichat App.",
-					IconImagePath = "profile.jpg",
-					BackImagePath = "loginBack.jpg",
-					JopTitle = "NewPie"
-				};
-
+				User newuser = user.ToUser();
 				IdentityResult result = await _userManger.CreateAsync(newuser, user.password);
 				if (result.Succeeded)
 				{
@@ -122,34 +113,37 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> GetAccountInfo(string id)
 		{
-			var user = await _userManger.FindByIdAsync(id);
-
-			if (user == null)
+			if (ModelState.IsValid)
 			{
-				return BadRequest(ModelState);
+				var user = await _userManger.FindByIdAsync(id);
+				if (user is null)
+				{
+					return BadRequest(ModelState);
+				}
+				return Ok(user);
 			}
-
-			return Ok(user);
-
+			return BadRequest();
 		}
 
 		[HttpGet("about")]
 
 		public async Task<IActionResult> UpdateAbout(string about, string id)
 		{
-			var user = await _DB.users.FirstOrDefaultAsync(x=> x.Id == id);
-
-			if (user == null)
+			if (ModelState.IsValid)
 			{
-				return BadRequest(ModelState);
+				var user = await _DB.users.FirstOrDefaultAsync(x=> x.Id == id);
+				if (user == null)
+				{
+					return BadRequest(ModelState);
+				}
+				else
+				{
+					user.About = about;
+					await _DB.SaveChangesAsync();
+				}
+				return Ok(user);
 			}
-			else
-			{
-				user.About = about;
-				_DB.SaveChanges();
-			}
-
-			return Ok(user);
+			return BadRequest();
 
 		}
 
@@ -157,40 +151,43 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> UpdateIconImage(IFormFile image, string id)
 		{
-			var user = await _DB.users.FirstOrDefaultAsync(x => x.Id == id);
-			
-			if (user == null)
+			if (ModelState.IsValid)
 			{
-				return BadRequest(ModelState);
-			}
-			else
-			{
-				// add photo to userBack
-				string myUpload = Path.Combine(_host.WebRootPath, "userIcon");
-				string ImageName = image.FileName;
-				string fullPath = Path.Combine(myUpload, ImageName);
-				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-				user.IconImagePath = ImageName;
-
-				// add photo to userPhotos
-				myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
-				ImageName = image.FileName;
-				fullPath = Path.Combine(myUpload, ImageName);
-				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-				user.IconImagePath = ImageName;
-
-				Photo photo = new Photo()
+				var user = await _DB.users.FirstOrDefaultAsync(x => x.Id == id);
+				
+				if (user == null)
 				{
-					UserId = user.Id,
-					ImagePath = ImageName
-				};
+					return BadRequest(ModelState);
+				}
+				else
+				{
+					// add photo to userBack
+					string myUpload = Path.Combine(_host.WebRootPath, "userIcon");
+					string ImageName = image.FileName;
+					string fullPath = Path.Combine(myUpload, ImageName);
+					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+					user.IconImagePath = ImageName;
 
-				await _DB.photos.AddAsync(photo);
+					// add photo to userPhotos
+					myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
+					ImageName = image.FileName;
+					fullPath = Path.Combine(myUpload, ImageName);
+					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+					user.IconImagePath = ImageName;
 
-				await _DB.SaveChangesAsync();
+					Photo photo = new Photo()
+					{
+						UserId = user.Id,
+						ImagePath = ImageName
+					};
+
+					await _DB.photos.AddAsync(photo);
+					await _DB.SaveChangesAsync();
+				}
+
+				return Ok(ModelState);
 			}
-
-			return Ok(ModelState);
+			return BadRequest();
 
 		}
 
@@ -199,39 +196,43 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> UpdateBackImage(IFormFile image, string id)
 		{
-			var user = await _DB.users.FirstOrDefaultAsync(x => x.Id == id);
-
-			if (user == null)
+			if (ModelState.IsValid)
 			{
-				return BadRequest(ModelState);
-			}
-			else
-			{
-				// add photo to userBack
-				string myUpload = Path.Combine(_host.WebRootPath, "backIcon");
-				string ImageName = image.FileName;
-				string fullPath = Path.Combine(myUpload, ImageName);
-				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+				var user = await _DB.users.FirstOrDefaultAsync(x => x.Id == id);
 
-				// add photo to userPhotos
-				myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
-				ImageName = image.FileName;
-				fullPath = Path.Combine(myUpload, ImageName);
-				await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-				user.IconImagePath = ImageName;
-
-				Photo photo = new Photo()
+				if (user == null)
 				{
-					UserId = user.Id,
-					ImagePath = ImageName
-				};
+					return BadRequest(ModelState);
+				}
+				else
+				{
+					// add photo to userBack
+					string myUpload = Path.Combine(_host.WebRootPath, "backIcon");
+					string ImageName = image.FileName;
+					string fullPath = Path.Combine(myUpload, ImageName);
+					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
 
-				await _DB.photos.AddAsync(photo);
+					// add photo to userPhotos
+					myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
+					ImageName = image.FileName;
+					fullPath = Path.Combine(myUpload, ImageName);
+					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
+					user.IconImagePath = ImageName;
 
-				await _DB.SaveChangesAsync();
+					Photo photo = new Photo()
+					{
+						UserId = user.Id,
+						ImagePath = ImageName
+					};
+
+					await _DB.photos.AddAsync(photo);
+
+					await _DB.SaveChangesAsync();
+				}
+
+				return Ok(ModelState);
 			}
-
-			return Ok(ModelState);
+			return BadRequest(ModelState);
 
 		}
 
@@ -240,35 +241,41 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> GetAllUser()
 		{
-			ICollection<User>users =  _DB.users.OrderByDescending((item)=>item.Followers).ToList();
-
-			return Ok(users);
-
+			if(ModelState.IsValid)
+			{
+				ICollection<User> users = await _userRepository.GetAll();
+				return Ok(users);
+			}
+			return BadRequest();
 		}
 
 		[HttpPut("updateAccount")]
 		public async Task<IActionResult> updateAccount(dtoEditUser user)
 		{
-			var EditedUser = await _userManger.FindByIdAsync(user.Id);
-			if (EditedUser != null)
+			if(ModelState.IsValid)
 			{
-				if (await _userManger.CheckPasswordAsync(EditedUser, user.OldPassword))
+				var EditedUser = await _userManger.FindByIdAsync(user.Id);
+				if (EditedUser != null)
 				{
-					EditedUser.FirstName = user.FirstName;
-					EditedUser.LastName = user.LastName;
-					EditedUser.Country = user.Country;
-					EditedUser.JopTitle = user.JopTitle;
-					EditedUser.NickName = user.NickName;
-					EditedUser.BirthDate = user.BirthDate;
-					EditedUser.PhoneNumber = user.PhoneNumber;
-					await _userManger.ChangePasswordAsync(EditedUser, user.OldPassword, user.Password);
-					_DB.SaveChanges();
+					if (await _userManger.CheckPasswordAsync(EditedUser, user.OldPassword))
+					{
+						EditedUser.FirstName = user.FirstName;
+						EditedUser.LastName = user.LastName;
+						EditedUser.Country = user.Country;
+						EditedUser.JopTitle = user.JopTitle;
+						EditedUser.NickName = user.NickName;
+						EditedUser.BirthDate = user.BirthDate;
+						EditedUser.PhoneNumber = user.PhoneNumber;
+						await _userManger.ChangePasswordAsync(EditedUser, user.OldPassword, user.Password);
+						_DB.SaveChanges();
+					}
+					else return Unauthorized("Wronge Old Password.");
 				}
-				else return Unauthorized("Wronge Old Password.");
-			}
-			else return BadRequest();
+				else return BadRequest();
 
-			return Ok(user);
+				return Ok(user);
+			}
+			return BadRequest();
 		}
 
 

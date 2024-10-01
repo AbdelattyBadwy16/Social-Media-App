@@ -8,31 +8,60 @@ namespace SocialMedia.Repository
 {
 	public class FavouritPostRepository : IFavouritPostRepository
 	{
-		public FavouritPostRepository() { }
-		AppDbContext _context = new AppDbContext();
-
-		public FavouritPost? Find(string userId ,int PostId)
+		private readonly AppDbContext _context;
+		public FavouritPostRepository(AppDbContext context) 
 		{
-			FavouritPost? post = _context.favouritPosts.FirstOrDefault(post => post.UserId == userId && post.PostId == PostId);
+			_context = context;
+		}
+
+		public async Task<FavouritPost?> Find(string userId ,int PostId)
+		{
+			FavouritPost? post = new FavouritPost();
+			try
+			{
+				 post = await _context.favouritPosts.FirstOrDefaultAsync(post => post.UserId == userId && post.PostId == PostId);
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 			return post;
 		}
 
-		public List<FavouritPost> GetAll(string userId)
+		public async Task<List<FavouritPost>> GetAll(string userId)
 		{
-			List< FavouritPost> post = _context.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post => post.Id).Include("post").ToList();
+			List< FavouritPost> post = new List<FavouritPost>();
+			try
+			{
+				post = await _context.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post => post.Id).Include("post").ToListAsync();
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 			return post;
 		}
 
-		public async void Add(FavouritPost favouritPost)
+		public async Task Add(FavouritPost favouritPost)
 		{
-			await _context.favouritPosts.AddAsync(favouritPost);
-			await _context.SaveChangesAsync();
+			try
+			{
+				await _context.favouritPosts.AddAsync(favouritPost);
+				await _context.SaveChangesAsync();
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 		}
 
-		public async void Delete(FavouritPost favouritPost)
+		public async Task Delete(FavouritPost favouritPost)
 		{
-			_context.favouritPosts.Remove(favouritPost);
-			await _context.SaveChangesAsync();
+			try
+			{
+				_context.favouritPosts.Remove(favouritPost);
+				await _context.SaveChangesAsync();
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 		}
 
 	}

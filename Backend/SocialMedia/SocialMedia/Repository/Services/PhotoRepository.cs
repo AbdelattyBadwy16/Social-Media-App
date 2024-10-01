@@ -1,4 +1,5 @@
-﻿using SocialMedia.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialMedia.Models;
 
 namespace SocialMedia.Repository
 {
@@ -7,15 +8,29 @@ namespace SocialMedia.Repository
 		public PhotoRepository() { }
 		AppDbContext _context = new AppDbContext();
 
-		public List<Photo> GetTop3(string id)
+		public async Task<List<Photo>> GetTop3(string id)
 		{
-			var photos = _context.photos.Where(x => x.UserId == id).Take(3).ToList();
+			var photos = new List<Photo>();
+			try
+			{
+				photos = await _context.photos.Where(x => x.UserId == id).Take(3).ToListAsync();
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 			return photos;
 		}
 
-		public List<Photo> Get(string id)
+		public async Task<List<Photo>> Get(string id)
 		{
-			List<Photo> photos = _context.photos.Where(x => x.UserId == id).ToList(); 
+			List<Photo> photos = new List<Photo>();
+			try
+			{
+			    photos = await _context.photos.Where(x => x.UserId == id).ToListAsync(); 
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 			return photos; 
 		}
 	}

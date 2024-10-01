@@ -10,27 +10,35 @@ namespace SocialMedia.Controllers
 	[ApiController]
 	public class PhotoController : ControllerBase
 	{
+		private readonly IPhotoRepository photoRepository;
 		public PhotoController(AppDbContext DB , IPhotoRepository _photoRepo)
 		{
 			photoRepository = _photoRepo;
 		}
-		private readonly IPhotoRepository photoRepository;
 
 		[HttpGet]
 
-		public IActionResult GetPostByIdTop3(string id)
+		public async Task<IActionResult> GetPostByIdTop3(string id)
 		{
-			var photos = photoRepository.GetTop3(id);
-			return Ok(photos);
+			if (ModelState.IsValid)
+			{
+				var photos = await photoRepository.GetTop3(id);
+				return Ok(photos);
+			}
+			return BadRequest();
 		}
 
 
 		[HttpGet("AllPhotos")]
 
-		public IActionResult GetPostById(string id)
+		public async Task<IActionResult>  GetPostById(string id)
 		{
-			var photos = photoRepository.Get(id);
-			return Ok(photos);
+			if (ModelState.IsValid)
+			{
+				var photos = await photoRepository.Get(id);
+				return Ok(photos);
+			}
+			return BadRequest();
 		}
 
 	}

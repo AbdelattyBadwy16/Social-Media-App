@@ -41,6 +41,10 @@
       "PackagePath": "staticwebassets/userIcon/2.png"
     },
     {
+      "Id": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/369100345_913866983675285_8115638703456739737_n.jpg",
+      "PackagePath": "staticwebassets/userIcon/369100345_913866983675285_8115638703456739737_n.jpg"
+    },
+    {
       "Id": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/Abdo.jpg",
       "PackagePath": "staticwebassets/userIcon/Abdo.jpg"
     },
@@ -111,6 +115,10 @@
     {
       "Id": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/2.png",
       "PackagePath": "staticwebassets/userPhotos/2.png"
+    },
+    {
+      "Id": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/369100345_913866983675285_8115638703456739737_n.jpg",
+      "PackagePath": "staticwebassets/userPhotos/369100345_913866983675285_8115638703456739737_n.jpg"
     },
     {
       "Id": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/Abdo.jpg",

@@ -4,7 +4,7 @@ namespace SocialMedia.Repository
 {
 	public interface IPhotoRepository
 	{
-		List<Photo> GetTop3(string id);
-		List<Photo> Get(string id);
+		Task<List<Photo>> GetTop3(string id);
+		Task<List<Photo>>  Get(string id);
 	}
 }

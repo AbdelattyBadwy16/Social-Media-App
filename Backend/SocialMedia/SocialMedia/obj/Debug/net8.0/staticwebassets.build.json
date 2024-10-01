@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FPzp0bCgLkwTQkRZNcxc8yMSj5AOr1iPWtFhc/bTNNY=",
+  "Hash": "RaAz570diWR8C/8TmfqoPaDtFlEFPTLv48lGCv1z13c=",
   "Source": "SocialMedia",
   "BasePath": "_content/SocialMedia",
   "Mode": "Default",
@@ -205,6 +205,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/userIcon/2.png"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/369100345_913866983675285_8115638703456739737_n.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userIcon/369100345_913866983675285_8115638703456739737_n.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userIcon/369100345_913866983675285_8115638703456739737_n.jpg"
     },
     {
       "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/Abdo.jpg",
@@ -547,6 +566,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/userPhotos/2.png"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/369100345_913866983675285_8115638703456739737_n.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userPhotos/369100345_913866983675285_8115638703456739737_n.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userPhotos/369100345_913866983675285_8115638703456739737_n.jpg"
     },
     {
       "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/Abdo.jpg",

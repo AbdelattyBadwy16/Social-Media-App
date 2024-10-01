@@ -5,6 +5,7 @@ namespace SocialMedia.Repository
 	public interface IUserRepository
 	{
 		Task<User?> Get(string id);
-		void Save();
+		Task Save();
+		Task<List<User>> GetAll();
 	}
 }
