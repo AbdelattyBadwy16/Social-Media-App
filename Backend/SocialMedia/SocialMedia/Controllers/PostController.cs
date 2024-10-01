@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Migrations;
 using SocialMedia.Repository;
+using SocialMedia.Mapper;
 
 namespace SocialMedia.Controllers
 {
@@ -23,6 +24,11 @@ namespace SocialMedia.Controllers
 	public class PostController : ControllerBase
 	{
 		private readonly IHostingEnvironment _host;
+		private readonly IPostRepository postRepository ;
+		private readonly IUserPostRepository userPostRepository;
+		private readonly IUserRepository userRepository;
+		private readonly ICommentRepository commentRepository;
+		private readonly IFriendRepository friendRepository;
 
 		public PostController(AppDbContext DB,IHostingEnvironment host ,IFriendRepository _friendRepo, IPostRepository _postRepo , IUserPostRepository _userPostRepo , IUserRepository _userRepo , ICommentRepository _commentRepo)
 		{
@@ -34,35 +40,14 @@ namespace SocialMedia.Controllers
 			friendRepository = _friendRepo;
 		}
 
-		public IPostRepository postRepository ;
-		public IUserPostRepository userPostRepository;
-		public IUserRepository userRepository;
-		public ICommentRepository commentRepository;
-		public IFriendRepository friendRepository;
+		
 		[HttpPost]
 		public async Task<IActionResult> AddNewPostAsync(dtoPost post)
 		{
 			if (ModelState.IsValid)
 			{
-
-				Post NewPost = new()
-				{
-					Content = post.Content,
-					Status = post.Status,
-					UserId = post.UserId,
-					GroupId = post.GroupId,
-				    likes = 0,
-					Wow = 0,
-					Angry = 0,
-					loves = 0,
-					Sads = 0,
-					Haha = 0,
-					CreatedAt = DateTime.Now
-				};
-
-				await postRepository.AddAsync(NewPost);
-
-				return Ok(NewPost.Id);
+				var postId = await postRepository.AddAsync(post);
+				return Ok(postId);
 			}
 
 			return BadRequest(ModelState);
@@ -95,11 +80,13 @@ namespace SocialMedia.Controllers
 		[HttpGet("getPost")]
 		public async Task<IActionResult> GetPost(int id)
 		{
-			var post = await postRepository.Find(id);
-			if(post != null) {
-			   return Ok(post);
+			if (ModelState.IsValid)
+			{
+				var post = await postRepository.Find(id);
+				if (post is null) return NotFound();
+				return Ok(post);
 			}
-			return NotFound();
+			return BadRequest(ModelState);
 
 		}
 
@@ -107,19 +94,27 @@ namespace SocialMedia.Controllers
 
 		[HttpGet]
 
-		public IActionResult GetAllPosts()
+		public async Task<IActionResult> GetAllPosts()
 		{
-			var posts = postRepository.GetAll();
-			return Ok(posts);
+			if (ModelState.IsValid)
+			{
+				var posts = await postRepository.GetAll();
+				return Ok(posts);
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpGet("userPost")]
 
-		public IActionResult GetAllPostsByUser(string userId)
+		public async Task<IActionResult> GetAllPostsByUser(string userId)
 		{
-			List<Post> posts = postRepository.GetAllByUser(userId);
-			return Ok(posts);
+			if (ModelState.IsValid)
+			{
+				List<Post> posts = await postRepository.GetAllByUser(userId);
+				return Ok(posts);
+			}
+			return BadRequest(ModelState);
 		}
 
 
@@ -127,123 +122,137 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> DeletePost(int id)
 		{
-			Post? post = await postRepository.Find(id);
-			if (post != null)
+			if (ModelState.IsValid)
 			{
-				postRepository.Delete(post);
+
+				Post? post = await postRepository.Find(id);
+				if (post != null)
+				{
+					postRepository.Delete(post);
+					return Ok();
+				}
+				return NotFound();
+				
 			}
-			return Ok();
+			return BadRequest(ModelState);
 		}
 
 		[HttpPut("AddPostReact")]
 		public async Task<IActionResult> UpdateLikes(string type, int id , string userId)
 		{
-			Post? post = await postRepository.Find(id);
-			User_Post? temp = await userPostRepository.Get(id, userId);
-
-			if (temp != null)
+			if (ModelState.IsValid)
 			{
-				userPostRepository.Delete(temp);
-				if (post != null)
+				Post? post = await postRepository.Find(id);
+				User_Post? temp = await userPostRepository.Get(id, userId);
+				// post not fount
+				if (post is null) return NotFound();
+				
+				// user add react to this post before
+				if (temp != null)
 				{
-					postRepository.UpdateReact(post, temp.type, -1);
+					userPostRepository.Delete(temp);
+					await postRepository.UpdateReact(post, temp.type, -1);
 				}
-			}
-			int postId = 0;
-			if (post != null)
-			{
-				postRepository.UpdateReact(post, type, 1);
-				postId = post.Id;
-			}
 
-			User_Post user_Post = new User_Post()
-			{
-				UserId = userId,
-				PostId = postId,
-				type = type,
-			};
-			
-			userPostRepository.Add(user_Post);
-			return Ok();
+				// add new react
+				await postRepository.UpdateReact(post, type, 1);
+				
+				User_Post user_Post = new User_Post()
+				{
+					UserId = userId,
+					PostId = post.Id,
+					type = type,
+				};
+
+				userPostRepository.Add(user_Post);
+				return Ok();
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpPut("EditPost")]
 		public async Task<IActionResult> EditPost(string content , string status ,int id)
 		{
-			Post? post = await postRepository.Find(id);
-			if (post != null)
+			if (ModelState.IsValid)
 			{
-				postRepository.Update(content, status, post);
+				Post? post = await postRepository.Find(id);
+				if (post != null)
+				{
+					await postRepository.Update(content, status, post);
+					return Ok();
+				}
+				return NotFound();
+				
 			}
-
-			return Ok();
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpGet("CheckReact")]
 		public async Task<IActionResult> CheckPostReact(string userId, int id)
 		{
-			User_Post? temp = await userPostRepository.Get(id,userId);
-			if(temp != null)
+			if (ModelState.IsValid)
 			{
-				return Ok(temp.type);
-			}
+				User_Post? temp = await userPostRepository.Get(id, userId);
+				if (temp != null)
+				{
+					return Ok(temp.type);
+				}
 
-			return Ok(0);
+				return Ok(0);
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpPut("RemoveReact")]
 		public async Task<IActionResult> RemovePostReact(string userId, int id)
 		{
-			Post? post =await postRepository.Find(id); //await _context.posts.FindAsync(id);
-			User_Post? temp = await userPostRepository.Get(id,userId);
-
-
-			if (temp != null)
+			if (ModelState.IsValid)
 			{
-				userPostRepository.Delete(temp);
+				Post? post = await postRepository.Find(id); //await _context.posts.FindAsync(id);
+				User_Post? temp = await userPostRepository.Get(id, userId);
+				if (post is null) return NotFound();
+				if (temp != null)
+				{
+					userPostRepository.Delete(temp);
+					await postRepository.UpdateReact(post, temp.type, -1);
+
+				}
+				return Ok(0);
 			}
-			if (post != null && temp != null)
-			{
-				postRepository.UpdateReact(post, temp.type, -1);
-			}
-			return Ok(0);
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpPost("AddComment")]
 		public async Task<IActionResult> AddComment(dtoComment comment)
 		{
-		    User? user = await userRepository.Get(comment.UserId);
-			string userName = "";
-			if (user != null)
+			if (ModelState.IsValid)
 			{
-				userName = user.FirstName + " " + user.LastName;
+				User? user = await userRepository.Get(comment.UserId);
+				if (user is null) return BadRequest("User Not Found");
+	
+				string userName = user.FirstName + " " + user.LastName;
+
+				Comment NewComment = comment.ToComment();
+				NewComment.UserImagePath = user.IconImagePath;
+				NewComment.UserName = userName;
+				
+				commentRepository.Add(NewComment);
+				return Ok(ModelState);
 			}
-			else return BadRequest(ModelState);
-
-			Comment NewComment = new Comment()
-			{
-				PostId = comment.PostId,
-				Content = comment.Content,
-				UserName = userName,
-				UserId = comment.UserId,
-				UserImagePath = user.IconImagePath
-			};
-
-			commentRepository.Add(NewComment);
-			return Ok(ModelState);
+			return BadRequest();
 		}
 
 		[HttpDelete("DeleteComment")]
-		public IActionResult DeleteComment(int id)
+		public async Task<IActionResult> DeleteComment(int id)
 		{
-			Comment? comment = commentRepository.Find(id);
+			Comment? comment = await commentRepository.Find(id);
 			if(comment != null)
 			{
-				commentRepository.Delete(comment);
+				await commentRepository.Delete(comment);
 				return Ok(ModelState);
 			}
 			return BadRequest(ModelState);
@@ -251,28 +260,35 @@ namespace SocialMedia.Controllers
 
 
 		[HttpGet("GetPostComments")]
-		public IActionResult GetPostComments(int Id)
+		public async Task<IActionResult> GetPostComments(int Id)
 		{
-			List<Comment> Comments = commentRepository.FindByPost(Id);
-			
-			return Ok(Comments);
+			if (ModelState.IsValid)
+			{
+				List<Comment> Comments = await commentRepository.FindByPost(Id);
+				return Ok(Comments);
+			}
+			return BadRequest(ModelState);
 		}
 
 		[HttpGet("GetFollowingPost")]
 
-		public IActionResult GetFollowingPost(string UserId)
+		public async Task<IActionResult> GetFollowingPost(string UserId)
 		{
-			List<Friends> friends = friendRepository.GetFollowing(UserId);
-			List<Post> posts = new List<Post>();
-			foreach(Friends friend in friends)
+			if (ModelState.IsValid)
 			{
-				List<Post> posts2 = postRepository.GetFollowingPost(friend.FollowerId);
-				foreach(Post post in posts2)
+				List<Friends> friends = await friendRepository.GetFollowing(UserId);
+				List<Post> posts = new List<Post>();
+				foreach (Friends friend in friends)
 				{
-					posts.Add(post);
+					List<Post> posts2 = await postRepository.GetFollowingPost(friend.FollowerId);
+					foreach (Post post in posts2)
+					{
+						posts.Add(post);
+					}
 				}
+				return Ok(posts);
 			}
-			return Ok(posts);
+			return BadRequest(ModelState);
 		}
 	}
 

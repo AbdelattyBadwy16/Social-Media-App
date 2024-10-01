@@ -11,23 +11,27 @@ namespace SocialMedia.Controllers
 	[ApiController]
 	public class FriendController : ControllerBase
 	{
-		public FriendController(AppDbContext DB , IFriendRepository _friendRepo)
+		private IFriendRepository friendRepository;
+		public FriendController(IFriendRepository _friendRepo)
 		{
 			friendRepository = _friendRepo;
 		}
-		private IFriendRepository friendRepository;
 		[HttpPost("addFriend")]
 
-		public IActionResult AddFreind(string id, string followerId)
+		public async Task<IActionResult> AddFreind(string id, string followerId)
 		{
-			Friends friend = new Friends()
+			if (ModelState.IsValid)
 			{
-				UserId = id,
-				FollowerId = followerId
-			};
-			friendRepository.Add(friend);
-			friendRepository.UpdateFollower(id, followerId,1);
-			return Ok(ModelState);
+				Friends friend = new Friends()
+				{
+					UserId = id,
+					FollowerId = followerId
+				};
+				await friendRepository.Add(friend);
+				await friendRepository.UpdateFollower(id, followerId, 1);
+				return Ok(ModelState);
+			}
+			return BadRequest(ModelState);
 		}
 
 
@@ -35,40 +39,54 @@ namespace SocialMedia.Controllers
 
 		public async Task<IActionResult> DeleteFriend(string userId, string id)
 		{
-			Friends? friend = await friendRepository.Find(userId,id);
-			friendRepository.Delete(friend, userId, id);
-			friendRepository.UpdateFollower(userId, id, -1);
-			return Ok(ModelState);
-
+			if (ModelState.IsValid)
+			{
+				Friends? friend = await friendRepository.Find(userId, id);
+				if (friend == null) return NotFound();
+				await friendRepository.Delete(friend, userId, id);
+				await friendRepository.UpdateFollower(userId, id, -1);
+				return Ok();
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpGet("GetUserFollowing")]
 
-		public IActionResult GetUserFollowing(string id)
+		public async Task<IActionResult> GetUserFollowing(string id)
 		{
-			var users = friendRepository.GetFollowing(id);
-			return Ok(users);
-
+			if (ModelState.IsValid)
+			{
+				var users = await friendRepository.GetFollowing(id);
+				return Ok(users);
+			}
+			return BadRequest(ModelState);
 		}
 
 
 		[HttpGet("GetUserFollower")]
 
-		public IActionResult GetUserFollower(string id)
+		public async Task<IActionResult> GetUserFollower(string id)
 		{
-			var users = friendRepository.GetFollower(id);
-			return Ok(users);
+			if (ModelState.IsValid)
+			{
+				var users = await friendRepository.GetFollower(id);
+				return Ok(users);
+			}
+			return BadRequest(ModelState);
 
 		}
 
 		[HttpGet("CheckFriend")]
 
-		public IActionResult CheckFriend(string userId, string id)
+		public async Task<IActionResult> CheckFriend(string userId, string id)
 		{
-			bool IsFreind= friendRepository.Check(userId, id);
-			return Ok(IsFreind);
-
+			if (ModelState.IsValid)
+			{
+				bool IsFreind = await friendRepository.Check(userId, id);
+				return Ok(IsFreind);
+			}
+			return BadRequest(ModelState);
 		}
 	}
 }

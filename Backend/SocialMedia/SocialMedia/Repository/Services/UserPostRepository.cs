@@ -15,16 +15,28 @@ namespace SocialMedia.Repository
 			return await _context.user_Posts.FirstOrDefaultAsync(x => x.PostId == postId && x.UserId == userId);
 		}
 
-		public void Delete(User_Post temp)
+		public async void Delete(User_Post temp)
 		{
-			_context.user_Posts.Remove(temp);
-			_context.SaveChanges();
+			try
+			{
+				_context.user_Posts.Remove(temp);
+				await _context.SaveChangesAsync();
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 		}
 
-		public void Add(User_Post userPost)
+		public async void Add(User_Post userPost)
 		{
-			_context.user_Posts.Add(userPost);
-			_context.SaveChanges();
+			try
+			{
+				await _context.user_Posts.AddAsync(userPost);
+				await _context.SaveChangesAsync();
+			}catch(Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
 		}
 	}
 }

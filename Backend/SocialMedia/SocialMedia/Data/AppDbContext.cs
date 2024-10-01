@@ -24,7 +24,7 @@ namespace SocialMedia.Models
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("Server = . ; Database = SocailMediaDB; Integrated Security = SSPI ; TrustServerCertificate = true");
+			optionsBuilder.UseSqlServer("Server = . ; Database = SocailMediaDB;TrustServerCertificate=True;Encrypt=false;User Id=sa;password=abdo@011429");
 			base.OnConfiguring(optionsBuilder);
 		}
 

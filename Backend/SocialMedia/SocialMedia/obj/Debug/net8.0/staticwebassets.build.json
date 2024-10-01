@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zRdrS0Uzre6yIjdO10W01QaK7O+yegDf0XMnoklOoRg=",
+  "Hash": "FPzp0bCgLkwTQkRZNcxc8yMSj5AOr1iPWtFhc/bTNNY=",
   "Source": "SocialMedia",
   "BasePath": "_content/SocialMedia",
   "Mode": "Default",
@@ -8,19 +8,19 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "SocialMedia\\wwwroot",
+      "Name": "SocialMedia/wwwroot",
       "Source": "SocialMedia",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\postPhotos\\17157777_194493117705535_6905883453128635351_o.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/postPhotos/17157777_194493117705535_6905883453128635351_o.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "postPhotos/17157777_194493117705535_6905883453128635351_o.jpg",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\postPhotos\\17157777_194493117705535_6905883453128635351_o.jpg"
+      "OriginalItemSpec": "wwwroot/postPhotos/17157777_194493117705535_6905883453128635351_o.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\postPhotos\\Abdo.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/postPhotos/Abdo.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "postPhotos/Abdo.jpg",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\postPhotos\\Abdo.jpg"
+      "OriginalItemSpec": "wwwroot/postPhotos/Abdo.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\postPhotos\\avl1.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/postPhotos/avl1.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "postPhotos/avl1.png",
       "AssetKind": "All",
@@ -71,13 +71,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\postPhotos\\avl1.png"
+      "OriginalItemSpec": "wwwroot/postPhotos/avl1.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\postPhotos\\deqeue.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/postPhotos/deqeue.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "postPhotos/deqeue.png",
       "AssetKind": "All",
@@ -90,13 +90,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\postPhotos\\deqeue.png"
+      "OriginalItemSpec": "wwwroot/postPhotos/deqeue.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\postPhotos\\pexels-photo-7078847.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/postPhotos/pexels-photo-7078847.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "postPhotos/pexels-photo-7078847.jpg",
       "AssetKind": "All",
@@ -109,13 +109,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\postPhotos\\pexels-photo-7078847.jpg"
+      "OriginalItemSpec": "wwwroot/postPhotos/pexels-photo-7078847.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\1.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/1.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/1.png",
       "AssetKind": "All",
@@ -128,13 +128,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\1.png"
+      "OriginalItemSpec": "wwwroot/userIcon/1.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\17157777_194493117705535_6905883453128635351_o.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/17157777_194493117705535_6905883453128635351_o.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/17157777_194493117705535_6905883453128635351_o.jpg",
       "AssetKind": "All",
@@ -147,13 +147,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\17157777_194493117705535_6905883453128635351_o.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/17157777_194493117705535_6905883453128635351_o.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\17917264_212552249232955_720093852272167522_o.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/17917264_212552249232955_720093852272167522_o.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/17917264_212552249232955_720093852272167522_o.jpg",
       "AssetKind": "All",
@@ -166,13 +166,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\17917264_212552249232955_720093852272167522_o.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/17917264_212552249232955_720093852272167522_o.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\19221639_240869573067889_816411839341180983_o.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/19221639_240869573067889_816411839341180983_o.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/19221639_240869573067889_816411839341180983_o.jpg",
       "AssetKind": "All",
@@ -185,13 +185,32 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\19221639_240869573067889_816411839341180983_o.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/19221639_240869573067889_816411839341180983_o.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\Abdo.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/2.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userIcon/2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userIcon/2.png"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/Abdo.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/Abdo.jpg",
       "AssetKind": "All",
@@ -204,13 +223,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\Abdo.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/Abdo.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\avl1.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/avl1.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/avl1.png",
       "AssetKind": "All",
@@ -223,13 +242,32 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\avl1.png"
+      "OriginalItemSpec": "wwwroot/userIcon/avl1.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\card1.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/Capture001.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userIcon/Capture001.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userIcon/Capture001.png"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/card1.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/card1.jpg",
       "AssetKind": "All",
@@ -242,13 +280,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\card1.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/card1.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\card3.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/card3.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/card3.jpg",
       "AssetKind": "All",
@@ -261,13 +299,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\card3.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/card3.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\grid-1.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/grid-1.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/grid-1.png",
       "AssetKind": "All",
@@ -280,13 +318,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\grid-1.png"
+      "OriginalItemSpec": "wwwroot/userIcon/grid-1.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\icons8-angry-face-48.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/icons8-angry-face-48.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/icons8-angry-face-48.png",
       "AssetKind": "All",
@@ -299,13 +337,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\icons8-angry-face-48.png"
+      "OriginalItemSpec": "wwwroot/userIcon/icons8-angry-face-48.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\loginBack.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/loginBack.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/loginBack.jpg",
       "AssetKind": "All",
@@ -318,13 +356,32 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\loginBack.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/loginBack.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\pexels-photo-7078847.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/OIF.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userIcon/OIF.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userIcon/OIF.jpg"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/pexels-photo-7078847.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/pexels-photo-7078847.jpg",
       "AssetKind": "All",
@@ -337,13 +394,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\pexels-photo-7078847.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/pexels-photo-7078847.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\profile.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/profile.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/profile.jpg",
       "AssetKind": "All",
@@ -356,13 +413,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\profile.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/profile.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\Screenshot 2024-02-02 175414.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/Screenshot 2024-02-02 175414.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/Screenshot 2024-02-02 175414.png",
       "AssetKind": "All",
@@ -375,13 +432,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\Screenshot 2024-02-02 175414.png"
+      "OriginalItemSpec": "wwwroot/userIcon/Screenshot 2024-02-02 175414.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userIcon\\spash.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userIcon/spash.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userIcon/spash.jpg",
       "AssetKind": "All",
@@ -394,13 +451,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userIcon\\spash.jpg"
+      "OriginalItemSpec": "wwwroot/userIcon/spash.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\1.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/1.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/1.png",
       "AssetKind": "All",
@@ -413,13 +470,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\1.png"
+      "OriginalItemSpec": "wwwroot/userPhotos/1.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\17157777_194493117705535_6905883453128635351_o.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/17157777_194493117705535_6905883453128635351_o.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/17157777_194493117705535_6905883453128635351_o.jpg",
       "AssetKind": "All",
@@ -432,13 +489,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\17157777_194493117705535_6905883453128635351_o.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/17157777_194493117705535_6905883453128635351_o.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\17917264_212552249232955_720093852272167522_o.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/17917264_212552249232955_720093852272167522_o.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/17917264_212552249232955_720093852272167522_o.jpg",
       "AssetKind": "All",
@@ -451,13 +508,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\17917264_212552249232955_720093852272167522_o.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/17917264_212552249232955_720093852272167522_o.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\19221639_240869573067889_816411839341180983_o.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/19221639_240869573067889_816411839341180983_o.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/19221639_240869573067889_816411839341180983_o.jpg",
       "AssetKind": "All",
@@ -470,13 +527,32 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\19221639_240869573067889_816411839341180983_o.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/19221639_240869573067889_816411839341180983_o.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\Abdo.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/2.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userPhotos/2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userPhotos/2.png"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/Abdo.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/Abdo.jpg",
       "AssetKind": "All",
@@ -489,13 +565,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\Abdo.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/Abdo.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\avl1.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/avl1.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/avl1.png",
       "AssetKind": "All",
@@ -508,13 +584,32 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\avl1.png"
+      "OriginalItemSpec": "wwwroot/userPhotos/avl1.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\card1.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/Capture001.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userPhotos/Capture001.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userPhotos/Capture001.png"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/card1.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/card1.jpg",
       "AssetKind": "All",
@@ -527,13 +622,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\card1.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/card1.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\card3.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/card3.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/card3.jpg",
       "AssetKind": "All",
@@ -546,13 +641,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\card3.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/card3.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\deqeue.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/deqeue.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/deqeue.png",
       "AssetKind": "All",
@@ -565,13 +660,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\deqeue.png"
+      "OriginalItemSpec": "wwwroot/userPhotos/deqeue.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\grid-1.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/grid-1.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/grid-1.png",
       "AssetKind": "All",
@@ -584,13 +679,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\grid-1.png"
+      "OriginalItemSpec": "wwwroot/userPhotos/grid-1.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\icons8-angry-face-48.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/icons8-angry-face-48.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/icons8-angry-face-48.png",
       "AssetKind": "All",
@@ -603,13 +698,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\icons8-angry-face-48.png"
+      "OriginalItemSpec": "wwwroot/userPhotos/icons8-angry-face-48.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\loginBack.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/loginBack.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/loginBack.jpg",
       "AssetKind": "All",
@@ -622,13 +717,32 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\loginBack.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/loginBack.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\pexels-photo-7078847.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/OIF.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
+      "BasePath": "_content/SocialMedia",
+      "RelativePath": "userPhotos/OIF.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/userPhotos/OIF.jpg"
+    },
+    {
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/pexels-photo-7078847.jpg",
+      "SourceId": "SocialMedia",
+      "SourceType": "Discovered",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/pexels-photo-7078847.jpg",
       "AssetKind": "All",
@@ -641,13 +755,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\pexels-photo-7078847.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/pexels-photo-7078847.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\profile.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/profile.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/profile.jpg",
       "AssetKind": "All",
@@ -660,13 +774,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\profile.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/profile.jpg"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\Screenshot 2024-02-02 175414.png",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/Screenshot 2024-02-02 175414.png",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/Screenshot 2024-02-02 175414.png",
       "AssetKind": "All",
@@ -679,13 +793,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\Screenshot 2024-02-02 175414.png"
+      "OriginalItemSpec": "wwwroot/userPhotos/Screenshot 2024-02-02 175414.png"
     },
     {
-      "Identity": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\userPhotos\\spash.jpg",
+      "Identity": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/userPhotos/spash.jpg",
       "SourceId": "SocialMedia",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\react.js\\SocialMedia\\Social-Media-App\\Backend\\SocialMedia\\SocialMedia\\wwwroot\\",
+      "ContentRoot": "/media/glitch00/_dev_data/Projects/Social-Media-App/Backend/SocialMedia/SocialMedia/wwwroot/",
       "BasePath": "_content/SocialMedia",
       "RelativePath": "userPhotos/spash.jpg",
       "AssetKind": "All",
@@ -698,7 +812,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\userPhotos\\spash.jpg"
+      "OriginalItemSpec": "wwwroot/userPhotos/spash.jpg"
     }
   ]
 }
