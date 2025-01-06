@@ -7,19 +7,27 @@ namespace SocialMedia.Application.Repository
 {
 	public class UserPostRepository : IUserPostRepository
 	{
-		public UserPostRepository() { }
-		AppDbContext _context = new AppDbContext();
+		private readonly AppDbContext _context ;
+		private readonly IPostRepository _postRepository;
+		public UserPostRepository(AppDbContext context , IPostRepository postRepository) 
+		{ 
+			_context = context;
+			_postRepository = postRepository;
+		}
 
 		public async Task<User_Post?> Get(int postId, string userId)
 		{
 			return await _context.user_Posts.FirstOrDefaultAsync(x => x.PostId == postId && x.UserId == userId);
 		}
 
-		public async Task Delete(User_Post temp)
+		public async Task Delete(int user_post_id,string userId)
 		{
+			User_Post? temp = await Get(user_post_id, userId);
+			if (temp == null) return;
 			try
 			{
 				_context.user_Posts.Remove(temp);
+				await _postRepository.UpdateReact(user_post_id, temp.type, -1);
 				await _context.SaveChangesAsync();
 			}catch(Exception ex)
 			{

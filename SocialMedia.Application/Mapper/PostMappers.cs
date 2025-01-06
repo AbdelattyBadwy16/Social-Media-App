@@ -20,7 +20,7 @@ namespace SocialMedia.Application.Mapper
 					loves = 0,
 					Sads = 0,
 					Haha = 0,
-					CreatedAt = DateTime.Now
+					CreatedAt = DateTime.UtcNow
 				};
 		}
 		

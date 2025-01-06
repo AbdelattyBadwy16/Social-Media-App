@@ -1,12 +1,14 @@
-﻿using SocialMedia.Core.Models;
+﻿using SocialMedia.Application.DTOs;
+using SocialMedia.Application.Response;
+using SocialMedia.Core.Models;
 
 namespace SocialMedia.Application.Repository
 {
 	public interface ICommentRepository
 	{
-		Task Add(Comment comment);
-		Task Delete(Comment comment);
+		Task<Response<string>> Add(dtoComment comment);
+		Task<Response<string>> Delete(int od);
 		Task<Comment?> Find(int id);
-		Task<List<Comment>> FindByPost(int Id);
+		Task<Response<List<Comment>>> FindByPost(int Id);
 	}
 }

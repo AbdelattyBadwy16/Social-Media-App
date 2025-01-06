@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
 using System.Collections.Generic;
@@ -27,20 +28,13 @@ namespace SocialMedia.Application.Repository
 			return post;
 		}
 
-		public async Task<List<FavouritPost>> GetAll(string userId)
+		public async Task<Response<List<FavouritPost>>> GetAll(string userId)
 		{
-			List< FavouritPost> post = new List<FavouritPost>();
-			try
-			{
-				post = await _context.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post => post.Id).Include("post").ToListAsync();
-			}catch(Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
-			return post;
+			var post = await _context.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post => post.Id).Include("post").ToListAsync();
+			return Response<List<FavouritPost>>.Success(post,"",200);
 		}
 
-		public async Task Add(FavouritPost favouritPost)
+		public async Task<Response<string>> Add(FavouritPost favouritPost)
 		{
 			try
 			{
@@ -48,11 +42,12 @@ namespace SocialMedia.Application.Repository
 				await _context.SaveChangesAsync();
 			}catch(Exception ex)
 			{
-				throw new Exception(ex.Message);
+				return Response<string>.Failure("Faild to add fav post.");
 			}
+			return Response<string>.Success("post added.");
 		}
 
-		public async Task Delete(FavouritPost favouritPost)
+		public async Task<Response<string>> Delete(FavouritPost favouritPost)
 		{
 			try
 			{
@@ -60,8 +55,9 @@ namespace SocialMedia.Application.Repository
 				await _context.SaveChangesAsync();
 			}catch(Exception ex)
 			{
-				throw new Exception(ex.Message);
+				return Response<string>.Failure("Faild to delete fav post.");
 			}
+			return Response<string>.Success("post deleted.");
 		}
 
 	}

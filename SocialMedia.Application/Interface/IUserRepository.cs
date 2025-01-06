@@ -1,4 +1,5 @@
-﻿using SocialMedia.Core.Models;
+﻿using SocialMedia.Application.Response;
+using SocialMedia.Core.Models;
 
 namespace SocialMedia.Application.Repository
 {
@@ -6,6 +7,6 @@ namespace SocialMedia.Application.Repository
 	{
 		Task<User?> Get(string id);
 		Task Save();
-		Task<List<User>> GetAll();
+		Task<Response<List<User>>> GetAll();
 	}
 }

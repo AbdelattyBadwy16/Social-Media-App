@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
 
@@ -23,18 +24,9 @@ namespace SocialMedia.Application.Repository
 			await _context.SaveChangesAsync();
 		}
 		
-		public async Task<List<User>> GetAll()
+		public async Task<Response<List<User>>> GetAll()
 		{
-			List<User> users = new List<User>();
-			try
-			{
-				users = await _context.users.OrderByDescending((item) => item.Followers).ToListAsync();
-				
-			}catch(Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
-			return users;
+			 return Response<List<User>>.Success(await _context.users.OrderByDescending((item) => item.Followers).ToListAsync());
 		}
 	}
 }
