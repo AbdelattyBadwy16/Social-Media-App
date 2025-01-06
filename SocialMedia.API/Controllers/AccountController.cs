@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using SocialMedia.Application.DTOs;
 using SocialMedia.Application.Mapper;
 using SocialMedia.Application.Repository;
+using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -40,65 +41,25 @@ namespace SocialMedia.API.Controllers
 
 
 		[HttpPost]
-		public async Task<IActionResult> RegisterNewUser(dtoNewUser user)
+		public async Task<Response<string>> RegisterNewUser(dtoNewUser user)
 		{
 			if (ModelState.IsValid)
 			{
-				var result = await _accountRepository.CreateNewUser(user);
-				if (result)
-				{
-					return Ok("Success");
-				}
+				return await _accountRepository.CreateNewUser(user);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to create Account");
 		}
 
 
 		[HttpPost("Login")]
 
-		public async Task<IActionResult> Login(dtoLogin login)
+		public async Task<Response<dtoLoginResponse>> Login(dtoLogin login)
 		{
 			if (ModelState.IsValid)
 			{
-				var user = await _userManger.FindByNameAsync(login.username);
-
-				if (user != null)
-					if (await _userManger.CheckPasswordAsync(user, login.password))
-					{
-						var clamis = new List<Claim>();
-						clamis.Add(new Claim(ClaimTypes.Name, user.UserName));
-						clamis.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
-						clamis.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-						var roles = await _userManger.GetRolesAsync(user);
-						foreach (var role in roles)
-						{
-							clamis.Add(new Claim(ClaimTypes.Role, role.ToString()));
-						}
-
-						var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
-						var sc = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-						var mktoken = new JwtSecurityToken(
-								claims: clamis,
-								expires: DateTime.Now.AddMonths(1),
-								signingCredentials: sc
-							);
-						var token = new
-						{
-							token = new JwtSecurityTokenHandler().WriteToken(mktoken),
-						};
-
-						return Ok(new { token.token, user.UserName, user.IconImagePath, user.Id });
-					}
-					else
-					{
-						return Unauthorized();
-					}
+				return await _accountRepository.Login(login);
 			}
-			else
-			{
-				ModelState.AddModelError("", "username is invalid");
-			}
-			return BadRequest(ModelState);
+			return Response<dtoLoginResponse>.Failure(new dtoLoginResponse(),"Faild to create Account",400);
 
 		}
 

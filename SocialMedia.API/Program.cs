@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Optern.Infrastructure.ExternalServices.JWTService;
 using SocialMedia.Application.Extentions;
 using SocialMedia.Application.Repository;
 using SocialMedia.Core.Models;
@@ -40,7 +41,8 @@ builder.Services.AddScoped<IUserRepository , UserRepository>();
 builder.Services.AddScoped<IUserPostRepository , UserPostRepository>();	
 builder.Services.AddScoped<IPhotoRepository , PhotoRepository>();	
 builder.Services.AddScoped<ICommentRepository , CommentRepository>();	
-
+builder.Services.AddScoped<IAccountRepository , AccountRepository>();
+builder.Services.AddScoped<IJWTService , JWTService>();	
 var app = builder.Build();
 
 

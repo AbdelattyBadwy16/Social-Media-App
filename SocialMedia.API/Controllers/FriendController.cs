@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Application.Repository;
+using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 
 
@@ -18,75 +19,60 @@ namespace SocialMedia.API.Controllers
 		}
 		[HttpPost("addFriend")]
 
-		public async Task<IActionResult> AddFreind(string id, string followerId)
+		public async Task<Response<string>> AddFreind(string id, string followerId)
 		{
 			if (ModelState.IsValid)
 			{
-				Friends friend = new Friends()
-				{
-					UserId = id,
-					FollowerId = followerId
-				};
-				await friendRepository.Add(friend);
-				await friendRepository.UpdateFollower(id, followerId, 1);
-				return Ok(ModelState);
+				return await friendRepository.Add(id,followerId);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to Add friend");
 		}
 
 
 		[HttpDelete("DeleteFriend")]
 
-		public async Task<IActionResult> DeleteFriend(string userId, string id)
+		public async Task<Response<string>> DeleteFriend(string userId, string id)
 		{
 			if (ModelState.IsValid)
 			{
-				Friends? friend = await friendRepository.Find(userId, id);
-				if (friend == null) return NotFound();
-				await friendRepository.Delete(friend, userId, id);
-				await friendRepository.UpdateFollower(userId, id, -1);
-				return Ok();
+				return await friendRepository.Delete(userId, id);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to delete friend");
 		}
 
 
 		[HttpGet("GetUserFollowing")]
 
-		public async Task<IActionResult> GetUserFollowing(string id)
+		public async Task<Response<List<Friends>>> GetUserFollowing(string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var users = await friendRepository.GetFollowing(id);
-				return Ok(users);
+				return await friendRepository.GetFollowing(id);
 			}
-			return BadRequest(ModelState);
+			return Response<List<Friends>>.Failure("Faild to get following");
 		}
 
 
 		[HttpGet("GetUserFollower")]
 
-		public async Task<IActionResult> GetUserFollower(string id)
+		public async Task<Response<List<Friends>>> GetUserFollower(string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var users = await friendRepository.GetFollower(id);
-				return Ok(users);
+				return await friendRepository.GetFollower(id);
 			}
-			return BadRequest(ModelState);
-
+			return Response<List<Friends>>.Failure("Faild to Get follower");
 		}
 
 		[HttpGet("CheckFriend")]
 
-		public async Task<IActionResult> CheckFriend(string userId, string id)
+		public async Task<Response<bool>> CheckFriend(string userId, string id)
 		{
 			if (ModelState.IsValid)
 			{
-				bool IsFreind = await friendRepository.Check(userId, id);
-				return Ok(IsFreind);
+				return await friendRepository.Check(userId, id);
 			}
-			return BadRequest(ModelState);
+			return Response<bool>.Failure("Faild to Get follower");
 		}
 	}
 }

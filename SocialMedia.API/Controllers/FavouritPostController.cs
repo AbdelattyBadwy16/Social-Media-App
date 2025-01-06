@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Application.Repository;
+using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
 
@@ -24,7 +23,7 @@ namespace SocialMedia.API.Controllers
 
 		[HttpPost("addPost")]
 
-		public async Task<IActionResult> AddPost(string userId, int PostId)
+		public async Task<Response<string>> AddPost(string userId, int PostId)
 		{
 			if (ModelState.IsValid)
 			{
@@ -33,47 +32,43 @@ namespace SocialMedia.API.Controllers
 					UserId = userId,
 					PostId = PostId
 				};
-				await favouritPostRepository.Add(favouritPost);
-				return Ok(ModelState);
+				return await favouritPostRepository.Add(favouritPost);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to add post");
 		}
 
 
 		[HttpDelete("DeletePost")]
 
-		public async Task<IActionResult> DeletePost(string userId, int PostId)
+		public async Task<Response<string>> DeletePost(string userId, int PostId)
 		{
 			if (ModelState.IsValid)
 			{
 				var post = await favouritPostRepository.Find(userId, PostId);
 				if (post != null)
 				{
-					await favouritPostRepository.Delete(post);
-					return Ok(ModelState);
+					return await favouritPostRepository.Delete(post);
 				}
-				else return BadRequest(ModelState);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to delete post");
 		}
 
 
 		[HttpGet]
 
-		public async Task<IActionResult> GetUserFavPost(string userId)
+		public async Task<Response<List<FavouritPost>>> GetUserFavPost(string userId)
 		{
 			if (ModelState.IsValid)
 			{
-				var post = await favouritPostRepository.GetAll(userId);
-				return Ok(post);
+				return await favouritPostRepository.GetAll(userId);
 			}
-			return BadRequest(ModelState);
+			return Response<List<FavouritPost>>.Failure("Cant get data");
 		}
 
 
 		[HttpGet("Check")]
 
-		public IActionResult CheckFavPost(string userId,int PostId)
+		public async Task<Response<string>> CheckFavPost(string userId,int PostId)
 		{
 
 			if (ModelState.IsValid)
@@ -81,11 +76,11 @@ namespace SocialMedia.API.Controllers
 				var post = favouritPostRepository.Find(userId, PostId);
 				if(post is not null)
 				{
-					return Ok("Found");
+					return Response<string>.Success("Found");
 				}
-				return Ok("Not Found");
+				return Response<string>.Success("Not Found");
 			}
-			return BadRequest(ModelState);
+			return  Response<string>.Failure("faild to check.");
 		}
 	}
 }

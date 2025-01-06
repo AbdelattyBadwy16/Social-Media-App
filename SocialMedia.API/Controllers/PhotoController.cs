@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Application.Repository;
+using SocialMedia.Application.Response;
+using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
 
 
@@ -18,27 +20,25 @@ namespace SocialMedia.API.Controllers
 
 		[HttpGet]
 
-		public async Task<IActionResult> GetPostByIdTop3(string id)
+		public async Task<Response<List<Photo>>> GetPostByIdTop3(string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var photos = await photoRepository.GetTop3(id);
-				return Ok(photos);
+				return await photoRepository.GetTop3(id);
 			}
-			return BadRequest();
+			return Response<List<Photo>>.Failure("faild to get data");
 		}
 
 
 		[HttpGet("AllPhotos")]
 
-		public async Task<IActionResult>  GetPostById(string id)
+		public async Task<Response<List<Photo>>>  GetPostById(string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var photos = await photoRepository.Get(id);
-				return Ok(photos);
+				return await photoRepository.Get(id);
 			}
-			return BadRequest();
+			return Response<List<Photo>>.Failure("faild to get data");
 		}
 
 	}

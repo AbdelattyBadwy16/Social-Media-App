@@ -5,6 +5,7 @@ using SocialMedia.Infrastructure.Models;
 using SocialMedia.Application.DTOs;
 using SocialMedia.Core.Models;
 using SocialMedia.Application.Mapper;
+using SocialMedia.Application.Response;
 
 namespace SocialMedia.API.Controllers
 {
@@ -32,254 +33,177 @@ namespace SocialMedia.API.Controllers
 
 		
 		[HttpPost]
-		public async Task<IActionResult> AddNewPostAsync(dtoPost post)
+		public async Task<Response<int>> AddNewPostAsync(dtoPost post)
 		{
 			if (ModelState.IsValid)
 			{
-				var postId = await postRepository.AddAsync(post);
-				return Ok(postId);
+				return await postRepository.AddAsync(post);
 			}
 
-			return BadRequest(ModelState);
+			return Response<int>.Failure("faild to add post");
 
 		}
 
 		[HttpPut("PostImage")]
-		public async Task<IActionResult> AddPostImage(IFormFile image,int id)
+		public async Task<Response<string>> AddPostImage(IHostingEnvironment _host,IFormFile image,int id)
 		{
 			if (ModelState.IsValid)
 			{
-				string ImageName;
-				//add post photo
-				ImageName = postRepository.AddPostPhoto(_host, image, "postPhotos");
-				//add user photo
-				ImageName = postRepository.AddPostPhoto(_host, image, "userPhotos");
-				
-				Post? post = await postRepository.Find(id);
-				if(post  != null)
-				{
-					postRepository.AddPostImage(post, ImageName);
-				}
-				return Ok(ModelState);
+				return await postRepository.AddPostImage(_host,image,id);
 			}
 
-			return BadRequest(ModelState);
+			return  Response<string>.Failure("faild to add photo");
 
 		}
 
 		[HttpGet("getPost")]
-		public async Task<IActionResult> GetPost(int id)
+		public async Task<Response<Post>> GetPost(int id)
 		{
 			if (ModelState.IsValid)
 			{
 				var post = await postRepository.Find(id);
-				if (post is null) return NotFound();
-				return Ok(post);
+				if (post is null)
+				{
+					Response<Post>.Failure("Post Not Found");
+				};
+				return Response<Post>.Success(post);
 			}
-			return BadRequest(ModelState);
-
+			return Response<Post>.Failure("Faild to add post");
 		}
 
 
 
 		[HttpGet]
 
-		public async Task<IActionResult> GetAllPosts()
+		public async Task<Response<List<Post>>> GetAllPosts()
 		{
 			if (ModelState.IsValid)
 			{
-				var posts = await postRepository.GetAll();
-				return Ok(posts);
+				return await postRepository.GetAll();
 			}
-			return BadRequest(ModelState);
+			return Response<List<Post>>.Failure("Faild to get posts");
 		}
 
 
 		[HttpGet("userPost")]
 
-		public async Task<IActionResult> GetAllPostsByUser(string userId)
+		public async Task<Response<List<Post>>> GetAllPostsByUser(string userId)
 		{
 			if (ModelState.IsValid)
 			{
-				List<Post> posts = await postRepository.GetAllByUser(userId);
-				return Ok(posts);
+				return await postRepository.GetAllByUser(userId);
 			}
-			return BadRequest(ModelState);
+			return Response<List<Post>>.Failure("Faild to get posts");
 		}
 
 
 		[HttpDelete]
 
-		public async Task<IActionResult> DeletePost(int id)
+		public async Task<Response<string>> DeletePost(int id)
 		{
 			if (ModelState.IsValid)
 			{
-
-				Post? post = await postRepository.Find(id);
-				if (post != null)
-				{
-					postRepository.Delete(post);
-					return Ok();
-				}
-				return NotFound();
-				
+				return await postRepository.Delete(id);			
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to delete post.");
 		}
 
 		[HttpPut("AddPostReact")]
-		public async Task<IActionResult> UpdateLikes(string type, int id , string userId)
+		public async Task<Response<string>> UpdateLikes(string type, int id , string userId)
 		{
 			if (ModelState.IsValid)
-			{
-				Post? post = await postRepository.Find(id);
-				User_Post? temp = await userPostRepository.Get(id, userId);
-				// post not fount
-				if (post is null) return NotFound();
-				
-				// user add react to this post before
-				if (temp != null)
-				{
-					userPostRepository.Delete(temp);
-					await postRepository.UpdateReact(post, temp.type, -1);
-				}
-
+			{					
+				await userPostRepository.Delete(id,userId);
+			
 				// add new react
-				await postRepository.UpdateReact(post, type, 1);
+				await postRepository.UpdateReact(id, type, 1);
 				
 				User_Post user_Post = new User_Post()
 				{
 					UserId = userId,
-					PostId = post.Id,
+					PostId = id,
 					type = type,
 				};
 
-				userPostRepository.Add(user_Post);
-				return Ok();
+				await userPostRepository.Add(user_Post);
+				return Response<string>.Success("React Updates.");
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to update reacts.");
 		}
 
 
 		[HttpPut("EditPost")]
-		public async Task<IActionResult> EditPost(string content , string status ,int id)
+		public async Task<Response<string>> EditPost(string content , string status ,int id)
 		{
 			if (ModelState.IsValid)
 			{
-				Post? post = await postRepository.Find(id);
-				if (post != null)
-				{
-					await postRepository.Update(content, status, post);
-					return Ok();
-				}
-				return NotFound();
-				
+				return await postRepository.Update(content, status, id);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to update reacts.");
 		}
 
 
 		[HttpGet("CheckReact")]
-		public async Task<IActionResult> CheckPostReact(string userId, int id)
+		public async Task<Response<string>> CheckPostReact(string userId, int id)
 		{
 			if (ModelState.IsValid)
 			{
 				User_Post? temp = await userPostRepository.Get(id, userId);
 				if (temp != null)
 				{
-					return Ok(temp.type);
+					return Response<string>.Success(temp.type);
 				}
 
-				return Ok(0);
+				return Response<string>.Failure("Not Found");
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to Check reacts.");
 		}
 
 
 		[HttpPut("RemoveReact")]
-		public async Task<IActionResult> RemovePostReact(string userId, int id)
+		public async Task<Response<string>> RemovePostReact(string userId, int id)
 		{
 			if (ModelState.IsValid)
 			{
-				Post? post = await postRepository.Find(id); //await _context.posts.FindAsync(id);
-				User_Post? temp = await userPostRepository.Get(id, userId);
-				if (post is null) return NotFound();
-				if (temp != null)
-				{
-					userPostRepository.Delete(temp);
-					await postRepository.UpdateReact(post, temp.type, -1);
-
-				}
-				return Ok(0);
+				await userPostRepository.Delete(id,userId);
+				return Response<string>.Failure("react removed.");	
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to remove reacts.");
 		}
 
 
 		[HttpPost("AddComment")]
-		public async Task<IActionResult> AddComment(dtoComment comment)
+		public async Task<Response<string>> AddComment(dtoComment comment)
 		{
 			if (ModelState.IsValid)
 			{
-				User? user = await userRepository.Get(comment.UserId);
-				if (user is null) return BadRequest("User Not Found");
-	
-				string userName = user.FirstName + " " + user.LastName;
-
-				Comment NewComment = comment.ToComment();
-				NewComment.UserImagePath = user.IconImagePath;
-				NewComment.UserName = userName;
-				
-				commentRepository.Add(NewComment);
-				return Ok(ModelState);
+				return await commentRepository.Add(comment);
 			}
-			return BadRequest();
+			return Response<string>.Failure("Faild to add comment.");
 		}
 
 		[HttpDelete("DeleteComment")]
-		public async Task<IActionResult> DeleteComment(int id)
+		public async Task<Response<string>> DeleteComment(int id)
 		{
-			Comment? comment = await commentRepository.Find(id);
-			if(comment != null)
+			if(ModelState.IsValid)
 			{
-				await commentRepository.Delete(comment);
-				return Ok(ModelState);
+				return await commentRepository.Delete(id);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to remove comment.");
 		}
 
 
 		[HttpGet("GetPostComments")]
-		public async Task<IActionResult> GetPostComments(int Id)
+		public async Task<Response<List<Comment>>> GetPostComments(int Id)
 		{
 			if (ModelState.IsValid)
 			{
-				List<Comment> Comments = await commentRepository.FindByPost(Id);
-				return Ok(Comments);
+				return await commentRepository.FindByPost(Id);
 			}
-			return BadRequest(ModelState);
+			return Response<List<Comment>>.Failure("Faild to get comments.");
 		}
 
-		[HttpGet("GetFollowingPost")]
 
-		public async Task<IActionResult> GetFollowingPost(string UserId)
-		{
-			if (ModelState.IsValid)
-			{
-				List<Friends> friends = await friendRepository.GetFollowing(UserId);
-				List<Post> posts = new List<Post>();
-				foreach (Friends friend in friends)
-				{
-					List<Post> posts2 = await postRepository.GetFollowingPost(friend.FollowerId);
-					foreach (Post post in posts2)
-					{
-						posts.Add(post);
-					}
-				}
-				return Ok(posts);
-			}
-			return BadRequest(ModelState);
-		}
 	}
 
 }
