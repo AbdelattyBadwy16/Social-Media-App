@@ -59,178 +59,78 @@ namespace SocialMedia.API.Controllers
 			{
 				return await _accountRepository.Login(login);
 			}
-			return Response<dtoLoginResponse>.Failure(new dtoLoginResponse(),"Faild to create Account",400);
+			return Response<dtoLoginResponse>.Failure("Faild to create Account");
 
 		}
 
 		[HttpGet]
 		[Authorize]
 
-		public async Task<IActionResult> GetAccountInfo(string id)
+		public async Task<Response<User>> GetAccountInfo(string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var user = await _userManger.FindByIdAsync(id);
-				if (user is null)
-				{
-					return BadRequest(ModelState);
-				}
-				return Ok(user);
+				return await _accountRepository.GetUser(id);
 			}
-			return BadRequest();
+			return Response<User>.Failure("Faild to Get User");
 		}
 
 		[HttpGet("about")]
 
-		public async Task<IActionResult> UpdateAbout(string about, string id)
+		public async Task<Response<User>> UpdateAbout(string about, string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var user = await _DB.users.FirstOrDefaultAsync(x=> x.Id == id);
-				if (user == null)
-				{
-					return BadRequest(ModelState);
-				}
-				else
-				{
-					user.About = about;
-					await _DB.SaveChangesAsync();
-				}
-				return Ok(user);
+				return await _accountRepository.UpdateAbout(about, id);
 			}
-			return BadRequest();
+			return Response<User>.Failure("Faild to update");
 
 		}
 
 		[HttpPut("IconImage")]
 
-		public async Task<IActionResult> UpdateIconImage(IFormFile image, string id)
+		public async Task<Response<string>> UpdateIconImage(IFormFile image, string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var user = await _DB.users.FirstOrDefaultAsync(x => x.Id == id);
-				
-				if (user == null)
-				{
-					return BadRequest(ModelState);
-				}
-				else
-				{
-					// add photo to userBack
-					string myUpload = Path.Combine(_host.WebRootPath, "userIcon");
-					string ImageName = image.FileName;
-					string fullPath = Path.Combine(myUpload, ImageName);
-					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-					user.IconImagePath = ImageName;
-
-					// add photo to userPhotos
-					myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
-					ImageName = image.FileName;
-					fullPath = Path.Combine(myUpload, ImageName);
-					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-					user.IconImagePath = ImageName;
-
-					Photo photo = new Photo()
-					{
-						UserId = user.Id,
-						ImagePath = ImageName
-					};
-
-					await _DB.photos.AddAsync(photo);
-					await _DB.SaveChangesAsync();
-				}
-
-				return Ok(ModelState);
+				return await _accountRepository.UpdateProfileImage(image,id,_host);
 			}
-			return BadRequest();
-
+			return Response<string>.Failure("Faild to update profile image.");
 		}
 
 
 		[HttpPut("BackImage")]
 
-		public async Task<IActionResult> UpdateBackImage(IFormFile image, string id)
+		public async Task<Response<string>> UpdateBackImage(IFormFile image, string id)
 		{
 			if (ModelState.IsValid)
 			{
-				var user = await _DB.users.FirstOrDefaultAsync(x => x.Id == id);
-
-				if (user == null)
-				{
-					return BadRequest(ModelState);
-				}
-				else
-				{
-					// add photo to userBack
-					string myUpload = Path.Combine(_host.WebRootPath, "backIcon");
-					string ImageName = image.FileName;
-					string fullPath = Path.Combine(myUpload, ImageName);
-					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-
-					// add photo to userPhotos
-					myUpload = Path.Combine(_host.WebRootPath, "userPhotos");
-					ImageName = image.FileName;
-					fullPath = Path.Combine(myUpload, ImageName);
-					await image.CopyToAsync(new FileStream(fullPath, FileMode.Create));
-					user.IconImagePath = ImageName;
-
-					Photo photo = new Photo()
-					{
-						UserId = user.Id,
-						ImagePath = ImageName
-					};
-
-					await _DB.photos.AddAsync(photo);
-
-					await _DB.SaveChangesAsync();
-				}
-
-				return Ok(ModelState);
+				return await _accountRepository.UpdateBackGroundImage(image,id,_host);
 			}
-			return BadRequest(ModelState);
+			return Response<string>.Failure("Faild to update background image.");
 
 		}
 
 
 		[HttpGet("GetAllUser")]
 
-		public async Task<IActionResult> GetAllUser()
+		public async Task<Response<List<User>>> GetAllUser()
 		{
 			if(ModelState.IsValid)
 			{
-				ICollection<User> users = await _userRepository.GetAll();
-				return Ok(users);
+				return await _userRepository.GetAll();
 			}
-			return BadRequest();
+			return Response<List<User>>.Failure("Faild to get users.");
 		}
 
 		[HttpPut("updateAccount")]
-		public async Task<IActionResult> updateAccount(dtoEditUser user)
+		public async Task<Response<User>> updateAccount(dtoEditUser user)
 		{
 			if(ModelState.IsValid)
 			{
-				var EditedUser = await _userManger.FindByIdAsync(user.Id);
-				if (EditedUser != null)
-				{
-					if (await _userManger.CheckPasswordAsync(EditedUser, user.OldPassword))
-					{
-						EditedUser.FirstName = user.FirstName;
-						EditedUser.LastName = user.LastName;
-						EditedUser.Country = user.Country;
-						EditedUser.JopTitle = user.JopTitle;
-						EditedUser.NickName = user.NickName;
-						EditedUser.BirthDate = user.BirthDate;
-						EditedUser.PhoneNumber = user.PhoneNumber;
-						await _userManger.ChangePasswordAsync(EditedUser, user.OldPassword, user.Password);
-						_DB.SaveChanges();
-					}
-					else return Unauthorized("Wronge Old Password.");
-				}
-				else return BadRequest();
-
-				return Ok(user);
+				return await _accountRepository.UpdateAccount(user);
 			}
-			return BadRequest();
+			return Response<User>.Failure("Faild to update user.");
 		}
 
 
