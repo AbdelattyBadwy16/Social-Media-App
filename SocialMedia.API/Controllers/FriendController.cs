@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Optern.Application.Interfaces.ICacheService;
 using SocialMedia.Application.Repository;
 using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
@@ -12,10 +13,13 @@ namespace SocialMedia.API.Controllers
 	[ApiController]
 	public class FriendController : ControllerBase
 	{
+		private readonly ICacheService _casheService;
+
 		private IFriendRepository friendRepository;
-		public FriendController(IFriendRepository _friendRepo)
+		public FriendController(IFriendRepository _friendRepo ,ICacheService cacheService)
 		{
 			friendRepository = _friendRepo;
+			_casheService = cacheService;
 		}
 		[HttpPost("addFriend")]
 
@@ -23,6 +27,7 @@ namespace SocialMedia.API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				_casheService.RemoveData("following");
 				return await friendRepository.Add(id,followerId);
 			}
 			return Response<string>.Failure("Faild to Add friend");

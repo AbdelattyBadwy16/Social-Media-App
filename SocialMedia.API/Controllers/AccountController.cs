@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Optern.Application.Interfaces.ICacheService;
 using SocialMedia.Application.DTOs;
 using SocialMedia.Application.Mapper;
 using SocialMedia.Application.Repository;
@@ -21,22 +22,17 @@ namespace SocialMedia.API.Controllers
 	public class AccountController : Controller
 	{
 		
-		private readonly UserManager<User> _userManger;
-		private readonly IConfiguration _configuration;
-		private readonly AppDbContext _DB;
 		private readonly IHostingEnvironment _host;
-
+		private readonly ICacheService _casheService;
 		private readonly IUserRepository _userRepository;
 		private readonly IAccountRepository _accountRepository;
-		public AccountController(UserManager<User> userManager, IConfiguration configuration , AppDbContext DB , IHostingEnvironment host , IUserRepository userRepository,IAccountRepository accountRepository)
+		public AccountController(ICacheService casheService, IConfiguration configuration , AppDbContext DB , IHostingEnvironment host , IUserRepository userRepository,IAccountRepository accountRepository)
 		{
 			
-			_userManger = userManager;
-			_configuration = configuration;
 			_host = host;
-			_DB = DB;
 			_userRepository = userRepository;
 			_accountRepository =  accountRepository;
+			_casheService = casheService;
 		}
 
 
@@ -45,6 +41,7 @@ namespace SocialMedia.API.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+				_casheService.RemoveData("users");
 				return await _accountRepository.CreateNewUser(user);
 			}
 			return Response<string>.Failure("Faild to create Account");
@@ -118,6 +115,12 @@ namespace SocialMedia.API.Controllers
 		{
 			if(ModelState.IsValid)
 			{
+				var users = _casheService.GetData<List<User>>("users");	
+				
+				if(users is not null)
+				{
+					return Response<List<User>>.Success(users);
+				}					
 				return await _userRepository.GetAll();
 			}
 			return Response<List<User>>.Failure("Faild to get users.");

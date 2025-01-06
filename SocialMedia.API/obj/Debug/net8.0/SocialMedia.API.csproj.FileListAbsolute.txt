@@ -318,3 +318,6 @@
 /media/glitch00/_dev_data/Projects/Social-Media-App/SocialMedia.API/obj/Debug/net8.0/SocialMedia.API.csproj.CopyComplete
 /media/glitch00/_dev_data/Projects/Social-Media-App/SocialMedia.API/obj/Debug/net8.0/SocialMedia.API.genruntimeconfig.cache
 /media/glitch00/_dev_data/Projects/Social-Media-App/SocialMedia.API/obj/Debug/net8.0/ref/SocialMedia.API.dll
+/media/glitch00/_dev_data/Projects/Social-Media-App/SocialMedia.API/bin/Debug/net8.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll
+/media/glitch00/_dev_data/Projects/Social-Media-App/SocialMedia.API/bin/Debug/net8.0/Pipelines.Sockets.Unofficial.dll
+/media/glitch00/_dev_data/Projects/Social-Media-App/SocialMedia.API/bin/Debug/net8.0/StackExchange.Redis.dll

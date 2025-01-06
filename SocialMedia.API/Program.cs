@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Optern.Application.Interfaces.ICacheService;
 using Optern.Infrastructure.ExternalServices.JWTService;
 using SocialMedia.Application.Extentions;
 using SocialMedia.Application.Repository;
@@ -20,16 +21,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddCors(options =>
+// Add Redis Cache
+builder.Services.AddStackExchangeRedisCache(option =>
 {
-	options.AddDefaultPolicy(
-		policy =>
-		{
-			policy.AllowAnyOrigin()
-					.AllowAnyMethod()
-					.AllowAnyHeader();
-		});
+	option.Configuration = builder.Configuration.GetConnectionString("Redis");
+	option.InstanceName = "socialAppdoc";
 });
+
+
 
 
 builder.Services.AddCustomJwtAuth(builder.Configuration);
@@ -43,6 +42,20 @@ builder.Services.AddScoped<IPhotoRepository , PhotoRepository>();
 builder.Services.AddScoped<ICommentRepository , CommentRepository>();	
 builder.Services.AddScoped<IAccountRepository , AccountRepository>();
 builder.Services.AddScoped<IJWTService , JWTService>();	
+builder.Services.AddScoped<ICacheService,CacheService>();
+
+
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(
+		policy =>
+		{
+			policy.AllowAnyOrigin()
+					.AllowAnyMethod()
+					.AllowAnyHeader();
+		});
+});
+
 var app = builder.Build();
 
 

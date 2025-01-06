@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Optern.Application.Interfaces.ICacheService;
 using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
@@ -8,14 +9,15 @@ namespace SocialMedia.Application.Repository
 {
 	public class FriendRepository : IFriendRepository
 	{
-		
+		private readonly ICacheService _casheService;
 		private readonly AppDbContext _context;
 		private readonly IUserRepository userRepository;
 		
-		public FriendRepository(AppDbContext Context,IUserRepository UserRepository) 
+		public FriendRepository(AppDbContext Context,IUserRepository UserRepository,ICacheService cacheService) 
 		{
 			_context = Context;
 			userRepository = UserRepository;
+			_casheService = cacheService;
 		}
 		public async Task<Response<string>> Add(string id, string followerId)
 		{
@@ -73,11 +75,23 @@ namespace SocialMedia.Application.Repository
 		
 		public async Task<Response<List<Friends>>> GetFollowing(string id)
 		{
-			return Response<List<Friends>>.Success(await _context.friends.Where((item) => item.UserId == id).ToListAsync(),"",200);
+			var following = _casheService.GetData<List<Friends>>("following");
+			if (following is null)
+			{
+				following = await _context.friends.Where((item) => item.UserId == id).ToListAsync();
+				_casheService.SetData("following", following);
+			}
+			return Response<List<Friends>>.Success(following,"",200);
 		}
 		public async Task<Response<List<Friends>>> GetFollower(string id)
 		{
-			return Response<List<Friends>>.Success(await _context.friends.Where((item) => item.FollowerId == id).ToListAsync(),"",200);
+			var follower = _casheService.GetData<List<Friends>>("follower");
+			if (follower is null)
+			{
+				follower = await _context.friends.Where((item) => item.UserId == id).ToListAsync();
+				_casheService.SetData("follower", follower);
+			}
+			return Response<List<Friends>>.Success(follower,"",200);
 		}
 
 		public async Task<Response<bool>> Check(string userId,string id)

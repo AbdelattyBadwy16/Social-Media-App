@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Optern.Application.Interfaces.ICacheService;
 using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
@@ -9,10 +10,12 @@ namespace SocialMedia.Application.Repository
 {
 	public class FavouritPostRepository : IFavouritPostRepository
 	{
+		private readonly ICacheService _casheService;
 		private readonly AppDbContext _context;
-		public FavouritPostRepository(AppDbContext context) 
+		public FavouritPostRepository(AppDbContext context,ICacheService cacheService) 
 		{
 			_context = context;
+			_casheService = cacheService;
 		}
 
 		public async Task<FavouritPost?> Find(string userId ,int PostId)
@@ -30,8 +33,13 @@ namespace SocialMedia.Application.Repository
 
 		public async Task<Response<List<FavouritPost>>> GetAll(string userId)
 		{
-			var post = await _context.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post => post.Id).Include("post").ToListAsync();
-			return Response<List<FavouritPost>>.Success(post,"",200);
+			var posts = _casheService.GetData<List<FavouritPost>>("favPosts");
+			if (posts is null)
+			{
+				posts = await _context.favouritPosts.Where(post => post.UserId == userId).OrderByDescending(post => post.Id).Include("post").ToListAsync();
+				_casheService.SetData("favPosts", posts);
+			}
+			return Response<List<FavouritPost>>.Success(posts,"",200);
 		}
 
 		public async Task<Response<string>> Add(FavouritPost favouritPost)

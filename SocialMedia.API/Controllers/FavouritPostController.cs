@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Optern.Application.Interfaces.ICacheService;
 using SocialMedia.Application.Repository;
 using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
@@ -11,12 +12,13 @@ namespace SocialMedia.API.Controllers
 	[ApiController]
 	public class FavouritPostController : ControllerBase
 	{
-		private readonly AppDbContext _DB;
+		private readonly ICacheService _casheService;
+
 		private readonly IFavouritPostRepository favouritPostRepository;
-		public FavouritPostController(AppDbContext DB , IFavouritPostRepository _favPostRepo)
+		public FavouritPostController(ICacheService cacheService , IFavouritPostRepository _favPostRepo)
 		{
-			_DB = DB;
 			favouritPostRepository = _favPostRepo;
+			_casheService = cacheService;
 		}
 	
 
@@ -32,6 +34,7 @@ namespace SocialMedia.API.Controllers
 					UserId = userId,
 					PostId = PostId
 				};
+				_casheService.RemoveData("favPosts");
 				return await favouritPostRepository.Add(favouritPost);
 			}
 			return Response<string>.Failure("Faild to add post");
@@ -47,6 +50,7 @@ namespace SocialMedia.API.Controllers
 				var post = await favouritPostRepository.Find(userId, PostId);
 				if (post != null)
 				{
+					_casheService.RemoveData("favPosts");
 					return await favouritPostRepository.Delete(post);
 				}
 			}

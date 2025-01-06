@@ -11,14 +11,21 @@ using SocialMedia.Application.Mapper;
 using SocialMedia.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Application.Response;
+using Optern.Application.Interfaces.ICacheService;
 
 
 namespace SocialMedia.Application.Repository
 {
 	public class PostRepository : IPostRepository
 	{
-		public PostRepository() {}
-		AppDbContext _context = new AppDbContext();
+		private readonly AppDbContext _context;
+		private readonly ICacheService _cacheService;
+		public PostRepository(ICacheService cacheService,AppDbContext context) 
+		{
+			_context = context;
+			_cacheService = cacheService;
+		}
+		
 		public async Task<Response<int>> AddAsync(dtoPost NewPost)
 		{
 			Post post = NewPost.ToPost();
@@ -26,6 +33,8 @@ namespace SocialMedia.Application.Repository
 			{
 				await _context.posts.AddAsync(post);
 				await _context.SaveChangesAsync();
+				_cacheService.RemoveData("posts");
+				_cacheService.RemoveData($"{NewPost.UserId}_posts");
 			}catch(Exception ex)
 			{
 				return Response<int>.Failure("faild to add post");
@@ -72,13 +81,24 @@ namespace SocialMedia.Application.Repository
 
 		public async Task<Response<List<Post>>> GetAll()
 		{
-			return Response<List<Post>>.Success(await _context.posts.OrderByDescending(item => item.Id).ToListAsync());
+			var posts = _cacheService.GetData<List<Post>>("posts");
+			if(posts is null)
+			{
+				posts = await _context.posts.OrderByDescending(item => item.Id).ToListAsync();
+				_cacheService.SetData("posts", posts);
+			}
+			return Response<List<Post>>.Success(posts);
 		}
 
 		public async Task<Response<List<Post>>> GetAllByUser(string userId)
 		{
-			
-			return Response<List<Post>>.Success(await _context.posts.Where((item) => item.UserId == userId).OrderByDescending((item) => item.Id).ToListAsync());
+			var posts = _cacheService.GetData<List<Post>>($"{userId}_posts");
+			if(posts is null)
+			{
+				posts =  await _context.posts.Where((item) => item.UserId == userId).OrderByDescending((item) => item.Id).ToListAsync();
+				_cacheService.SetData($"{userId}_posts", posts);
+			}
+			return Response<List<Post>>.Success(posts);
 		}
 
 		public async Task<Response<string>> Delete(int id)

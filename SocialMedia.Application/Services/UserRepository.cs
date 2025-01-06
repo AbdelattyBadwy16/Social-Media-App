@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Optern.Application.Interfaces.ICacheService;
 using SocialMedia.Application.Response;
 using SocialMedia.Core.Models;
 using SocialMedia.Infrastructure.Models;
@@ -8,9 +9,11 @@ namespace SocialMedia.Application.Repository
 	public class UserRepository : IUserRepository
 	{
 		private readonly AppDbContext _context;
-		public UserRepository(AppDbContext context) 
+		private readonly ICacheService _cacheService;
+		public UserRepository(AppDbContext context , ICacheService cacheService) 
 		{ 
 			_context = context;
+			_cacheService = cacheService;
 		}
 		
 
@@ -26,7 +29,9 @@ namespace SocialMedia.Application.Repository
 		
 		public async Task<Response<List<User>>> GetAll()
 		{
-			 return Response<List<User>>.Success(await _context.users.OrderByDescending((item) => item.Followers).ToListAsync());
+			var users = await _context.users.OrderByDescending((item) => item.Followers).ToListAsync();
+			_cacheService.SetData("users", users);
+			return Response<List<User>>.Success(users);
 		}
 	}
 }
